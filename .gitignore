@@ -1,0 +1,5 @@
+bin
+obj
+compile_commands.json
+md5.txt
+.cache
