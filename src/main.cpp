@@ -9,6 +9,8 @@
 // GLFW function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 // The Width of the screen
 const unsigned int SCREEN_WIDTH = 800;
@@ -36,11 +38,13 @@ int main(int argc, char *argv[])
     GLenum err = glewInit();
     if (glewInit() != GLEW_OK)
     {
-        std::cout << "Failed to initialize GLAD" << std::endl;
+        std::cout << "Failed to initialize GLEW error" << err << std::endl;
         return -1;
     }
 
     glfwSetKeyCallback(window, key_callback);
+    glfwSetCursorPosCallback(window, cursor_position_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
     // OpenGL configuration
@@ -102,6 +106,25 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         else if (action == GLFW_RELEASE)
             Chess.Keys[key] = false;
     }
+}
+
+void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
+    Chess.MouseX = xpos;
+    Chess.MouseY = ypos;
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
+        Chess.MouseLeft = true;
+        std::cout << Chess.MouseX << " " << Chess.MouseY << std::endl;
+    }
+    else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+        Chess.MouseLeft = false;
+
+    if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+        Chess.MouseRight = true;
+    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+        Chess.MouseRight = false;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

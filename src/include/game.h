@@ -21,6 +21,8 @@ public:
     GameState               State;	
     bool                    Keys[1024];
     unsigned int            Width, Height;
+    double                  MouseX, MouseY;
+    bool                    MouseLeft, MouseRight;
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
     ~Game();
