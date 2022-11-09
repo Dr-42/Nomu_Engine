@@ -3,3 +3,6 @@ obj
 compile_commands.json
 md5.txt
 .cache
+.ccls-cache
+.vscode
+tags

@@ -4,6 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "sprite_renderer.h"
+#include "resource_manager.h"
+
 // Represents the current state of the game
 enum GameState {
     GAME_ACTIVE,
@@ -23,6 +26,9 @@ public:
     unsigned int            Width, Height;
     double                  MouseX, MouseY;
     bool                    MouseLeft, MouseRight;
+    bool                    wireframe;
+    SpriteRenderer  *Renderer;
+
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
     ~Game();
