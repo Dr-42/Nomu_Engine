@@ -37,11 +37,11 @@ void Game::Init(){
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
     // load textures
 #ifndef linux
-    ResourceManager::LoadTexture("F:/C++/Chess/src/textures/chessmen.png", true, "face");
-    std::cout << "Loaded texture: " << "F:/C++/Chess/src/textures/chessmen.png" << std::endl;
+    ResourceManager::LoadTexture("F:/C++/Chess/src/textures/nomu.png", true, "face");
+    std::cout << "Loaded texture: " << "F:/C++/Chess/src/textures/nomu.png" << std::endl;
 #else
-    ResourceManager::LoadTexture("/mnt/f/C++/Chess/src/textures/chessmen.png", true, "face");
-    std::cout << "Loaded texture: " << "lin" << std::endl;
+    ResourceManager::LoadTexture("/mnt/f/C++/Chess/src/textures/nomu.png", true, "face");
+    std::cout << "Loaded texture: " << "/mnt/f/C++/src/textures/nomu.png" << std::endl;
 #endif
 }
 
