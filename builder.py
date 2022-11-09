@@ -5,13 +5,20 @@ import os
 from termcolor import colored
 
 # Directories
+compiler = 'g++'
 bin_dir = 'bin'
 obj_dir = 'obj'
 src_dir = 'src'
 if platform.system() == 'Windows':
-    libs = '-lm -lglew32 -lglfw3 -lopengl32'
+    freetype_cfg = '-IC:/msys64/mingw64/bin/../include/freetype2 -IC:/msys64/mingw64/bin/../include -IC:/msys64/mingw64/bin/../include/libpng16 -IC:/msys64/mingw64/bin/../include/harfbuzz -IC:/msys64/mingw64/bin/../include/glib-2.0 -IC:/msys64/mingw64/bin/../lib/glib-2.0/include'
+    freetype_lib = '-LC:/msys64/mingw64/bin/../lib -lfreetype'
+    libs = '-lm -lglew32 -lglfw3 -lopengl32 ' + freetype_lib
+    cflags = '-g -Wall ' + freetype_cfg
 elif platform.system() == 'Linux':
-    libs = '-lm -lGL -lGLEW -lglfw'
+    libs = '-lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2`'
+    cflags = '-g -Wall `pkg-config --cflags freetype2`'
+
+
 
 ##########################################
 ##### DO NOT EDIT BELOW THIS LINE ########
@@ -170,7 +177,7 @@ def build_objects(source_dir, obj_dir):
 compiled_obj = False
 #compiles filepath.cpp to obj
 def compile_obj(filepath, obj):
-    cmd = 'g++ -g -Wall -c -o ' + obj + ' ' + filepath + get_inc_cmd(filepath)
+    cmd = compiler + ' ' + cflags + ' -c -o ' + obj + ' ' + filepath + get_inc_cmd(filepath)
     print(colored('[LOG] ', 'blue') ,cmd)
     error_code = os.system(cmd)
     if error_code != 0:
@@ -191,7 +198,7 @@ def link():
     for obj in objs:
         objtot += ' ' + objs[obj]
         i += 1
-    cmd = 'g++ -g -Wall -o ' + bin_dir + '/' + 'main ' + objtot + ' ' + libs
+    cmd = compiler + ' ' + cflags + ' -o ' + bin_dir + '/' + 'main ' + objtot + ' ' + libs
     print(colored('[LOG] ', 'blue') ,cmd)
     error = os.system(cmd)
     if error != 0:
@@ -201,12 +208,18 @@ def link():
 def clean():
     if platform.system() == 'Windows':
         run_ps('Remove-Item bin/*')
+        print(colored('[LOG] ', 'yellow') ,'Removed bin/*')
         run_ps('Remove-Item obj/*.o')
+        print(colored('[LOG] ', 'yellow') ,'Removed obj/*.o')
         run_ps('Remove-Item md5.txt')
+        print(colored('[LOG] ', 'red') ,'Removed md5.txt')
     elif platform.system() == 'Linux':
         os.system('rm -rf bin/*')
+        print(colored('[LOG] ', 'yellow') ,'Removed bin/*')
         os.system('rm -rf obj/*.o')
+        print(colored('[LOG] ', 'yellow') ,'Removed obj/*.o')
         os.system('rm -rf md5.txt')
+        print(colored('[LOG] ', 'red') ,'Removed md5.txt')
     else:
         print(colored('[ERROR] ', 'red'), 'Unsupported platform')
 

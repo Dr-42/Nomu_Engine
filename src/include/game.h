@@ -6,6 +6,7 @@
 
 #include "sprite_renderer.h"
 #include "resource_manager.h"
+#include "text_renderer.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -28,6 +29,7 @@ public:
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
     SpriteRenderer  *Renderer;
+    TextRenderer    *Text;
 
     // constructor/destructor
     Game(unsigned int width, unsigned int height);

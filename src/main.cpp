@@ -17,7 +17,7 @@ const unsigned int SCREEN_WIDTH = 800;
 // The height of the screen
 const unsigned int SCREEN_HEIGHT = 800;
 
-Game Chess(SCREEN_WIDTH, SCREEN_HEIGHT);
+Game App(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 #endif
     glfwWindowHint(GLFW_RESIZABLE, false);
 
-    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Chess", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "App", nullptr, nullptr);
     glfwMakeContextCurrent(window);
 
     // glew: load all OpenGL function pointers
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    Chess.Init();
+    App.Init();
 
     // deltaTime variables
     // -------------------
@@ -71,17 +71,17 @@ int main(int argc, char *argv[])
 
         // manage user input
         // -----------------
-        Chess.ProcessInput(deltaTime);
+        App.ProcessInput(deltaTime);
 
         // update game state
         // -----------------
-        Chess.Update(deltaTime);
+        App.Update(deltaTime);
 
         // render
         // ------
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        Chess.Render();
+        App.Render();
 
         glfwSwapBuffers(window);
     }
@@ -102,29 +102,29 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key >= 0 && key < 1024)
     {
         if (action == GLFW_PRESS)
-            Chess.Keys[key] = true;
+            App.Keys[key] = true;
         else if (action == GLFW_RELEASE)
-            Chess.Keys[key] = false;
+            App.Keys[key] = false;
     }
 }
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
-    Chess.MouseX = xpos;
-    Chess.MouseY = ypos;
+    App.MouseX = xpos;
+    App.MouseY = ypos;
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
-        Chess.MouseLeft = true;
-        std::cout << Chess.MouseX << " " << Chess.MouseY << std::endl;
+        App.MouseLeft = true;
+        std::cout << App.MouseX << " " << App.MouseY << std::endl;
     }
     else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-        Chess.MouseLeft = false;
+        App.MouseLeft = false;
 
     if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-        Chess.MouseRight = true;
+        App.MouseRight = true;
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-        Chess.MouseRight = false;
+        App.MouseRight = false;
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)

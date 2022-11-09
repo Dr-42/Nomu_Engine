@@ -22,10 +22,10 @@ Game::~Game()
 void Game::Init(){
     // load shaders
 #ifndef linux
-    ResourceManager::LoadShader("F:/C++/Chess/src/shaders/vert.glsl", "F:/C++/Chess/src/shaders/frag.glsl", nullptr, "sprite");
+    ResourceManager::LoadShader("F:/C++/Chess/src/shaders/sprite_vert_shad.glsl", "F:/C++/Chess/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
     std::cout << "Loaded shader win" << std::endl;
 #else
-    ResourceManager::LoadShader("/mnt/f/C++/Chess/src/shaders/vert.glsl", "/mnt/f/C++/Chess/src/shaders/frag.glsl", nullptr, "sprite");
+    ResourceManager::LoadShader("/mnt/f/C++/Chess/src/shaders/sprite_vert_shad.glsl", "/mnt/f/C++/Chess/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
     std::cout << "Loaded shader lin" << std::endl;
 #endif  
     // configure shaders
@@ -42,6 +42,12 @@ void Game::Init(){
 #else
     ResourceManager::LoadTexture("/mnt/f/C++/Chess/src/textures/nomu.png", true, "face");
     std::cout << "Loaded texture: " << "/mnt/f/C++/src/textures/nomu.png" << std::endl;
+#endif
+    Text = new TextRenderer(this->Width, this->Height);
+#ifndef linux
+    Text->Load("F:/C++/Chess/src/fonts/OCRAEXT.ttf", 24);
+#else
+    Text->Load("/mnt/f/C++/Chess/src/fonts/OCRAEXT.ttf", 24);
 #endif
 }
 
@@ -65,5 +71,7 @@ void Game::ProcessInput(float dt)
 void Game::Render()
 {
     Renderer->DrawSprite(ResourceManager::GetTexture("face"),
-                         glm::vec2(200.0f, 200.0f), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+                         glm::vec2(MouseX-200, MouseY-200), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    Text->RenderText("Hello!", 300.0f, 100.0f, 2.0f);
+    Text->RenderText("From Nomu Engine", 550.0f, 770.0f, 1.0f);
 }
