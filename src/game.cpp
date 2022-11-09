@@ -71,7 +71,7 @@ void Game::ProcessInput(float dt)
 void Game::Render()
 {
     Renderer->DrawSprite(ResourceManager::GetTexture("face"),
-                         glm::vec2(MouseX-200, MouseY-200), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+                         glm::vec2(MouseX, MouseY), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
     Text->RenderText("Hello!", 300.0f, 100.0f, 2.0f);
     Text->RenderText("From Nomu Engine", 550.0f, 770.0f, 1.0f);
 }
