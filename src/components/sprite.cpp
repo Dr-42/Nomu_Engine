@@ -1,14 +1,10 @@
 #include "components/sprite.h"
 
-Sprite::Sprite()
-{
-}
-
 Sprite::~Sprite()
 {
 }
 
-void Sprite::Init(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform)
+Sprite::Sprite(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform)
 {
     m_texture = &texture;
     m_shader = &shader;
@@ -18,6 +14,11 @@ void Sprite::Init(int width, int height, Texture2D texture, Shader shader, int s
     m_spriteRenderer = new SpriteRenderer(m_shader);
     m_transform = transform;
     isActivated = true;
+}
+
+void Sprite::Init()
+{
+    m_ConfigureShader();
 }
 
 void Sprite::Update()

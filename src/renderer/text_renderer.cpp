@@ -4,8 +4,8 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include "text_renderer.h"
-#include "resource_manager.h"
+#include "renderer/text_renderer.h"
+#include "utils/resource_manager.h"
 
 
 TextRenderer::TextRenderer(unsigned int width, unsigned int height)

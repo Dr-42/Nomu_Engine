@@ -1,11 +1,14 @@
+#ifndef SPRITE_H
+#define SPRITE_H
+
 #include <iostream>
 
 #include "ecs/component.h"
 #include "components/transform.h"
-#include "texture.h"
-#include "sprite_renderer.h"
-#include "shader.h"
-#include "resource_manager.h"
+#include "utils/texture.h"
+#include "renderer/sprite_renderer.h"
+#include "utils/shader.h"
+#include "utils/resource_manager.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -13,10 +16,10 @@
 class Sprite : public Component
 {
 public:
-    Sprite();
+    Sprite(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform);
     ~Sprite();
 
-    void Init(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform);
+    void Init();
     void Update();
     void Destroy();
 
@@ -42,3 +45,5 @@ private:
     glm::vec2 m_size;
     int srceenWidth, screenHeight;
 }; 
+
+#endif

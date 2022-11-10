@@ -6,8 +6,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include "texture.h"
-#include "shader.h"
+#include "utils/texture.h"
+#include "utils/shader.h"
 
 
 /// Holds all state information relevant to a character as loaded using FreeType

@@ -4,9 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "sprite_renderer.h"
-#include "resource_manager.h"
-#include "text_renderer.h"
+#include "renderer/sprite_renderer.h"
+#include "utils/resource_manager.h"
+#include "renderer/text_renderer.h"
 
 // Represents the current state of the game
 enum GameState {
