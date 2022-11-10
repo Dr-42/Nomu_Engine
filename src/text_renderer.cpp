@@ -12,9 +12,9 @@ TextRenderer::TextRenderer(unsigned int width, unsigned int height)
 {
     // load and configure shader
 #ifndef linux
-    this->TextShader = ResourceManager::LoadShader("F:/C++/Chess/src/shaders/text_vert_shad.glsl", "F:/C++/Chess/src/shaders/text_frag_shad.glsl", nullptr, "text");
+    this->TextShader = ResourceManager::LoadShader("F:/C++/NomuEngine/src/shaders/text_vert_shad.glsl", "F:/C++/NomuEngine/src/shaders/text_frag_shad.glsl", nullptr, "text");
 #else
-    this->TextShader = ResourceManager::LoadShader("/mnt/f/C++/Chess/src/shaders/text_vert_shad.glsl", "/mnt/f/C++/Chess/src/shaders/text_frag_shad.glsl", nullptr, "text");
+    this->TextShader = ResourceManager::LoadShader("/mnt/f/C++/NomuEngine/src/shaders/text_vert_shad.glsl", "/mnt/f/C++/NomuEngine/src/shaders/text_frag_shad.glsl", nullptr, "text");
 #endif
     this->TextShader.SetMatrix4("projection", glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f), true);
     this->TextShader.SetInteger("text", 0);

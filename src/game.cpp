@@ -22,10 +22,10 @@ Game::~Game()
 void Game::Init(){
     // load shaders
 #ifndef linux
-    ResourceManager::LoadShader("F:/C++/Chess/src/shaders/sprite_vert_shad.glsl", "F:/C++/Chess/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
+    ResourceManager::LoadShader("F:/C++/NomuEngine/src/shaders/sprite_vert_shad.glsl", "F:/C++/NomuEngine/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
     std::cout << "Loaded shader win" << std::endl;
 #else
-    ResourceManager::LoadShader("/mnt/f/C++/Chess/src/shaders/sprite_vert_shad.glsl", "/mnt/f/C++/Chess/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
+    ResourceManager::LoadShader("/mnt/f/C++/NomuEngine/src/shaders/sprite_vert_shad.glsl", "/mnt/f/C++/NomuEngine/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
     std::cout << "Loaded shader lin" << std::endl;
 #endif  
     // configure shaders
@@ -37,17 +37,17 @@ void Game::Init(){
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
     // load textures
 #ifndef linux
-    ResourceManager::LoadTexture("F:/C++/Chess/src/textures/nomu.png", true, "face");
-    std::cout << "Loaded texture: " << "F:/C++/Chess/src/textures/nomu.png" << std::endl;
+    ResourceManager::LoadTexture("F:/C++/NomuEngine/src/textures/nomu.png", true, "face");
+    std::cout << "Loaded texture: " << "F:/C++/NomuEngine/src/textures/nomu.png" << std::endl;
 #else
-    ResourceManager::LoadTexture("/mnt/f/C++/Chess/src/textures/nomu.png", true, "face");
+    ResourceManager::LoadTexture("/mnt/f/C++/NomuEngine/src/textures/nomu.png", true, "face");
     std::cout << "Loaded texture: " << "/mnt/f/C++/src/textures/nomu.png" << std::endl;
 #endif
     Text = new TextRenderer(this->Width, this->Height);
 #ifndef linux
-    Text->Load("F:/C++/Chess/src/fonts/OCRAEXT.ttf", 24);
+    Text->Load("F:/C++/NomuEngine/src/fonts/OCRAEXT.ttf", 24);
 #else
-    Text->Load("/mnt/f/C++/Chess/src/fonts/OCRAEXT.ttf", 24);
+    Text->Load("/mnt/f/C++/NomuEngine/src/fonts/OCRAEXT.ttf", 24);
 #endif
 }
 
