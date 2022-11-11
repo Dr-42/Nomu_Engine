@@ -1,8 +1,10 @@
 #include "ecs/entity.h"
 
-Entity::Entity()
+Entity::Entity(const char* name)
 {
+    m_name = name;
     m_components = std::vector<Component*>();
+    m_transform = new Transform();
 }
 
 Entity::~Entity()
@@ -52,4 +54,12 @@ std::vector<Component*> Entity::GetComponents()
     return m_components;
 }
 
+Transform* Entity::GetTransform()
+{
+    return m_transform;
+}
 
+const char* Entity::GetName()
+{
+    return m_name;
+}

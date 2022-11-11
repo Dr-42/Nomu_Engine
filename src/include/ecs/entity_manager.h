@@ -15,9 +15,10 @@ public:
     void Init();
     void Update();
 
-    void AddEntity(Entity* entity);
+    Entity* AddEntity(Entity* entity, const char* name);
     void RemoveEntity(Entity* entity);
     std::vector<Entity*> GetEntities();
+    Entity* GetEntity(const char* name);
 
 private:
     std::vector<Entity*> m_entities;

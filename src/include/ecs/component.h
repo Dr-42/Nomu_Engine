@@ -8,9 +8,9 @@ public:
     
     ~Component();
 
-    void Init();
-    void Update();
-    void Destroy();
+    virtual void Init();
+    virtual void Update();
+    virtual void Destroy();
 };
 
 #endif

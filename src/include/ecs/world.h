@@ -18,7 +18,6 @@ public:
 
     EntityManager* GetEntityManager() const;
 
-private:
     EntityManager* m_entityManager;
 };
 

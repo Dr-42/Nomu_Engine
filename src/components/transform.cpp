@@ -2,6 +2,9 @@
 
 Transform::Transform()
 {
+    m_position = glm::vec2(200.0f, 200.0f);
+    m_rotation = 0.0f;
+    m_scale = glm::vec2(100.0f, 100.0f);
 }
 
 Transform::~Transform()

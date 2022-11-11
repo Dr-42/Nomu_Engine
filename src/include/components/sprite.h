@@ -16,7 +16,7 @@
 class Sprite : public Component
 {
 public:
-    Sprite(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform);
+    Sprite(int width, int height, Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
     ~Sprite();
 
     void Init();
@@ -43,7 +43,7 @@ private:
     SpriteRenderer* m_spriteRenderer;
     Shader* m_shader;
     glm::vec2 m_size;
-    int srceenWidth, screenHeight;
+    int screenWidth, screenHeight;
 }; 
 
 #endif

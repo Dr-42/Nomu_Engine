@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "game.h"
+#include "game1.h"
 #include "utils/resource_manager.h"
 
 #include <iostream>
@@ -75,13 +75,10 @@ int main(int argc, char *argv[])
 
         // update game state
         // -----------------
-        App.Update(deltaTime);
-
-        // render
-        // ------
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        App.Render();
+
+        App.Update(deltaTime);
 
         glfwSwapBuffers(window);
     }

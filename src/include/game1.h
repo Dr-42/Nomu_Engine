@@ -4,12 +4,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "ecs/world.h"
+#include "components/transform.h"
+#include "components/sprite.h"
+
 #include "renderer/sprite_renderer.h"
 #include "utils/resource_manager.h"
 #include "renderer/text_renderer.h"
-
-#include "components/transform.h"
-#include "components/sprite.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -21,7 +22,7 @@ enum GameState {
 // Game holds all game-related state and functionality.
 // Combines all game-related data into a single class for
 // easy access to each of the components and manageability.
-class Game1
+class Game
 {
 public:
     // game state
@@ -31,12 +32,12 @@ public:
     double                  MouseX, MouseY;
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
-    SpriteRenderer  *Renderer;
-    TextRenderer    *Text;
-
+    World                   *world;
+    Entity                  *entity;
+    Sprite                  *sprite;
     // constructor/destructor
-    Game1(unsigned int width, unsigned int height);
-    ~Game1();
+    Game(unsigned int width, unsigned int height);
+    ~Game();
     // initialize game state (load all shaders/textures/levels)
     void Init();
     // game loop

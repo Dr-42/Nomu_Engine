@@ -4,12 +4,12 @@ Sprite::~Sprite()
 {
 }
 
-Sprite::Sprite(int width, int height, Texture2D texture, Shader shader, int screen_width, int screen_height, Transform* transform)
+Sprite::Sprite(int width, int height, Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
 {
-    m_texture = &texture;
-    m_shader = &shader;
+    m_texture = texture;
+    m_shader = shader;
     m_size = glm::vec2(width, height);
-    srceenWidth = screen_width;
+    screenWidth = screen_width;
     screenHeight = screen_height;
     m_spriteRenderer = new SpriteRenderer(m_shader);
     m_transform = transform;
@@ -18,6 +18,7 @@ Sprite::Sprite(int width, int height, Texture2D texture, Shader shader, int scre
 
 void Sprite::Init()
 {
+    std::cout << "Sprite::Init()" << std::endl;
     m_ConfigureShader();
 }
 
@@ -25,7 +26,10 @@ void Sprite::Update()
 {
     if(isActivated)
     {
-        m_spriteRenderer->DrawSprite(m_texture, m_transform->GetScale(), m_transform->GetPosition(), m_transform->GetRotation());
+
+        //m_spriteRenderer->DrawSprite(ResourceManager::GetTexture("face"),
+        //                 glm::vec2(200, 200), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+        m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation());
     }
 
 }
@@ -70,15 +74,10 @@ Shader* Sprite::GetShader()
 
 void Sprite::m_ConfigureShader()
 {
-    m_shader->Use();
-    m_shader->SetInteger("image", 0);
-    m_shader->SetVector2f("screenSize", glm::vec2(srceenWidth, screenHeight));
-    m_shader->SetVector2f("size", m_size);
-
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->srceenWidth), 
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->screenWidth), 
         static_cast<float>(this->screenHeight), 0.0f, -1.0f, 1.0f);
-    ResourceManager::GetShader("sprite")->Use().SetInteger("image", 0);
-    ResourceManager::GetShader("sprite")->SetMatrix4("projection", projection);
+    this->m_shader->Use().SetInteger("image", 0);
+    this->m_shader->SetMatrix4("projection", projection);
 }
 
 

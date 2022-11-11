@@ -29,9 +29,23 @@ void EntityManager::Update()
     }
 }
 
-void EntityManager::AddEntity(Entity* entity)
+Entity* EntityManager::AddEntity(Entity* entity, const char* name)
 {
+    entity = new Entity(name);
     m_entities.push_back(entity);
+    return entity;
+}
+
+Entity* EntityManager::GetEntity(const char* name)
+{
+    for (auto entity : m_entities)
+    {
+        if (entity->GetName() == name)
+        {
+            return entity;
+        }
+    }
+    return nullptr;
 }
 
 void EntityManager::RemoveEntity(Entity* entity)
