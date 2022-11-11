@@ -75,7 +75,7 @@ Shader ResourceManager::loadShaderFromFile(const char *vShaderFile, const char *
             geometryCode = gShaderStream.str();
         }
     }
-    catch (std::exception e)
+    catch (std::exception const& e)
     {
         std::cout << "ERROR::SHADER: Failed to read shader files" << std::endl;
     }

@@ -15,7 +15,6 @@ void Component::Init()
 
 void Component::Update()
 {
-    std::cout << "Component::Update()" << std::endl;
 }
 
 void Component::Destroy()

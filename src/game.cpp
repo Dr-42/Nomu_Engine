@@ -11,7 +11,6 @@ Game::Game(unsigned int width, unsigned int height)
     this->MouseY = 0.0;
     this->MouseLeft = false;
     this->MouseRight = false;
-    this->State = GAME_ACTIVE;
     wireframe = false;
 }
 

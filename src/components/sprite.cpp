@@ -19,7 +19,6 @@ Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_
 
 void Sprite::Init()
 {
-    std::cout << "Sprite::Init()" << std::endl;
     m_ConfigureShader();
 }
 
@@ -27,9 +26,6 @@ void Sprite::Update()
 {
     if(isActivated)
     {
-
-        //m_spriteRenderer->DrawSprite(ResourceManager::GetTexture("face"),
-        //                 glm::vec2(200, 200), glm::vec2(400.0f, 400.0f), 00.0f, glm::vec3(1.0f, 1.0f, 1.0f));
         m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation());
     }
 

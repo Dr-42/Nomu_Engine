@@ -113,7 +113,6 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos){
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS){
         App.MouseLeft = true;
-        std::cout << App.MouseX << " " << App.MouseY << std::endl;
     }
     else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
         App.MouseLeft = false;
