@@ -5,7 +5,7 @@ Text::~Text()
     delete m_textRenderer;
 }
 
-Text::Text(std::string text, int font_size, int screen_width, int screen_height, Transform* transform)
+Text::Text(std::string text, const char* fontPath, Shader* shader, int font_size, int screen_width, int screen_height, Transform* transform)
 {
     m_text = text;
     m_font_size = font_size;
@@ -15,13 +15,9 @@ Text::Text(std::string text, int font_size, int screen_width, int screen_height,
     isActivated = true;
     m_color = glm::vec3(1.0f, 1.0f, 1.0f);
 
-    m_textRenderer = new TextRenderer(screenWidth, screenHeight);
+    m_textRenderer = new TextRenderer(screenWidth, screenHeight, shader);
 
-#ifndef linux
-    m_fontPath = "F:/C++/NomuEngine/src/fonts/OCRAEXT.ttf";
-#else
-    m_fontPath = "/mnt/f/C++/NomuEngine/src/fonts/OCRAEXT.ttf";
-#endif
+    m_fontPath = fontPath;
 }
 
 void Text::Init()

@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "game1.h"
+#include "game.h"
 #include "utils/resource_manager.h"
 
 #include <iostream>

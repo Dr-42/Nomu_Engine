@@ -3,7 +3,6 @@
 
 Component::Component()
 {
-    std::cout << "Component created" << std::endl;
 }
 
 Component::~Component()

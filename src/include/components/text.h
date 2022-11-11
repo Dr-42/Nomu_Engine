@@ -17,7 +17,7 @@
 class Text : public Component
 {
 public:
-    Text(std::string text, int font_size, int screen_width, int screen_height, Transform* transform);
+    Text(std::string text,const char* fontPath, Shader* shader,int font_size, int screen_width, int screen_height, Transform* transform);
     ~Text();
 
     void Init();

@@ -14,7 +14,6 @@ Transform::~Transform()
 
 void Transform::Init()
 {
-    std::cout << "Transform::Init()" << std::endl;
 }
 
 void Transform::Update()
