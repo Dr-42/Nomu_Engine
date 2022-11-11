@@ -16,7 +16,7 @@
 class Sprite : public Component
 {
 public:
-    Sprite(int width, int height, Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
+    Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
     ~Sprite();
 
     void Init();

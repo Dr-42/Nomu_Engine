@@ -5,15 +5,15 @@ Sprite::~Sprite()
     delete m_spriteRenderer;
 }
 
-Sprite::Sprite(int width, int height, Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
+Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
 {
     m_texture = texture;
     m_shader = shader;
-    m_size = glm::vec2(width, height);
+    m_transform = transform;
+    m_size = m_transform->GetScale();
     screenWidth = screen_width;
     screenHeight = screen_height;
     m_spriteRenderer = new SpriteRenderer(m_shader);
-    m_transform = transform;
     isActivated = true;
 }
 
