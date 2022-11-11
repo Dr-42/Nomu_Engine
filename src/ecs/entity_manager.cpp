@@ -29,9 +29,9 @@ void EntityManager::Update()
     }
 }
 
-Entity* EntityManager::AddEntity(Entity* entity, const char* name)
+Entity* EntityManager::AddEntity(const char* name)
 {
-    entity = new Entity(name);
+    Entity* entity = new Entity(name);
     m_entities.push_back(entity);
     return entity;
 }

@@ -2,6 +2,7 @@
 
 Sprite::~Sprite()
 {
+    delete m_spriteRenderer;
 }
 
 Sprite::Sprite(int width, int height, Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
@@ -79,9 +80,3 @@ void Sprite::m_ConfigureShader()
     this->m_shader->Use().SetInteger("image", 0);
     this->m_shader->SetMatrix4("projection", projection);
 }
-
-
-
-
-
-

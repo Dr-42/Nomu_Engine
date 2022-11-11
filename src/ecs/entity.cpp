@@ -34,6 +34,10 @@ void Entity::Update()
 void Entity::AddComponent(Component* component)
 {
     m_components.push_back(component);
+    if (typeid(component).name() == typeid(Transform).name())
+    {
+        m_transform = (Transform*)component;
+    }
 }
 
 void Entity::RemoveComponent(Component* component)

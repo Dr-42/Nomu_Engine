@@ -4,6 +4,7 @@
 #include "ecs/component.h"
 #include "components/transform.h"
 #include "components/sprite.h"
+#include "components/text.h"
 
 #include <vector>
 #include <algorithm>

@@ -39,13 +39,18 @@ void Game::Init(){
 
     world = new World();
 
-    world->GetEntityManager()->AddEntity(entity, "nomu");
-    entity = world->GetEntityManager()->GetEntity("nomu");
-
-    
-    sprite = new Sprite(200, 200, ResourceManager::GetTexture("face"), ResourceManager::GetShader("sprite"), this->Width, this->Height, entity->GetTransform());
+    entity = world->GetEntityManager()->AddEntity("nomu");
+    sprite = new Sprite(800, 800, ResourceManager::GetTexture("face"), ResourceManager::GetShader("sprite"), this->Width, this->Height, entity->GetTransform());
     entity->AddComponent(sprite);
     sprite->SetTexture(ResourceManager::GetTexture("face"));
+
+    entity1 = world->GetEntityManager()->AddEntity("nomu2");
+    Text *text = new Text("Hello", 24, this->Width, this->Height, entity1->GetTransform());
+    entity1->AddComponent(text);
+
+    entity2 = world->GetEntityManager()->AddEntity("nomu3");
+    Text *text2 = new Text("Hello from NOMU Engine", 24, this->Width, this->Height, entity2->GetTransform());
+    entity2->AddComponent(text2);
 
     world->Init();
 }
@@ -64,6 +69,15 @@ void Game::ProcessInput(float dt)
 
 void Game::Update(float dt)
 {
-    world->Update();
+
     entity->GetTransform()->SetPosition(glm::vec2(MouseX, MouseY));
+    entity->GetTransform()->SetScale(glm::vec2(400.0f, 400.0f));
+
+    entity1->GetTransform()->SetPosition(glm::vec2(300, 100));
+    entity1->GetTransform()->SetScale(glm::vec2(2, 1.0));
+
+    entity2->GetTransform()->SetPosition(glm::vec2(450, 770));
+    entity2->GetTransform()->SetScale(glm::vec2(1.0, 1.0));
+
+    world->Update();
 }

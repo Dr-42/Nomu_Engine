@@ -15,7 +15,7 @@ public:
     void Init();
     void Update();
 
-    Entity* AddEntity(Entity* entity, const char* name);
+    Entity* AddEntity(const char* name);
     void RemoveEntity(Entity* entity);
     std::vector<Entity*> GetEntities();
     Entity* GetEntity(const char* name);

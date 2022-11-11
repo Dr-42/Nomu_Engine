@@ -33,7 +33,7 @@ public:
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
     World                   *world;
-    Entity                  *entity;
+    Entity                  *entity, *entity1, *entity2;
     Sprite                  *sprite;
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
