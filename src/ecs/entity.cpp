@@ -4,7 +4,7 @@ Entity::Entity(const char* name)
 {
     m_name = name;
     m_components = std::vector<Component*>();
-    m_transform = new Transform();
+    this->AddComponent(new Transform());
 }
 
 Entity::~Entity()
@@ -34,10 +34,6 @@ void Entity::Update()
 void Entity::AddComponent(Component* component)
 {
     m_components.push_back(component);
-    if (typeid(component).name() == typeid(Transform).name())
-    {
-        m_transform = (Transform*)component;
-    }
 }
 
 void Entity::RemoveComponent(Component* component)
@@ -58,12 +54,10 @@ std::vector<Component*> Entity::GetComponents()
     return m_components;
 }
 
-Transform* Entity::GetTransform()
-{
-    return m_transform;
-}
 
 const char* Entity::GetName()
 {
     return m_name;
 }
+
+

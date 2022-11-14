@@ -7,6 +7,7 @@
 #include "ecs/world.h"
 #include "components/transform.h"
 #include "components/sprite.h"
+#include "components/event_listener.h"
 
 #include "renderer/sprite_renderer.h"
 #include "utils/resource_manager.h"
@@ -18,12 +19,13 @@ public:
     // game state
     bool                    Keys[1024];
     unsigned int            Width, Height;
-    double                  MouseX, MouseY;
+    glm::vec2*              MousePos;
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
     World                   *world;
     Entity                  *entity, *entity1, *entity2;
     Sprite                  *sprite;
+    EventListener           *evln;
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
     ~Game();

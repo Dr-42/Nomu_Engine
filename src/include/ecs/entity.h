@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <algorithm>
+#define quote(x) #x
 
 class Entity
 {
@@ -21,15 +22,27 @@ public:
     void RemoveComponent(Component* component);
     void Destroy();
     std::vector<Component*> GetComponents();
-    Transform* GetTransform();
     const char* GetName();
 
-    void AddSprite(Sprite* sprite);
+    //generic function to get components
+    template <typename T>
+    T* GetComponent()
+    {
+
+        for (long long unsigned int i = 0; i < m_components.size(); i++)
+        {
+            if (T* component = dynamic_cast<T*>(m_components[i]))
+            {
+                return component;
+            }
+        }
+        std::cout << "Component " << quote(T) << " not found" << std::endl;
+        return nullptr;
+    }
 
 private:
-    const char* m_name;
-    std::vector<Component*> m_components;
-    Transform* m_transform;
+    const char *m_name;
+    std::vector<Component *> m_components;
 };
 
 #endif
