@@ -13,7 +13,7 @@ public:
     ~EntityManager();
 
     void Init();
-    void Update();
+    void Update(float dt);
 
     Entity* AddEntity(const char* name);
     void RemoveEntity(Entity* entity);

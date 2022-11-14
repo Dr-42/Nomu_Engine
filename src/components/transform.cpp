@@ -16,7 +16,7 @@ void Transform::Init()
 {
 }
 
-void Transform::Update()
+void Transform::Update(float dt)
 {
 }
 

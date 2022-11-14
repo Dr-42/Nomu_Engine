@@ -12,8 +12,8 @@ public:
     Transform();
     ~Transform();
 
-    void Init();
-    void Update();
+    void Init() override;
+    void Update(float dt) override;
     void Destroy();
 
     void SetPosition(glm::vec2 position);

@@ -19,8 +19,8 @@ public:
     Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
     ~Sprite();
 
-    void Init();
-    void Update();
+    void Init() override;
+    void Update(float dt) override;
     void Destroy();
 
     void SetTexture(const char* texturePath);

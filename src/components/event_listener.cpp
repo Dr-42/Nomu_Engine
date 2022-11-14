@@ -7,13 +7,15 @@ EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mo
     m_mouseLeft = mouseLeft;
     m_mouseRight = mouseRight;
     m_keys = keys;
+    m_leftClickTime = 0.0f;
+    m_rightClickTime = 0.0f;
 }
 
 EventListener::~EventListener()
 {
 }
 
-bool EventListener::isLeftClicked()
+bool EventListener::isLeftClickedandHeld()
 {
     if (isMouseOver() && *m_mouseLeft)
     {
@@ -22,7 +24,7 @@ bool EventListener::isLeftClicked()
     return false;   
 }
 
-bool EventListener::isRightClicked()
+bool EventListener::isRightClickedandHeld()
 {
     if(isMouseOver() && *m_mouseRight)
     {
@@ -33,6 +35,28 @@ bool EventListener::isRightClicked()
 bool EventListener::isHovered()
 {
     return isMouseOver();
+}
+
+bool EventListener::isLeftClicked()
+{
+    if (isMouseOver() && *m_mouseLeft && m_leftClickTime == 0.0f && !m_leftClickHeld)
+    {
+        m_leftClickTime = 0.1f;
+        m_leftClickHeld = true;
+        return true;
+    }
+    return false;
+}
+
+bool EventListener::isRightClicked()
+{
+    if (isMouseOver() && *m_mouseRight && m_rightClickTime == 0.0f && !m_rightClickHeld)
+    {
+        m_rightClickTime = 0.1f;
+        m_rightClickHeld = true;
+        return true;
+    }
+    return false;
 }
 
 bool EventListener::isMouseOver()
@@ -50,6 +74,45 @@ bool EventListener::isMouseOver()
         m_mousePos->y <= m_transform->GetPosition().y + m_transform->GetScale().y / 2)
     {
         return true;
+    }
+}
+
+void EventListener::Update(float dt)
+{
+    if (m_leftClickTime > 0.0f)
+    {
+        if(m_leftClickTime > dt)
+        {
+            m_leftClickTime -= dt;
+        }
+        else
+        {
+            m_leftClickTime = 0.0f;
+        }
+        
+    } 
+
+    if (m_rightClickTime > 0.0f)
+    {
+        if(m_rightClickTime > dt)
+        {
+            m_rightClickTime -= dt;
+        }
+        else
+        {
+            m_rightClickTime = 0.0f;
+        }
+        
+    }
+
+    if (!*m_mouseLeft)
+    {
+        m_leftClickHeld = false;
+    }
+
+    if (!*m_mouseRight)
+    {
+        m_rightClickHeld = false;
     }
 }
 

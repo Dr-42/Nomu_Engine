@@ -23,11 +23,11 @@ void Entity::Init()
     }
 }
 
-void Entity::Update()
+void Entity::Update(float dt)
 {
     for (auto component : m_components)
     {
-        component->Update();
+        component->Update(dt);
     }
 }
 

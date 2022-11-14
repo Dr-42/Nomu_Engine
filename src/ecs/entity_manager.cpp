@@ -21,11 +21,11 @@ void EntityManager::Init()
     }
 }
 
-void EntityManager::Update()
+void EntityManager::Update(float dt)
 {
     for (auto entity : m_entities)
     {
-        entity->Update();
+        entity->Update(dt);
     }
 }
 
@@ -51,6 +51,7 @@ Entity* EntityManager::GetEntity(const char* name)
 void EntityManager::RemoveEntity(Entity* entity)
 {
     m_entities.erase(std::remove(m_entities.begin(), m_entities.end(), entity), m_entities.end());
+    delete entity;
 }
 
 std::vector<Entity*> EntityManager::GetEntities()

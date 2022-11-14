@@ -9,7 +9,7 @@ public:
     virtual ~Component();
 
     virtual void Init();
-    virtual void Update();
+    virtual void Update(float dt);
     virtual void Destroy();
 };
 

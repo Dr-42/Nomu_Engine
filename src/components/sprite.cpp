@@ -22,7 +22,7 @@ void Sprite::Init()
     m_ConfigureShader();
 }
 
-void Sprite::Update()
+void Sprite::Update(float dt)
 {
     if(isActivated)
     {

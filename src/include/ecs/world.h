@@ -14,7 +14,7 @@ public:
     ~World();
 
     void Init();
-    void Update();
+    void Update(float dt);
 
     EntityManager* GetEntityManager() const;
 

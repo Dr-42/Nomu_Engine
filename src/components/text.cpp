@@ -25,7 +25,7 @@ void Text::Init()
     m_textRenderer->Load(m_fontPath, m_font_size);
 }
 
-void Text::Update()
+void Text::Update(float dt)
 {
     if(isActivated)
     {

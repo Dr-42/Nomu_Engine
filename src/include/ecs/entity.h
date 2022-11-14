@@ -17,7 +17,7 @@ public:
     ~Entity();
 
     void Init();
-    void Update();
+    void Update(float dt);
     void AddComponent(Component* component);
     void RemoveComponent(Component* component);
     void Destroy();

@@ -20,8 +20,8 @@ public:
     Text(std::string text,const char* fontPath, Shader* shader,int font_size, int screen_width, int screen_height, Transform* transform);
     ~Text();
 
-    void Init();
-    void Update();
+    void Init() override;
+    void Update(float dt) override;
     void Destroy();
 
     void SetText(std::string text);

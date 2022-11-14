@@ -10,6 +10,7 @@ Game::Game(unsigned int width, unsigned int height)
     this->MouseLeft = false;
     this->MouseRight = false;
     wireframe = false;
+    this->MousePos = new glm::vec2(0.0f, 0.0f);
 }
 
 Game::~Game()
@@ -79,8 +80,15 @@ void Game::ProcessInput(float dt)
 void Game::Update(float dt)
 {
 
-    world->Update();
+    world->Update(dt);
     if(entity->GetComponent<EventListener>()->isLeftClicked()){
         std::cout << "Left Clicked" << std::endl;
+    }
+    if(entity->GetComponent<EventListener>()->isRightClicked()){
+        std::cout << "Right Clicked" << std::endl;
+    }
+
+    if(entity->GetComponent<EventListener>()->isLeftClickedandHeld()){
+        entity->GetComponent<Transform>()->SetPosition(*MousePos);
     }
 }

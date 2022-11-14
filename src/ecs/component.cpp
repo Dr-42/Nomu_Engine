@@ -13,7 +13,7 @@ void Component::Init()
 {
 }
 
-void Component::Update()
+void Component::Update(float dt)
 {
 }
 

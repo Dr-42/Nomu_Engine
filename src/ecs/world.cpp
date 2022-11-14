@@ -15,9 +15,9 @@ void World::Init()
     m_entityManager->Init();
 }
 
-void World::Update()
+void World::Update(float dt)
 {
-    m_entityManager->Update();
+    m_entityManager->Update(dt);
 }
 
 EntityManager* World::GetEntityManager() const
