@@ -5,9 +5,23 @@ Sprite::~Sprite()
     delete m_spriteRenderer;
 }
 
+Sprite::Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_width, int screen_height, Transform* transform)
+{
+    m_texture = texture;
+    m_color = color;
+    m_shader = shader;
+    m_transform = transform;
+    m_size = m_transform->GetScale();
+    screenWidth = screen_width;
+    screenHeight = screen_height;
+    m_spriteRenderer = new SpriteRenderer(m_shader);
+    isActivated = true;
+}
+
 Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
 {
     m_texture = texture;
+    m_color = glm::vec4(1.0f);
     m_shader = shader;
     m_transform = transform;
     m_size = m_transform->GetScale();
@@ -26,7 +40,7 @@ void Sprite::Update(float dt)
 {
     if(isActivated)
     {
-        m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation());
+        m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation(), m_color);
     }
 
 }
@@ -45,6 +59,11 @@ void Sprite::SetTexture(const char* texturePath)
 void Sprite::SetTexture(Texture2D* texture)
 {
     m_texture = texture;
+}
+
+void Sprite::SetColor(glm::vec4 color)
+{
+    m_color = color;
 }
 
 void Sprite::SetShader(Shader* shader, glm::vec2 size)

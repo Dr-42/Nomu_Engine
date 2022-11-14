@@ -16,6 +16,7 @@
 class Sprite : public Component
 {
 public:
+    Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_width, int screen_height, Transform* transform);
     Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
     ~Sprite();
 
@@ -25,6 +26,8 @@ public:
 
     void SetTexture(const char* texturePath);
     void SetTexture(Texture2D* texture);
+
+    void SetColor(glm::vec4 color);
 
     void SetShader(Shader* shader, glm::vec2 size);
 
@@ -43,6 +46,7 @@ private:
     SpriteRenderer* m_spriteRenderer;
     Shader* m_shader;
     glm::vec2 m_size;
+    glm::vec4 m_color;
     int screenWidth, screenHeight;
 }; 
 
