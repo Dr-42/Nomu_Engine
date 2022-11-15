@@ -38,31 +38,30 @@ void Game::Init(){
     world = new World();
     MousePos = new glm::vec2(0.0f, 0.0f);
 
-    entity = world->GetEntityManager()->AddEntity("nomu");
-    sprite = new Sprite(ResourceManager::GetTexture("face"), ResourceManager::GetShader("sprite"), this->Width, this->Height, entity->GetComponent<Transform>());
-    entity->AddComponent(sprite);
-    sprite->SetTexture(ResourceManager::GetTexture("sprite"));
-    evln = new EventListener(entity->GetComponent<Transform>(), MousePos, &MouseLeft, &MouseRight, Keys);
-    entity->AddComponent(evln);
+    world->GetEntityManager()->AddEntity("nomu");
+    world->GetEntityManager()->GetEntity("nomu")->AddComponent(new Sprite(ResourceManager::GetTexture("sprite"), ResourceManager::GetShader("sprite"), Width, Height, world->GetEntityManager()->GetEntity("nomu")->GetComponent<Transform>()));
+    world->GetEntityManager()->GetEntity("nomu")->AddComponent(new EventListener(world->GetEntityManager()->GetEntity("nomu")->GetComponent<Transform>(), MousePos, &MouseLeft, &MouseRight, Keys));
 
-    entity1 = world->GetEntityManager()->AddEntity("nomu2");
-    Text *text = new Text("Hello!", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, entity1->GetComponent<Transform>());
-    entity1->AddComponent(text);
+    world->GetEntityManager()->AddEntity("nomu1");
+    world->GetEntityManager()->GetEntity("nomu1")->AddComponent(new Sprite(ResourceManager::GetTexture("sprite"), ResourceManager::GetShader("sprite"), this->Width, this->Height, world->GetEntityManager()->GetEntity("nomu1")->GetComponent<Transform>()));
+    world->GetEntityManager()->GetEntity("nomu1")->AddComponent(new EventListener(world->GetEntityManager()->GetEntity("nomu1")->GetComponent<Transform>(), MousePos, &MouseLeft, &MouseRight, Keys));
 
-    entity2 = world->GetEntityManager()->AddEntity("nomu3");
-    Text *text2 = new Text("Hello from NOMU Engine", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, entity2->GetComponent<Transform>());
-    entity2->AddComponent(text2);
+    world->GetEntityManager()->AddEntity("hello_text");
+    world->GetEntityManager()->GetEntity("hello_text")->AddComponent( new Text("Hello!", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, world->GetEntityManager()->GetEntity("hello_text")->GetComponent<Transform>()));
+
+    world->GetEntityManager()->AddEntity("engine_text");
+    world->GetEntityManager()->GetEntity("engine_text")->AddComponent( new Text("Hello from NOMU Engine", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, world->GetEntityManager()->GetEntity("engine_text")->GetComponent<Transform>()));
 
     world->Init();
     
-    entity->GetComponent<Transform>()->SetPosition(glm::vec2(400.0f, 400.0f));
-    entity->GetComponent<Transform>()->SetScale(glm::vec2(400.0f, 400.0f));
+    world->GetEntityManager()->GetEntity("nomu")->GetComponent<Transform>()->SetPosition(glm::vec2(400.0f, 400.0f));
+    world->GetEntityManager()->GetEntity("nomu")->GetComponent<Transform>()->SetScale(glm::vec2(400.0f, 400.0f));
 
-    entity1->GetComponent<Transform>()->SetPosition(glm::vec2(300, 100));
-    entity1->GetComponent<Transform>()->SetScale(glm::vec2(2, 1.0));
+    world->GetEntityManager()->GetEntity("hello_text")->GetComponent<Transform>()->SetPosition(glm::vec2(300, 100));
+    world->GetEntityManager()->GetEntity("hello_text")->GetComponent<Transform>()->SetScale(glm::vec2(2, 1.0));
 
-    entity2->GetComponent<Transform>()->SetPosition(glm::vec2(450, 770));
-    entity2->GetComponent<Transform>()->SetScale(glm::vec2(1.0, 1.0));
+    world->GetEntityManager()->GetEntity("engine_text")->GetComponent<Transform>()->SetPosition(glm::vec2(450, 770));
+    world->GetEntityManager()->GetEntity("engine_text")->GetComponent<Transform>()->SetScale(glm::vec2(1.0, 1.0));
 }
 
 void Game::ProcessInput(float dt)
@@ -81,14 +80,19 @@ void Game::Update(float dt)
 {
 
     world->Update(dt);
-    if(entity->GetComponent<EventListener>()->isLeftClicked()){
+    if(world->GetEntityManager()->GetEntity("nomu")->GetComponent<EventListener>()->isLeftClicked()){
         std::cout << "Left Clicked" << std::endl;
     }
-    if(entity->GetComponent<EventListener>()->isRightClicked()){
+    if(world->GetEntityManager()->GetEntity("nomu")->GetComponent<EventListener>()->isRightClicked()){
         std::cout << "Right Clicked" << std::endl;
     }
 
-    if(entity->GetComponent<EventListener>()->isLeftClickedandHeld()){
-        entity->GetComponent<Transform>()->SetPosition(*MousePos);
+    if(world->GetEntityManager()->GetEntity("nomu")->GetComponent<EventListener>()->isLeftClickedandHeld()){
+        world->GetEntityManager()->GetEntity("nomu")->GetComponent<Transform>()->SetPosition(*MousePos);
     }
+
+    if(world->GetEntityManager()->GetEntity("nomu1")->GetComponent<EventListener>()->isRightClickedandHeld()){
+        world->GetEntityManager()->GetEntity("nomu1")->GetComponent<Transform>()->SetPosition(*MousePos);
+    }
+
 }

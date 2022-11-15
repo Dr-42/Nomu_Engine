@@ -38,13 +38,14 @@ Entity* EntityManager::AddEntity(const char* name)
 
 Entity* EntityManager::GetEntity(const char* name)
 {
-    for (auto entity : m_entities)
+    for (int i = 0; i < m_entities.size(); i++)
     {
-        if (entity->GetName() == name)
+        if (strcmp(m_entities[i]->GetName(), name) == 0)
         {
-            return entity;
+            return m_entities[i];
         }
     }
+    std::cout << "Entity " << name << " not found" << std::endl;
     return nullptr;
 }
 

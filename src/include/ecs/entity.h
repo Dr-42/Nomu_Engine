@@ -42,7 +42,7 @@ public:
 
 private:
     const char *m_name;
-    std::vector<Component *> m_components;
+    std::vector<Component*> m_components;
 };
 
 #endif

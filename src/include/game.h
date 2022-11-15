@@ -23,9 +23,7 @@ public:
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
     World                   *world;
-    Entity                  *entity, *entity1, *entity2;
-    Sprite                  *sprite;
-    EventListener           *evln;
+
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
     ~Game();
