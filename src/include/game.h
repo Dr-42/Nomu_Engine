@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "ecs/world.h"
+#include "ecs/entity.h"
 #include "components/transform.h"
 #include "components/sprite.h"
 #include "components/event_listener.h"
@@ -22,8 +22,7 @@ public:
     glm::vec2*              MousePos;
     bool                    MouseLeft, MouseRight;
     bool                    wireframe;
-    World                   *world;
-
+    Entity*                 root;
     // constructor/destructor
     Game(unsigned int width, unsigned int height);
     ~Game();
