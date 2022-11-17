@@ -30,6 +30,7 @@ bool EventListener::isRightClickedandHeld()
     {
         return true;
     }
+    return false;
 }
 
 bool EventListener::isHovered()
@@ -75,6 +76,7 @@ bool EventListener::isMouseOver()
     {
         return true;
     }
+    return false;
 }
 
 void EventListener::Update(float dt)
