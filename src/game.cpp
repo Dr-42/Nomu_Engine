@@ -52,6 +52,10 @@ void Game::Init(){
     root->AddChild("engine_text");
     root->GetChild("engine_text")->AddComponent( new Text("Hello from NOMU Engine", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, root->GetChild("engine_text")->GetComponent<Transform>()));
 
+    Entity* fps = root->GetChild("engine_text")->Clone();
+    fps->SetName("fps");
+    root->AddChild(fps);
+
     root->Init();
     
     root->GetChild("nomu")->GetComponent<Transform>()->SetPosition(glm::vec2(400.0f, 400.0f));
@@ -62,6 +66,9 @@ void Game::Init(){
 
     root->GetChild("engine_text")->GetComponent<Transform>()->SetPosition(glm::vec2(450, 770));
     root->GetChild("engine_text")->GetComponent<Transform>()->SetScale(glm::vec2(1.0, 1.0));
+
+    root->GetChild("fps")->GetComponent<Transform>()->SetPosition(glm::vec2(10, 10));
+    root->GetChild("fps")->GetComponent<Transform>()->SetScale(glm::vec2(1.0, 1.0));
 }
 
 void Game::ProcessInput(float dt)
@@ -94,5 +101,8 @@ void Game::Update(float dt)
     if(root->GetChild("nomu1")->GetComponent<EventListener>()->isRightClickedandHeld()){
         root->GetChild("nomu1")->GetComponent<Transform>()->SetPosition(*MousePos);
     }
+
+    std::string fps = "FPS: " + std::to_string(1.0f / dt);
+    root->GetChild("fps")->GetComponent<Text>()->SetText(fps);
 
 }

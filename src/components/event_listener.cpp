@@ -17,6 +17,45 @@ EventListener::~EventListener()
 {
 }
 
+void EventListener::Update(float dt)
+{
+    if (m_leftClickTime > 0.0f)
+    {
+        if(m_leftClickTime > dt)
+        {
+            m_leftClickTime -= dt;
+        }
+        else
+        {
+            m_leftClickTime = 0.0f;
+        }
+        
+    } 
+
+    if (m_rightClickTime > 0.0f)
+    {
+        if(m_rightClickTime > dt)
+        {
+            m_rightClickTime -= dt;
+        }
+        else
+        {
+            m_rightClickTime = 0.0f;
+        }
+        
+    }
+
+    if (!*m_mouseLeft)
+    {
+        m_leftClickHeld = false;
+    }
+
+    if (!*m_mouseRight)
+    {
+        m_rightClickHeld = false;
+    }
+}
+
 EventListener* EventListener::Clone()
 {
     EventListener* eventListener = new EventListener(m_entity->GetComponent<Transform>(), m_mousePos, m_mouseLeft, m_mouseRight, m_keys);
@@ -87,42 +126,5 @@ bool EventListener::isMouseOver()
     return false;
 }
 
-void EventListener::Update(float dt)
-{
-    if (m_leftClickTime > 0.0f)
-    {
-        if(m_leftClickTime > dt)
-        {
-            m_leftClickTime -= dt;
-        }
-        else
-        {
-            m_leftClickTime = 0.0f;
-        }
-        
-    } 
 
-    if (m_rightClickTime > 0.0f)
-    {
-        if(m_rightClickTime > dt)
-        {
-            m_rightClickTime -= dt;
-        }
-        else
-        {
-            m_rightClickTime = 0.0f;
-        }
-        
-    }
-
-    if (!*m_mouseLeft)
-    {
-        m_leftClickHeld = false;
-    }
-
-    if (!*m_mouseRight)
-    {
-        m_rightClickHeld = false;
-    }
-}
 

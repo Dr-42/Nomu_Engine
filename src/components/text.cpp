@@ -47,3 +47,28 @@ Text* Text::Clone()
     Text* text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
     return text;
 }
+
+void Text::SetText(std::string text)
+{
+    m_text = text;
+}
+
+void Text::SetFontSize(int font_size)
+{
+    m_font_size = font_size;
+}
+
+void Text::SetColor(glm::vec3 color)
+{
+    m_color = color;
+}
+
+void Text::SetFontPath(const char* fontPath)
+{
+    m_fontPath = fontPath;
+}
+
+TextRenderer* Text::GetTextRenderer()
+{
+    return m_textRenderer;
+}
