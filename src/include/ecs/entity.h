@@ -39,6 +39,7 @@ public:
     void Destroy();
     std::vector<Component*> GetComponents();
     const char* GetName();
+    void SetName(const char* name);
 
     //generic function to get components
     template <typename T>

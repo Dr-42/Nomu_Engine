@@ -81,8 +81,7 @@ void Entity::RemoveComponent(Component* component)
 Entity* Entity::AddChild(Entity* child)
 {
     child->SetParent(this);
-    child->
-    m_children.push_back(child);
+    this->m_children.push_back(child);
     return child;
 }
 
@@ -172,4 +171,8 @@ const char* Entity::GetName()
     return m_name;
 }
 
+void Entity::SetName(const char* name)
+{
+    m_name = name;
+}
 

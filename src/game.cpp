@@ -41,9 +41,10 @@ void Game::Init(){
     root->GetChild("nomu")->AddComponent(new Sprite(ResourceManager::GetTexture("sprite"), ResourceManager::GetShader("sprite"), Width, Height, root->GetChild("nomu")->GetComponent<Transform>()));
     root->GetChild("nomu")->AddComponent(new EventListener(root->GetChild("nomu")->GetComponent<Transform>(), MousePos, &MouseLeft, &MouseRight, Keys));
 
-    root->AddChild("nomu1");
-    root->GetChild("nomu1")->AddComponent(new Sprite(ResourceManager::GetTexture("sprite"), ResourceManager::GetShader("sprite"), this->Width, this->Height, root->GetChild("nomu1")->GetComponent<Transform>()));
-    root->GetChild("nomu1")->AddComponent(new EventListener(root->GetChild("nomu1")->GetComponent<Transform>(), MousePos, &MouseLeft, &MouseRight, Keys));
+    Entity* nomu1 = root->GetChild("nomu")->Clone();
+    nomu1->SetName("nomu1");
+    root->AddChild(nomu1);
+
 
     root->AddChild("hello_text");
     root->GetChild("hello_text")->AddComponent( new Text("Hello!", fontPath, ResourceManager::GetShader("text"), 24, this->Width, this->Height, root->GetChild("hello_text")->GetComponent<Transform>()));
