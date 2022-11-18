@@ -46,6 +46,24 @@ void Entity::Update(float dt)
     }
 }
 
+Entity* Entity::Clone()
+{
+    Entity* clone = new Entity(m_name);
+
+    for (auto component : m_components)
+    {
+        clone->AddComponent(component->Clone());
+    }
+
+    for (auto child : m_children)
+    {
+        clone->AddChild(child->Clone());
+    }
+
+    return clone;
+}
+
+
 void Entity::AddComponent(Component* component)
 {
     m_components.push_back(component);

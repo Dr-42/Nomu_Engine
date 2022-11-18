@@ -20,3 +20,7 @@ void Component::Update(float dt)
 void Component::Destroy()
 {
 }
+
+Component* Component::Clone()
+{
+}

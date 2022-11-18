@@ -18,6 +18,7 @@ public:
 
     void Init();
     void Update(float dt);
+    Entity* Clone();
 
     void AddComponent(Component* component);
     void RemoveComponent(Component* component);

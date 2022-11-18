@@ -18,6 +18,7 @@ Text::Text(std::string text, const char* fontPath, Shader* shader, int font_size
     m_textRenderer = new TextRenderer(screenWidth, screenHeight, shader);
 
     m_fontPath = fontPath;
+    m_name = "Text";
 }
 
 void Text::Init()

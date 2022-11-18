@@ -9,6 +9,7 @@ EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mo
     m_keys = keys;
     m_leftClickTime = 0.0f;
     m_rightClickTime = 0.0f;
+    m_name = "EventListener";
 }
 
 EventListener::~EventListener()
