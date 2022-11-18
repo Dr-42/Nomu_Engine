@@ -1,4 +1,5 @@
 #include "components/sprite.h"
+#include "ecs/entity.h"
 
 Sprite::~Sprite()
 {
@@ -50,6 +51,12 @@ void Sprite::Update(float dt)
 void Sprite::Destroy()
 {
 
+}
+
+Sprite* Sprite::Clone()
+{
+    Sprite* sprite = new Sprite(m_texture, m_color, m_shader, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
+    return sprite;
 }
 
 void Sprite::SetTexture(const char* texturePath)

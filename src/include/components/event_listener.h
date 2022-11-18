@@ -10,6 +10,7 @@ public:
     virtual ~EventListener();
 
     void Update(float dt) override;
+    EventListener* Clone() override;
 
     bool isLeftClicked();
     bool isRightClicked();

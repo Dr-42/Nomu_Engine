@@ -23,6 +23,7 @@ public:
     void Init() override;
     void Update(float dt) override;
     void Destroy();
+    Text* Clone() override;
 
     void SetText(std::string text);
     void SetFontSize(int font_size);

@@ -23,6 +23,7 @@ public:
     void Init() override;
     void Update(float dt) override;
     void Destroy();
+    Sprite* Clone() override;
 
     void SetTexture(const char* texturePath);
     void SetTexture(Texture2D* texture);

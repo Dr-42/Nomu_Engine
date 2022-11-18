@@ -9,7 +9,7 @@
 class Transform : public Component
 {
 public:
-    Transform();
+    Transform(Entity* entity);
     ~Transform();
 
     void Init() override;

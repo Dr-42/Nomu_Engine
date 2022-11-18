@@ -1,4 +1,5 @@
 #include "components/event_listener.h"
+#include "ecs/entity.h"
 
 EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mouseLeft, bool* mouseRight, bool* keys)
 {
@@ -14,6 +15,12 @@ EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mo
 
 EventListener::~EventListener()
 {
+}
+
+EventListener* EventListener::Clone()
+{
+    EventListener* eventListener = new EventListener(m_entity->GetComponent<Transform>(), m_mousePos, m_mouseLeft, m_mouseRight, m_keys);
+    return eventListener;
 }
 
 bool EventListener::isLeftClickedandHeld()

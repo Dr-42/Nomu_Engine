@@ -4,7 +4,7 @@ Entity::Entity(const char* name)
 {
     m_name = name;
     m_components = std::vector<Component*>();
-    this->AddComponent(new Transform());
+    this->AddComponent(new Transform(this));
 }
 
 Entity::~Entity()
@@ -52,7 +52,11 @@ Entity* Entity::Clone()
 
     for (auto component : m_components)
     {
-        clone->AddComponent(component->Clone());
+        if(strcmp(component->GetName(), "Transform") != 0)
+        {
+            component->SetEntity(clone);
+            clone->AddComponent(component->Clone());
+        }
     }
 
     for (auto child : m_children)

@@ -132,3 +132,8 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+Shader* TextRenderer::GetShader()
+{
+    return this->TextShader;
+}

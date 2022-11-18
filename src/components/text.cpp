@@ -1,4 +1,5 @@
 #include "components/text.h"
+#include "ecs/entity.h"
 
 Text::~Text()
 {
@@ -39,4 +40,10 @@ void Text::Update(float dt)
 void Text::Destroy()
 {
 
+}
+
+Text* Text::Clone()
+{
+    Text* text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
+    return text;
 }
