@@ -21,19 +21,11 @@ Game::~Game()
 
 void Game::Init(){
     // load shaders
-#ifndef linux
-    ResourceManager::LoadShader("F:/C++/Nomu_Engine/src/shaders/sprite_vert_shad.glsl", "F:/C++/Nomu_Engine/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
-    ResourceManager::LoadTexture("F:/C++/Nomu_Engine/src/textures/nomu.png", true, "sprite");
-    
-    const char* fontPath = "F:/C++/Nomu_Engine/src/fonts/OCRAEXT.TTF";
-    ResourceManager::LoadShader("F:/C++/Nomu_Engine/src/shaders/text_vert_shad.glsl", "F:/C++/Nomu_Engine/src/shaders/text_frag_shad.glsl", nullptr, "text");
-#else
-    ResourceManager::LoadShader("/mnt/f/C++/Nomu_Engine/src/shaders/sprite_vert_shad.glsl", "/mnt/f/C++/Nomu_Engine/src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
-    ResourceManager::LoadTexture("/mnt/f/C++/Nomu_Engine/src/textures/nomu.png", true, "sprite");
+    ResourceManager::LoadShader("src/shaders/sprite_vert_shad.glsl", "src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
+    ResourceManager::LoadTexture("src/textures/nomu.png", true, "sprite");
 
-    const char* fontPath = "/mnt/f/C++/Nomu_Engine/src/fonts/OCRAEXT.TTF";
-    ResourceManager::LoadShader("/mnt/f/C++/Nomu_Engine/src/shaders/text_vert_shad.glsl", "/mnt/f/C++/Nomu_Engine/src/shaders/text_frag_shad.glsl", nullptr, "text");
-#endif
+    const char* fontPath = "src/fonts/OCRAEXT.TTF";
+    ResourceManager::LoadShader("src/shaders/text_vert_shad.glsl", "src/shaders/text_frag_shad.glsl", nullptr, "text");
 
     MousePos = new glm::vec2(0.0f, 0.0f);
 
