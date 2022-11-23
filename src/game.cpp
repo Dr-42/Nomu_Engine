@@ -47,8 +47,6 @@ void Game::Init(){
     Entity* fps = root->GetChild("engine_text")->Clone();
     fps->SetName("fps");
     root->AddChild(fps);
-
-    root->Init();
     
     root->GetChild("nomu")->GetComponent<Transform>()->SetPosition(glm::vec2(400.0f, 400.0f));
     root->GetChild("nomu")->GetComponent<Transform>()->SetScale(glm::vec2(400.0f, 400.0f));
@@ -61,6 +59,8 @@ void Game::Init(){
 
     root->GetChild("fps")->GetComponent<Transform>()->SetPosition(glm::vec2(10, 10));
     root->GetChild("fps")->GetComponent<Transform>()->SetScale(glm::vec2(1.0, 1.0));
+
+    root->Init();
 }
 
 void Game::ProcessInput(float dt)

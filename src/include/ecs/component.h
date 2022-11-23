@@ -22,6 +22,7 @@ public:
 protected:
     const char* m_name;
     Entity* m_entity;
+    bool active;
 };
 
 #endif

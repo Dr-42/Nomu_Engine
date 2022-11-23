@@ -37,8 +37,6 @@ public:
     SpriteRenderer* GetSpriteRenderer();
     Shader* GetShader();
 
-    bool isActivated = false;
-
 private:
 
     void m_ConfigureShader();

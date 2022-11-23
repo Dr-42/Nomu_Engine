@@ -27,6 +27,7 @@ private:
     float m_leftClickTime, m_rightClickTime;
     bool m_leftClickHeld;
     bool m_rightClickHeld;
+    bool activated;
     
     bool isMouseOver();
 

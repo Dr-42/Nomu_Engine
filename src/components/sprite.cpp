@@ -16,7 +16,7 @@ Sprite::Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_w
     screenWidth = screen_width;
     screenHeight = screen_height;
     m_spriteRenderer = new SpriteRenderer(m_shader);
-    isActivated = true;
+    active = true;
     m_name = "Sprite";
 }
 
@@ -30,7 +30,7 @@ Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_
     screenWidth = screen_width;
     screenHeight = screen_height;
     m_spriteRenderer = new SpriteRenderer(m_shader);
-    isActivated = true;
+    active = true;
     m_name = "Sprite";
 }
 
@@ -41,7 +41,7 @@ void Sprite::Init()
 
 void Sprite::Render()
 {
-    if(isActivated)
+    if(active)
     {
         m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation(), m_color);
     }
