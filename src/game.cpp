@@ -21,11 +21,11 @@ Game::~Game()
 
 void Game::Init(){
     // load shaders
-    ResourceManager::LoadShader("src/shaders/sprite_vert_shad.glsl", "src/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
-    ResourceManager::LoadTexture("src/textures/nomu.png", true, "sprite");
+    ResourceManager::LoadShader("assets/shaders/sprite_vert_shad.glsl", "assets/shaders/sprite_frag_shad.glsl", nullptr, "sprite");
+    ResourceManager::LoadTexture("assets/textures/nomu.png", true, "sprite");
 
-    const char* fontPath = "src/fonts/OCRAEXT.TTF";
-    ResourceManager::LoadShader("src/shaders/text_vert_shad.glsl", "src/shaders/text_frag_shad.glsl", nullptr, "text");
+    const char* fontPath = "assets/fonts/OCRAEXT.TTF";
+    ResourceManager::LoadShader("assets/shaders/text_vert_shad.glsl", "assets/shaders/text_frag_shad.glsl", nullptr, "text");
 
     MousePos = new glm::vec2(0.0f, 0.0f);
 
@@ -97,4 +97,9 @@ void Game::Update(float dt)
     std::string fps = "FPS: " + std::to_string(1.0f / dt);
     root->GetChild("fps")->GetComponent<Text>()->SetText(fps);
 
+}
+
+void Game::Render()
+{
+    root->Render();
 }

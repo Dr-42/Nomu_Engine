@@ -75,10 +75,13 @@ int main(int argc, char *argv[])
 
         // update game state
         // -----------------
+        App.Update(deltaTime);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        App.Update(deltaTime);
+        // render
+        // ------
+        App.Render();
 
         glfwSwapBuffers(window);
     }
