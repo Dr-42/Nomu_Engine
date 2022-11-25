@@ -6,7 +6,7 @@ Text::~Text()
     delete m_textRenderer;
 }
 
-Text::Text(std::string text, const char *fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Transform *transform)
+Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Transform *transform)
 {
     m_text = text;
     m_font_size = font_size;

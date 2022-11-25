@@ -17,7 +17,7 @@
 class Text : public Component
 {
 public:
-    Text(std::string text,const char* fontPath, Shader* shader,int font_size, int screen_width, int screen_height, Transform* transform);
+    Text(std::string text,std::string fontPath, Shader* shader,int font_size, int screen_width, int screen_height, Transform* transform);
     ~Text();
 
     void Init() override;
@@ -43,7 +43,7 @@ private:
     int m_font_size;
     glm::vec3 m_color;
     Transform* m_transform;
-    const char* m_fontPath;
+    std::string m_fontPath;
 }; 
 
 #endif

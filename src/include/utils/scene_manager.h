@@ -6,7 +6,8 @@
 #include <iostream>
 #include <map>
 
-//#include "ecs/entity.h"
+#include "ecs/entity.h"
+
 struct Component_Data{
     std::string type;
     std::string entity;
@@ -61,7 +62,7 @@ struct Node
 class SceneManager
 {
 public:
-//    static Entity* LoadScene(std::string path);
+	Entity* LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys);
     std::vector<Entity_Data> entities;
     std::vector<Asset_Data> assets;
 

@@ -13,7 +13,7 @@
 class Entity
 {
 public:
-    Entity(const char* name);
+    Entity(std::string name);
     ~Entity();
 
     void Init();

@@ -19,10 +19,10 @@ public:
     Entity* GetEntity() const { return m_entity; }
     void SetEntity(Entity* entity) { m_entity = entity; }
     const char* GetName() const { return m_name; }
+    bool active;
 protected:
     const char* m_name;
     Entity* m_entity;
-    bool active;
 };
 
 #endif
