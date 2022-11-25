@@ -10,11 +10,12 @@
 // Instantiate static variables
 std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
+std::map<std::string, std::string>  ResourceManager::Fonts;
 
 
-Shader ResourceManager::LoadShader(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile, std::string name)
+Shader ResourceManager::LoadShader(std::string vShaderFile, std::string fShaderFile, std::string gShaderFile, std::string name)
 {
-    Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+    Shaders[name] = loadShaderFromFile(vShaderFile.c_str(), fShaderFile.c_str(), gShaderFile.c_str());
     return Shaders[name];
 }
 
@@ -23,15 +24,25 @@ Shader* ResourceManager::GetShader(std::string name)
     return &Shaders[name];
 }
 
-Texture2D ResourceManager::LoadTexture(const char *file, bool alpha, std::string name)
+Texture2D ResourceManager::LoadTexture(std::string file, bool alpha, std::string name)
 {
-    Textures[name] = loadTextureFromFile(file, alpha);
+    Textures[name] = loadTextureFromFile(file.c_str(), alpha);
     return Textures[name];
 }
 
 Texture2D* ResourceManager::GetTexture(std::string name)
 {
     return &Textures[name];
+}
+
+void ResourceManager::LoadFont(std::string name, std::string path)
+{
+    Fonts[name] = path;
+}
+
+std::string ResourceManager::GetFont(std::string name)
+{
+    return Fonts[name];
 }
 
 void ResourceManager::Clear()

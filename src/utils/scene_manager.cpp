@@ -263,6 +263,8 @@ Node *SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 Entity* SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	ParseScene(path);
 
+	LoadResources(assets);
+
 	Entity* root = new Entity("root");
 	// Create the entities
 	for(int i = 0; i < entities.size(); i++){
@@ -273,8 +275,27 @@ Entity* SceneManager::LoadScene(std::string path, int scr_width, int scr_height,
 	return root;
 }
 
-void LoadResources(){
-	
+void ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path){
+	int index = comb_path.find(",");
+	vshader_path = comb_path.substr(0, index);
+	fshader_path = comb_path.substr(index + 1, comb_path.size());
+}
+
+void LoadResources(std::vector<Asset_Data> assets){
+	for(int i = 0; i < assets.size(); i++){
+		Asset_Data* asset_data = &assets[i];
+		if(asset_data->type == "Texture"){
+			ResourceManager::LoadTexture(asset_data->path,true, asset_data->name);
+		}
+		else if(asset_data->type == "Shader"){
+			std::string vshader_path, fshader_path;
+			ParseShaderPath(asset_data->path, vshader_path, fshader_path);
+			ResourceManager::LoadShader(vshader_path, fshader_path, nullptr, asset_data->name);
+		}
+		else if (asset_data->type == "Font"){
+			ResourceManager::LoadFont(asset_data->name, asset_data->path);
+		}
+	}
 }
 
 Entity* CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
@@ -389,7 +410,7 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 				shader = ResourceManager::GetShader(it->second);
 			}
 			else if(it->first == "font"){
-				font_path = it->second;
+				font_path = ResourceManager::GetFont(it->second);
 			}
 			else if(it->first == "font_size"){
 				font_size = ParseInt(it->second);
