@@ -4,8 +4,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <fstream>
 #include <map>
+
+//#include "ecs/entity.h"
 
 struct Scene{
     std::string name;
@@ -16,6 +17,8 @@ struct Scene{
 struct Entity_Data{
     std::string name;
     std::vector<std::string> components;
+    std::string clone_source;
+    std::string parent;
 };
 
 struct Component_Data{
@@ -26,20 +29,57 @@ struct Component_Data{
 
 struct Asset_Data{
     std::string type;
+    std::string name;
     std::string path;
 };
 
-class SceneLoader
+struct Node
+{
+	std::string name;
+	std::vector<Node *> children;
+	Node *parent;
+
+	Node(const std::string &name) : name(name) {}
+	~Node()
+	{
+		for (auto child : children)
+			delete child;
+	}
+
+	void AddChild(Node *child)
+	{
+		children.push_back(child);
+		child->parent = this;
+	}
+
+	void Print(int depth = 0)
+	{
+		for (int i = 0; i < depth; i++)
+			std::cout << "  ";
+		std::cout << name << std::endl;
+		for (auto child : children)
+			child->Print(depth + 1);
+	}
+};
+
+class SceneManager
 {
 public:
-    static void LoadScene(std::string path);
-private:
+//    static Entity* LoadScene(std::string path);
     std::vector<Scene> scene_data;
     std::vector<Entity_Data> entity_data;
     std::vector<Component_Data> component_data;
     std::vector<Asset_Data> asset_data;
 
-    static void ParseScene(std::string path);
+    std::vector<std::string> lines;
+
+    void ParseScene(std::string path);
+    void ParseAssets();
+    void ParseEntities();
+
+private:
+    int GetEntityIndex(std::string name);
+    Node* Tokenize(int start, int end, std::vector<std::string> lines);
 };
 
 

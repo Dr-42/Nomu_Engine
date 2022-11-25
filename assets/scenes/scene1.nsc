@@ -1,56 +1,57 @@
-assets:
-    [Shader]
-        sprite: assets/shaders/sprite_vert_shad.glsl, assets/shaders/sprite_frag_shad.glsl
-        text: assets/shaders/text_vert_shad.glsl, assets/shaders/text_frag_shad.glsl
-    [Texture]
-        sprite: assets/textures/nomu.png
-    [Font]
-        font: assets/fonts/OCRAEXT.TTF
+Assets:
+	[Shader]
+		sprite: assets/shaders/sprite_vert_shad.glsl, assets/shaders/sprite_frag_shad.glsl
+	[Shader]
+		text: assets/shaders/text_vert_shad.glsl, assets/shaders/text_frag_shad.glsl
+	[Texture]
+		sprite: assets/textures/nomu.png
+	[Font]
+		font: assets/fonts/OCRAEXT.TTF
 
-scene_map:
-    nomu:
-        [Sprite]
-            texture: sprite
-            shader: sprite
-            active: true
-        [Transform]
-            position: 400, 400
-            scale: 400, 400
-        [Event_listener]
-            active: true 
+Entities:
+	nomu:
+		[Sprite]
+			texture: sprite
+			shader: sprite
+			active: true
+		[Transform]
+			position: 400, 400
+			scale: 400, 400
+		[Event_listener]
+			active: true 
 
-    nomu1: (nomu)
-        [Transform]
-            position: 100, 100
-            scale: 100, 100
-    
-    hello_text:
-        [Text]
-            shader: text
-            font: font
-            text: Hello from Nomu Engine!
-            size: 24
-            active: true
-        [Transform]
-            position: 300, 100
-            scale: 2, 1
-    
-    engine_text:
-        [Text]
-            shader: text
-            font: font
-            text: Nomu Engine
-            size: 24
-            active: true
-        [Transform]
-            position: 450, 770
-            scale: 1, 1
-    
-    fps: (engine_text)
-        [Text]
-            text: FPS: 0
-            active: true
-        [Transform]
-            position: 10, 10
-            scale: 1, 1
-    
+	nomu1: (nomu)
+		[Transform]
+			position: 100, 100
+			scale: 100, 100
+	
+	hello_text:
+		[Text]
+			shader: text
+			font: font
+			text: Hello from Nomu Engine!
+			size: 24
+			active: true
+		[Transform]
+			position: 300, 100
+			scale: 2, 1
+	
+	engine_text:
+		[Text]
+			shader: text
+			font: font
+			text: Nomu Engine
+			size: 24
+			active: true
+		[Transform]
+			position: 450, 770
+			scale: 1, 1
+	
+	fps: (engine_text)
+		[Text]
+			text: FPS: 0
+			active: true
+		[Transform]
+			position: 10, 10
+			scale: 1, 1
+	
