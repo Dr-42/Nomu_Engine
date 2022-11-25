@@ -43,6 +43,9 @@ void SceneManager::ParseScene(std::string path)
 //			component_property: component_property_value
 //			...
 
+// The entire structure is parsed by a tokeniser which 
+// creates a Node based tree based on tabbing level
+
 void SceneManager::ParseAssets()
 {
 	// Find the start of the assets
@@ -67,37 +70,26 @@ void SceneManager::ParseAssets()
 		}
 	}
 
-	Asset_Data asset;
-	// Parse the assets
-	for (int i = start + 1; i < end; i++)
+	Node* asset_tree;
+	asset_tree = Tokenize(start, end, lines);	
+
+	// Parse the asset tree
+	for (int i = 0; i < asset_tree->children.size(); i++)
 	{
-		std::string line = lines[i];
-		if (line == "")
+		Node* asset_type = asset_tree->children[i];
+
+		// Parse the asset type
+		for (int j = 0; j < asset_type->children.size(); j++)
 		{
-			continue;
-		}
-		else if (line == "\t[Shader]")
-		{
-			asset = Asset_Data();
-			asset.type = "Shader";
-		}
-		else if (line == "\t[Texture]")
-		{
-			asset = Asset_Data();
-			asset.type = "Texture";
-		}
-		else if (line == "\t[Font]")
-		{
-			asset = Asset_Data();
-			asset.type = "Font";
-		}
-		else
-		{
-			std::string name = line.substr(2, line.find(":") - 2);
-			std::string path = line.substr(line.find(":") + 2, line.length());
-			asset.name = name;
-			asset.path = path;
-			asset_data.push_back(asset);
+			Node* asset = asset_type->children[j];
+
+			// Parse the asset
+			Asset_Data asset_data;
+			asset_data.type = asset_type->name;
+			asset_data.name = asset->name.substr(0, asset->name.find(":"));
+			asset_data.path = asset->name.substr(asset->name.find(":") + 2, asset->name.size());
+
+			assets.push_back(asset_data);
 		}
 	}
 }
@@ -203,9 +195,9 @@ Node* SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 
 int SceneManager::GetEntityIndex(std::string name)
 {
-	for (int i = 0; i < entity_data.size(); i++)
+	for (int i = 0; i < entities.size(); i++)
 	{
-		if (entity_data[i].name == name)
+		if (entities[i].name == name)
 		{
 			return i;
 		}

@@ -8,12 +8,6 @@
 
 //#include "ecs/entity.h"
 
-struct Scene{
-    std::string name;
-    std::string path;
-    std::vector<std::string> entities;
-};
-
 struct Entity_Data{
     std::string name;
     std::vector<std::string> components;
@@ -66,10 +60,9 @@ class SceneManager
 {
 public:
 //    static Entity* LoadScene(std::string path);
-    std::vector<Scene> scene_data;
-    std::vector<Entity_Data> entity_data;
-    std::vector<Component_Data> component_data;
-    std::vector<Asset_Data> asset_data;
+    std::vector<Entity_Data> entities;
+    std::vector<Component_Data> components;
+    std::vector<Asset_Data> assets;
 
     std::vector<std::string> lines;
 
