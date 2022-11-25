@@ -110,20 +110,83 @@ void SceneManager::ParseEntities()
 
 	Node* entity_tree;
 	entity_tree = Tokenize(start, end, lines);
-	entity_tree->Print(6);
+
+	// Parse the entity tree
+	for (int i = 0; i < entity_tree->children.size(); i++)
+	{
+		if(entity_tree->children[i]->name[0] == '[')
+			continue;
+		else
+		{
+			Entity_Data* entity_data = ParseEntity(entity_tree->children[i]);
+			entities.push_back(*entity_data);
+		}
+	}
 }
 
-Node* SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
+Entity_Data* SceneManager::ParseEntity(Node *entity)
+{
+	// Parse the entity
+	Entity_Data* entity_data = new Entity_Data();
+	entity_data->name = entity->name.substr(0, entity->name.find(":"));
+	if (entity->name.find(":") != entity->name.size() - 1)
+		entity_data->clone_source = entity->name.substr(
+			entity->name.find("(") + 1,
+			entity->name.find(")") - entity->name.find("(") - 1);
+	else
+		entity_data->clone_source = "";
+
+	entity_data->parent = entity->parent->name;
+
+	// Parse the components
+	for (int i = 0; i < entity->children.size(); i++)
+	{
+		if(entity->children[i]->name[0] == '[')
+		{
+			Component_Data* component_data = ParseComponent(entity->children[i]);
+			entity_data->components.push_back(component_data);
+		}
+		else{
+			entity_data->children.push_back(this->ParseEntity(entity->children[i]));
+		}
+	}
+
+	return entity_data;
+}
+
+Component_Data* SceneManager::ParseComponent(Node *component)
+{
+	// Parse the component
+	Component_Data* component_data = new Component_Data();
+	component_data->type = component->name;
+	component_data->entity = component->parent->name;
+
+	// Parse the component properties
+	for (int k = 0; k < component->children.size(); k++)
+	{
+		Node* property = component->children[k];
+
+		// Parse the property
+		std::string property_name = property->name.substr(0, property->name.find(":"));
+		std::string property_value = property->name.substr(property->name.find(":") + 2, property->name.size());
+
+		component_data->properties[property_name] = property_value;
+	}
+
+	return component_data;
+}
+
+Node *SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 {
 	// Tokenise the lines into tokens based on tabs
-	Node* root = new Node("root");
+	Node *root = new Node("root");
 	int depth = 0;
 	Node *current = root;
 
 	for (int i = start + 1; i < end; i++)
 	{
 		std::string line = lines[i];
-		if (line == "")
+		if (line == "" || line[0] == '#' || line == "\n")
 		{
 			continue;
 		}
@@ -191,16 +254,4 @@ Node* SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 		}
 	}
 	return root;
-}
-
-int SceneManager::GetEntityIndex(std::string name)
-{
-	for (int i = 0; i < entities.size(); i++)
-	{
-		if (entities[i].name == name)
-		{
-			return i;
-		}
-	}
-	return -1;
 }

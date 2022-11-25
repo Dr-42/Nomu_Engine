@@ -7,19 +7,21 @@
 #include <map>
 
 //#include "ecs/entity.h"
-
-struct Entity_Data{
-    std::string name;
-    std::vector<std::string> components;
-    std::string clone_source;
-    std::string parent;
-};
-
 struct Component_Data{
     std::string type;
     std::string entity;
     std::map<std::string, std::string> properties;
 };
+
+struct Entity_Data{
+    std::string name;
+    std::vector<Component_Data*> components;
+    std::vector<Entity_Data*> children;
+    std::string clone_source;
+    std::string parent;
+};
+
+
 
 struct Asset_Data{
     std::string type;
@@ -61,7 +63,6 @@ class SceneManager
 public:
 //    static Entity* LoadScene(std::string path);
     std::vector<Entity_Data> entities;
-    std::vector<Component_Data> components;
     std::vector<Asset_Data> assets;
 
     std::vector<std::string> lines;
@@ -71,8 +72,9 @@ public:
     void ParseEntities();
 
 private:
-    int GetEntityIndex(std::string name);
     Node* Tokenize(int start, int end, std::vector<std::string> lines);
+    Entity_Data* ParseEntity(Node* entity);
+    Component_Data* ParseComponent(Node* component);
 };
 
 

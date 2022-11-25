@@ -19,12 +19,10 @@ Entities:
 			scale: 400, 400
 		[Event_listener]
 			active: true 
-
-	nomu1: (nomu)
-		[Transform]
-			position: 100, 100
-			scale: 100, 100
-	
+		nomu1: (nomu)
+			[Transform]
+				position: 100, 100
+				scale: 100, 100
 	hello_text:
 		[Text]
 			shader: text
@@ -35,7 +33,6 @@ Entities:
 		[Transform]
 			position: 300, 100
 			scale: 2, 1
-	
 	engine_text:
 		[Text]
 			shader: text
@@ -46,7 +43,6 @@ Entities:
 		[Transform]
 			position: 450, 770
 			scale: 1, 1
-	
 	fps: (engine_text)
 		[Text]
 			text: FPS: 0
@@ -54,4 +50,3 @@ Entities:
 		[Transform]
 			position: 10, 10
 			scale: 1, 1
-	
