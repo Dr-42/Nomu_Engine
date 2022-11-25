@@ -15,7 +15,11 @@ std::map<std::string, std::string>  ResourceManager::Fonts;
 
 Shader ResourceManager::LoadShader(std::string vShaderFile, std::string fShaderFile, std::string gShaderFile, std::string name)
 {
-    Shaders[name] = loadShaderFromFile(vShaderFile.c_str(), fShaderFile.c_str(), gShaderFile.c_str());
+    if(gShaderFile != "")
+        Shaders[name] = loadShaderFromFile(vShaderFile.c_str(), fShaderFile.c_str(), gShaderFile.c_str());
+    else
+        Shaders[name] = loadShaderFromFile(vShaderFile.c_str(), fShaderFile.c_str(), nullptr);
+
     return Shaders[name];
 }
 

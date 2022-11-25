@@ -37,6 +37,7 @@ Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_
 void Sprite::Init()
 {
     m_ConfigureShader();
+    m_entity = m_transform->GetEntity();
 }
 
 void Sprite::Render()

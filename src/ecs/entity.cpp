@@ -1,6 +1,6 @@
 #include "ecs/entity.h"
 
-Entity::Entity(const char* name)
+Entity::Entity(std::string name)
 {
     m_name = name;
     m_components = std::vector<Component*>();
@@ -65,7 +65,7 @@ Entity* Entity::Clone()
 
     for (auto component : m_components)
     {
-        if(strcmp(component->GetName(), "Transform") != 0)
+        if(component->GetName() != "Transform")
         {
             component->SetEntity(clone);
             clone->AddComponent(component->Clone());
@@ -179,7 +179,7 @@ std::vector<Component*> Entity::GetComponents()
 }
 
 
-const char* Entity::GetName()
+std::string Entity::GetName()
 {
     return m_name;
 }

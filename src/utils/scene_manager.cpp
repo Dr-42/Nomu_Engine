@@ -260,60 +260,55 @@ Node *SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 	return root;
 }
 
-Entity* SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
-	ParseScene(path);
-
-	LoadResources(assets);
-
-	Entity* root = new Entity("root");
-	// Create the entities
-	for(int i = 0; i < entities.size(); i++){
-		Entity_Data* entity_data = &entities[i];
-		root->AddChild(CreateEntity(entity_data, root, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys));
-	}
-
-	return root;
-}
-
-void ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path){
-	int index = comb_path.find(",");
-	vshader_path = comb_path.substr(0, index);
-	fshader_path = comb_path.substr(index + 1, comb_path.size());
-}
-
-void LoadResources(std::vector<Asset_Data> assets){
+void SceneManager::LoadResources(std::vector<Asset_Data> assets){
 	for(int i = 0; i < assets.size(); i++){
 		Asset_Data* asset_data = &assets[i];
-		if(asset_data->type == "Texture"){
+		if(asset_data->type == "[Texture]"){
 			ResourceManager::LoadTexture(asset_data->path,true, asset_data->name);
 		}
-		else if(asset_data->type == "Shader"){
+		else if(asset_data->type == "[Shader]"){
 			std::string vshader_path, fshader_path;
 			ParseShaderPath(asset_data->path, vshader_path, fshader_path);
-			ResourceManager::LoadShader(vshader_path, fshader_path, nullptr, asset_data->name);
+			ResourceManager::LoadShader(vshader_path, fshader_path, "", asset_data->name);
 		}
-		else if (asset_data->type == "Font"){
+		else if (asset_data->type == "[Font]"){
 			ResourceManager::LoadFont(asset_data->name, asset_data->path);
 		}
 	}
 }
 
-Entity* CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+
+
+void SceneManager::ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path){
+	int index = comb_path.find(",");
+	vshader_path = comb_path.substr(0, index);
+	fshader_path = comb_path.substr(index + 2, comb_path.size());
+}
+
+
+Entity* SceneManager::CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	Entity* entity = new Entity(entity_data->name);
 	entity->SetParent(parent);
 	for(int i = 0; i < entity_data->components.size(); i++){
 		Component_Data* component_data = entity_data->components[i];
 		Component* component = CreateComponent(component_data, entity, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys);
-		entity->AddComponent(component);
+		if(component->GetName() == "Transform"){
+			continue;
+		}
+		else{
+			entity->AddComponent(component);
+		}
 	}
-	for(int i = 0; i < entity_data->children.size(); i++){
-		Entity* child = CreateEntity(entity_data, entity, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys);
-		entity->AddChild(child);
+	if(entity_data->children.size() > 0){
+		for(int i = 0; i < entity_data->children.size(); i++){
+			Entity* child = CreateEntity(entity_data->children[i], entity, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys);
+			entity->AddChild(child);
+		}
 	}
 	return entity;
 }
 
-glm::vec4 ParseVec4(std::string value){
+glm::vec4 SceneManager::ParseVec4(std::string value){
 	std::string x = value.substr(0, value.find(","));
 	value = value.substr(value.find(",") + 1, value.size());
 	std::string y = value.substr(0, value.find(","));
@@ -324,32 +319,32 @@ glm::vec4 ParseVec4(std::string value){
 	return glm::vec4(std::stof(x), std::stof(y), std::stof(z), std::stof(w));
 }
 
-glm::vec2 ParseVec2(std::string value){
+glm::vec2 SceneManager::ParseVec2(std::string value){
 	std::string x = value.substr(0, value.find(","));
 	std::string y = value.substr(value.find(",") + 1, value.size());
 	return glm::vec2(std::stof(x), std::stof(y));
 }
 
-float ParseFloat(std::string value){
+float SceneManager::ParseFloat(std::string value){
 	return std::stof(value);
 }
 
-int ParseInt(std::string value){
+int SceneManager::ParseInt(std::string value){
 	return std::stoi(value);
 }
 
-bool ParseBool(std::string value){
+bool SceneManager::ParseBool(std::string value){
 	return value == "true";
 }
 
-std::string ParseString(std::string value){
+std::string SceneManager::ParseString(std::string value){
 	return value;
 }
 
-Component* CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Component* SceneManager::CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	Component* component = NULL;
 	std::map<std::string, std::string>::iterator it;
-	if(component_data->type == "Transform"){
+	if(component_data->type == "[Transform]"){
 		Transform* transform = entity->GetComponent<Transform>();
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "position"){
@@ -365,10 +360,9 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 				transform->active = ParseBool(it->second);
 			}
 		}
-		
-		component = transform;
+		component = transform;	
 	}
-	else if(component_data->type == "Sprite"){
+	else if(component_data->type == "[Sprite]"){
 		Texture2D* texture;
 		glm::vec4 color;
 		Shader* shader;
@@ -391,7 +385,7 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 		sprite->active = active;
 		component = sprite;
 	}
-	else if(component_data->type == "Text"){
+	else if(component_data->type == "[Text]"){
 		std::string text;
 		glm::vec4 color;
 		Shader* shader;
@@ -412,7 +406,7 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 			else if(it->first == "font"){
 				font_path = ResourceManager::GetFont(it->second);
 			}
-			else if(it->first == "font_size"){
+			else if(it->first == "size"){
 				font_size = ParseInt(it->second);
 			}
 			else if(it->first == "active"){
@@ -424,7 +418,7 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 		text_comp->active = active;
 		component = text_comp;
 	}
-	else if(component_data->type == "Event_listener"){
+	else if(component_data->type == "[Event_listener]"){
 		bool active;
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "active"){
@@ -436,5 +430,25 @@ Component* CreateComponent(Component_Data* component_data, Entity* entity, int s
 		component = evl;
 	}
 
+	else{
+		std::cout << "Component type not found: " << component_data->type << std::endl;
+		exit(1);
+	}
+
 	return component;
+}
+
+Entity* SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+	ParseScene(path);
+
+	LoadResources(assets);
+
+	root_en = new Entity("root");
+	// Create the entities
+	for(int i = 0; i < entities.size(); i++){
+		Entity_Data* entity_data = &entities[i];
+		root_en->AddChild(CreateEntity(entity_data, root_en, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys));
+	}
+
+	return root_en;
 }

@@ -39,7 +39,7 @@ public:
 
     void Destroy();
     std::vector<Component*> GetComponents();
-    const char* GetName();
+    std::string GetName();
     void SetName(const char* name);
 
     //generic function to get components
@@ -59,7 +59,7 @@ public:
     }
 
 private:
-    const char *m_name;
+    std::string m_name;
     std::vector<Component*> m_components;
     std::vector<Entity*> m_children;
     glm::vec3 m_positionOffsetFromParent;

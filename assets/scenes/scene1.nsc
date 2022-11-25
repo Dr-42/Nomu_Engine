@@ -14,39 +14,63 @@ Entities:
 			texture: sprite
 			shader: sprite
 			active: true
+			color: 1, 1, 1, 1
 		[Transform]
 			position: 400, 400
 			scale: 400, 400
+			rotation: 0
+			active: true
 		[Event_listener]
 			active: true 
-		nomu1: (nomu)
-			[Transform]
-				position: 100, 100
-				scale: 100, 100
+	nomu1:
+		[Sprite]
+			texture: sprite
+			shader: sprite
+			active: true
+			color: 1, 1, 1, 1
+		[Transform]
+			position: 200, 200
+			scale: 100, 100
+			rotation: 0
+			active: true
+		[Event_listener]
+			active: true
 	hello_text:
 		[Text]
 			shader: text
 			font: font
-			text: Hello from Nomu Engine!
+			text: Hello!
 			size: 24
 			active: true
+			color: 1, 1, 1, 1
 		[Transform]
 			position: 300, 100
 			scale: 2, 1
+			rotation: 0
+			active: true
 	engine_text:
 		[Text]
 			shader: text
 			font: font
-			text: Nomu Engine
+			text: Hello from Nomu Engine
 			size: 24
 			active: true
+			color: 1, 1, 1, 1
 		[Transform]
 			position: 450, 770
 			scale: 1, 1
-	fps: (engine_text)
-		[Text]
-			text: FPS: 0
+			rotation: 0
 			active: true
+	fps:
+		[Text]
+			shader: text
+			font: font
+			text: Hello from Nomu Engine
+			size: 24
+			active: true
+			color: 1, 1, 1, 1
 		[Transform]
 			position: 10, 10
 			scale: 1, 1
+			rotation: 0
+			active: true

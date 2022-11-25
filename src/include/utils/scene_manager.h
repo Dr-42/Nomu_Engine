@@ -76,6 +76,19 @@ private:
     Node* Tokenize(int start, int end, std::vector<std::string> lines);
     Entity_Data* ParseEntity(Node* entity);
     Component_Data* ParseComponent(Node* component);
+	void LoadResources(std::vector<Asset_Data> assets);
+	void ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path);
+	Entity* CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys);
+	glm::vec4 ParseVec4(std::string value);
+	glm::vec2 ParseVec2(std::string value);
+	float ParseFloat(std::string value);
+	int ParseInt(std::string value);
+	bool ParseBool(std::string value);
+	std::string ParseString(std::string value);
+	Component* CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys);
+
+	Entity* root_en;
+
 };
 
 

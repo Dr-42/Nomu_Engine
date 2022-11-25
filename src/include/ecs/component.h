@@ -1,6 +1,8 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
+#include <string>
+
 class Entity;
 
 class Component
@@ -18,10 +20,10 @@ public:
     virtual Component* Clone();
     Entity* GetEntity() const { return m_entity; }
     void SetEntity(Entity* entity) { m_entity = entity; }
-    const char* GetName() const { return m_name; }
+    std::string GetName() const { return m_name; }
     bool active;
 protected:
-    const char* m_name;
+    std::string m_name;
     Entity* m_entity;
 };
 
