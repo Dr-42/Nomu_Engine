@@ -232,15 +232,15 @@ def check_mode():
     if len(os.sys.argv) == 1:
         return 'build'
     elif len(os.sys.argv) == 2:
-        if os.sys.argv[1] == 'clean' or os.sys.argv[1] == 'c':
+        if os.sys.argv[1] == '--clean' or os.sys.argv[1] == '-c':
             return 'clean'
-        elif os.sys.argv[1] == 'run' or os.sys.argv[1] == 'r':
+        elif os.sys.argv[1] == '--run' or os.sys.argv[1] == '-r':
             return 'run'
-        elif os.sys.argv[1] == 'help' or os.sys.argv[1] == 'h':
+        elif os.sys.argv[1] == '--help' or os.sys.argv[1] == '-h':
             return 'help'
-        elif os.sys.argv[1] == 'build' or os.sys.argv[1] == 'b':
+        elif os.sys.argv[1] == '--build' or os.sys.argv[1] == '-b':
             return 'build'
-        elif os.sys.argv[1] == 'rebuild' or os.sys.argv[1] == 'rb':
+        elif os.sys.argv[1] == '--rebuild' or os.sys.argv[1] == '-rb':
             return 'rebuild'
         else:
             print(colored('[ERROR] ', 'red'), 'Unknown Command')
@@ -250,21 +250,15 @@ def check_mode():
 
 
 def usage():
-    print('Usage:')
-    print('To build the project:')
-    print('  builder.py')
-    print('  builder.py build')
-    print('  builder.py b')
-    print('To clean the project:')
-    print('  builder.py clean')
-    print('  builder.py c')
-    print('To run the project:')
-    print('  builder.py run')
-    print('  builder.py r')
-    print('To rebuild the project:')
-    print('  builder.py rebuild')
-    print('  builder.py rb')
-
+    print(colored('[HELP] :', 'green'), 'Usage:')
+    print(colored('[HELP] :', 'green'), 'To build the project:')
+    print(colored('    python builder.py ', 'yellow'), colored('or ', 'grey'), colored('python builder.py --build', 'yellow'), colored('or ', 'grey'), colored('python builder.py -b', 'yellow'))
+    print(colored('[HELP] :', 'green'), 'To clean the project:')
+    print(colored('    python builder.py --clean', 'yellow'), colored('or ', 'grey'), colored('python builder.py -c', 'yellow'))
+    print(colored('[HELP] :', 'green'), 'To run the project:')
+    print(colored('    python builder.py --run', 'yellow'), colored('or ', 'grey'), colored('python builder.py -r', 'yellow'))
+    print(colored('[HELP] :', 'green'), 'To rebuild the project:')
+    print(colored('    python builder.py --rebuild', 'yellow'), colored('or ', 'grey'), colored('python builder.py -rb', 'yellow'))
 
 def main():
     mode = check_mode()
@@ -281,7 +275,7 @@ def main():
         link()
         print('=======PROGRAM OUTPUT========')
         if platform.system() == 'Windows':
-            os.system('.\\bin\\main.exe')
+            os.system(bin_dir + '\\' + 'main.exe')
         elif platform.system() == 'Linux':
             os.system(bin_dir + '/' + 'main')
     elif mode == 'rebuild':
