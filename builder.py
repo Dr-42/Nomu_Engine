@@ -183,8 +183,11 @@ def compile_obj(filepath, obj):
     if error_code != 0:
         print(colored('[ERROR] ', 'red'), 'Error compiling ' + filepath)
         exit(error_code)
-    global compiled_obj
-    compiled_obj = True
+    else:
+        print(colored('[LOG] ', 'green') ,'Compiled ' + filepath)
+        global compiled_obj
+        compiled_obj = True
+        save_md5()
 
 #links obj files into bin
 def link():
@@ -204,6 +207,9 @@ def link():
     if error != 0:
         print(colored('[ERROR] ', 'red'), 'Error linking')
         exit(error)
+    else:
+        print(colored('[INFO] ', 'green'), 'Linking successful')
+        save_md5()
 
 def clean():
     if platform.system() == 'Windows':
@@ -222,17 +228,20 @@ def clean():
         print(colored('[LOG] ', 'red') ,'Removed md5.txt')
     else:
         print(colored('[ERROR] ', 'red'), 'Unsupported platform')
-
 def check_mode():
     if len(os.sys.argv) == 1:
         return 'build'
     elif len(os.sys.argv) == 2:
-        if os.sys.argv[1] == 'clean':
+        if os.sys.argv[1] == 'clean' or os.sys.argv[1] == 'c':
             return 'clean'
-        elif os.sys.argv[1] == 'run':
+        elif os.sys.argv[1] == 'run' or os.sys.argv[1] == 'r':
             return 'run'
-        elif os.sys.argv[1] == 'help':
+        elif os.sys.argv[1] == 'help' or os.sys.argv[1] == 'h':
             return 'help'
+        elif os.sys.argv[1] == 'build' or os.sys.argv[1] == 'b':
+            return 'build'
+        elif os.sys.argv[1] == 'rebuild' or os.sys.argv[1] == 'rb':
+            return 'rebuild'
         else:
             print(colored('[ERROR] ', 'red'), 'Unknown Command')
             exit(1)
@@ -242,9 +251,19 @@ def check_mode():
 
 def usage():
     print('Usage:')
+    print('To build the project:')
     print('  builder.py')
+    print('  builder.py build')
+    print('  builder.py b')
+    print('To clean the project:')
     print('  builder.py clean')
+    print('  builder.py c')
+    print('To run the project:')
     print('  builder.py run')
+    print('  builder.py r')
+    print('To rebuild the project:')
+    print('  builder.py rebuild')
+    print('  builder.py rb')
 
 
 def main():
@@ -254,7 +273,6 @@ def main():
         load_md5()
         build_objects(src_dir, obj_dir)
         link()
-        save_md5()
     elif mode == 'clean':
         clean()
     elif mode == 'run':
@@ -266,7 +284,11 @@ def main():
             os.system('.\\bin\\main.exe')
         elif platform.system() == 'Linux':
             os.system(bin_dir + '/' + 'main')
-        save_md5()
+    elif mode == 'rebuild':
+        clean()
+        load_md5()
+        build_objects(src_dir, obj_dir)
+        link()
     elif mode == 'help':
         usage()
     else:
@@ -275,3 +297,4 @@ def main():
 
 if __name__=='__main__':
     main()
+
