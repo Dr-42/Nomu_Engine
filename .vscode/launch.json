@@ -1,12 +1,11 @@
 {
   "version": "0.2.0",
   "configurations": [
-
     {
-      "name": "(gdb) Test",
+      "name": "(gdb) LaunchWin",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/test.exe",
+      "program": "${workspaceFolder}/bin/main.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
@@ -28,17 +27,17 @@
       ]
     },
     {
-      "name": "(gdb) Launch",
+      "name": "(gdb) LaunchLinux",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/bin/main.exe",
+      "program": "${workspaceFolder}/bin/main",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
-      "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe",
+      "miDebuggerPath": "/usr/bin/gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
