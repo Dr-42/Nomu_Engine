@@ -11,12 +11,17 @@
         {
             "label": "run",
             "type": "shell",
-            "command": "python builder.py run"
+            "command": "python builder.py --run"
         },
         {
             "label": "clean",
             "type": "shell",
-            "command": "python builder.py clean"
+            "command": "python builder.py --clean"
+        },
+        {
+            "label": "rebuild",
+            "type": "shell",
+            "command": "python builder.py --rebuild"
         }
     ]
 }
