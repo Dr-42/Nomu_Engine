@@ -1,5 +1,5 @@
-#ifndef RESOURCE_MANAGER_H
-#define RESOURCE_MANAGER_H
+#pragma once
+#include "defines.h"
 
 #include <map>
 #include <string>
@@ -15,7 +15,8 @@
 // and/or shader is also stored for future reference by string
 // handles. All functions and resources are static and no 
 // public constructor is defined.
-class ResourceManager
+namespace Nomu{
+class N_API ResourceManager
 {
 public:
     // resource storage
@@ -44,5 +45,4 @@ private:
     // loads a single texture from file
     static Texture2D loadTextureFromFile(const char *file, bool alpha);
 };
-
-#endif
+}

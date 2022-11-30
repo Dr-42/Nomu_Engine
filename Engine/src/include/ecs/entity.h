@@ -1,6 +1,5 @@
-#ifndef ENTITY_H
-#define ENTITY_H
-
+#pragma once
+#include "defines.h"
 #include "ecs/component.h"
 #include "components/transform.h"
 #include "components/sprite.h"
@@ -9,62 +8,62 @@
 #include <vector>
 #include <algorithm>
 #define quote(x) #x
-
-class Entity
+namespace N_API Nomu
 {
-public:
-    Entity(std::string name);
-    ~Entity();
-
-    void Init();
-    void Update(float dt);
-    void Render();
-    Entity* Clone();
-
-    void AddComponent(Component* component);
-    void RemoveComponent(Component* component);
-    
-    Entity* AddChild(Entity* child);
-    Entity* AddChild(Entity* child, const char* name);
-    Entity* AddChild(const char* name);
-
-    Entity* GetChild(const char* name);
-    std::vector<Entity*> GetChildren();
-
-    void RemoveChild(Entity* child);
-    void RemoveChild(const char* name);
-
-    void SetParent(Entity* parent);
-    Entity* GetParent();
-
-    void Destroy();
-    std::vector<Component*> GetComponents();
-    std::string GetName();
-    void SetName(const char* name);
-
-    //generic function to get components
-    template <typename T>
-    T* GetComponent()
+    class Entity
     {
+    public:
+        Entity(std::string name);
+        ~Entity();
 
-        for (long long unsigned int i = 0; i < m_components.size(); i++)
+        void Init();
+        void Update(float dt);
+        void Render();
+        Entity *Clone();
+
+        void AddComponent(Component *component);
+        void RemoveComponent(Component *component);
+
+        Entity *AddChild(Entity *child);
+        Entity *AddChild(Entity *child, const char *name);
+        Entity *AddChild(const char *name);
+
+        Entity *GetChild(const char *name);
+        std::vector<Entity *> GetChildren();
+
+        void RemoveChild(Entity *child);
+        void RemoveChild(const char *name);
+
+        void SetParent(Entity *parent);
+        Entity *GetParent();
+
+        void Destroy();
+        std::vector<Component *> GetComponents();
+        std::string GetName();
+        void SetName(const char *name);
+
+        // generic function to get components
+        template <typename T>
+        T *GetComponent()
         {
-            if (T* component = dynamic_cast<T*>(m_components[i]))
+
+            for (long long unsigned int i = 0; i < m_components.size(); i++)
             {
-                return component;
+                if (T *component = dynamic_cast<T *>(m_components[i]))
+                {
+                    return component;
+                }
             }
+            std::cout << "Component " << quote(T) << " not found" << std::endl;
+            return nullptr;
         }
-        std::cout << "Component " << quote(T) << " not found" << std::endl;
-        return nullptr;
-    }
 
-private:
-    std::string m_name;
-    std::vector<Component*> m_components;
-    std::vector<Entity*> m_children;
-    glm::vec3 m_positionOffsetFromParent;
-    float m_rotationOffsetFromParent;
-    Entity* m_parent;
-};
-
-#endif
+    private:
+        std::string m_name;
+        std::vector<Component *> m_components;
+        std::vector<Entity *> m_children;
+        glm::vec3 m_positionOffsetFromParent;
+        float m_rotationOffsetFromParent;
+        Entity *m_parent;
+    };
+}

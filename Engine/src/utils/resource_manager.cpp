@@ -8,12 +8,12 @@
 #include <stb/stb_image.h>
 
 // Instantiate static variables
-std::map<std::string, Texture2D>    ResourceManager::Textures;
-std::map<std::string, Shader>       ResourceManager::Shaders;
-std::map<std::string, std::string>  ResourceManager::Fonts;
+std::map<std::string, Nomu::Texture2D>    Nomu::ResourceManager::Textures;
+std::map<std::string, Nomu::Shader>       Nomu::ResourceManager::Shaders;
+std::map<std::string, std::string>        Nomu::ResourceManager::Fonts;
 
 
-Shader ResourceManager::LoadShader(std::string vShaderFile, std::string fShaderFile, std::string gShaderFile, std::string name)
+Nomu::Shader Nomu::ResourceManager::LoadShader(std::string vShaderFile, std::string fShaderFile, std::string gShaderFile, std::string name)
 {
     if(gShaderFile != "")
         Shaders[name] = loadShaderFromFile(vShaderFile.c_str(), fShaderFile.c_str(), gShaderFile.c_str());
@@ -23,33 +23,33 @@ Shader ResourceManager::LoadShader(std::string vShaderFile, std::string fShaderF
     return Shaders[name];
 }
 
-Shader* ResourceManager::GetShader(std::string name)
+Nomu::Shader* Nomu::ResourceManager::GetShader(std::string name)
 {
     return &Shaders[name];
 }
 
-Texture2D ResourceManager::LoadTexture(std::string file, bool alpha, std::string name)
+Nomu::Texture2D Nomu::ResourceManager::LoadTexture(std::string file, bool alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file.c_str(), alpha);
     return Textures[name];
 }
 
-Texture2D* ResourceManager::GetTexture(std::string name)
+Nomu::Texture2D* Nomu::ResourceManager::GetTexture(std::string name)
 {
     return &Textures[name];
 }
 
-void ResourceManager::LoadFont(std::string name, std::string path)
+void Nomu::ResourceManager::LoadFont(std::string name, std::string path)
 {
     Fonts[name] = path;
 }
 
-std::string ResourceManager::GetFont(std::string name)
+std::string Nomu::ResourceManager::GetFont(std::string name)
 {
     return Fonts[name];
 }
 
-void ResourceManager::Clear()
+void Nomu::ResourceManager::Clear()
 {
     // (properly) delete all shaders	
     for (auto iter : Shaders)
@@ -59,7 +59,7 @@ void ResourceManager::Clear()
         glDeleteTextures(1, &iter.second.ID);
 }
 
-Shader ResourceManager::loadShaderFromFile(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile)
+Nomu::Shader Nomu::ResourceManager::loadShaderFromFile(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile)
 {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -103,7 +103,7 @@ Shader ResourceManager::loadShaderFromFile(const char *vShaderFile, const char *
     return shader;
 }
 
-Texture2D ResourceManager::loadTextureFromFile(const char *file, bool alpha)
+Nomu::Texture2D Nomu::ResourceManager::loadTextureFromFile(const char *file, bool alpha)
 {
     // create texture object
     Texture2D texture;

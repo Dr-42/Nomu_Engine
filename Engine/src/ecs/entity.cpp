@@ -1,13 +1,13 @@
 #include "ecs/entity.h"
 
-Entity::Entity(std::string name)
+Nomu::Entity::Entity(std::string name)
 {
     m_name = name;
     m_components = std::vector<Component*>();
     this->AddComponent(new Transform(this));
 }
 
-Entity::~Entity()
+Nomu::Entity::~Entity()
 {
     for (auto component : m_components)
     {
@@ -20,7 +20,7 @@ Entity::~Entity()
     }
 }
 
-void Entity::Init()
+void Nomu::Entity::Init()
 {
     for (auto component : m_components)
     {
@@ -33,7 +33,7 @@ void Entity::Init()
     }
 }
 
-void Entity::Update(float dt)
+void Nomu::Entity::Update(float dt)
 {
     for (auto component : m_components)
     {
@@ -46,7 +46,7 @@ void Entity::Update(float dt)
     }
 }
 
-void Entity::Render()
+void Nomu::Entity::Render()
 {
     for (auto component : m_components)
     {
@@ -59,7 +59,7 @@ void Entity::Render()
     }
 }
 
-Entity* Entity::Clone()
+Nomu::Entity* Nomu::Entity::Clone()
 {
     Entity* clone = new Entity(m_name);
 
@@ -81,24 +81,24 @@ Entity* Entity::Clone()
 }
 
 
-void Entity::AddComponent(Component* component)
+void Nomu::Entity::AddComponent(Component* component)
 {
     m_components.push_back(component);
 }
 
-void Entity::RemoveComponent(Component* component)
+void Nomu::Entity::RemoveComponent(Component* component)
 {
     m_components.erase(std::remove(m_components.begin(), m_components.end(), component), m_components.end());
 }
 
-Entity* Entity::AddChild(Entity* child)
+Nomu::Entity* Nomu::Entity::AddChild(Entity* child)
 {
     child->SetParent(this);
     this->m_children.push_back(child);
     return child;
 }
 
-Entity* Entity::AddChild(Entity* child, const char* name)
+Nomu::Entity* Nomu::Entity::AddChild(Entity* child, const char* name)
 {
     child->SetParent(this);
     child->m_name = name;
@@ -106,7 +106,7 @@ Entity* Entity::AddChild(Entity* child, const char* name)
     return child;
 }
 
-Entity* Entity::AddChild(const char* name)
+Nomu::Entity* Nomu::Entity::AddChild(const char* name)
 {
     Entity* child = new Entity(name);
     child->SetParent(this);
@@ -114,7 +114,7 @@ Entity* Entity::AddChild(const char* name)
     return child;
 }
 
-Entity* Entity::GetChild(const char* name)
+Nomu::Entity* Nomu::Entity::GetChild(const char* name)
 {
     for (auto child : m_children)
     {
@@ -126,18 +126,18 @@ Entity* Entity::GetChild(const char* name)
     return nullptr;
 }
 
-std::vector<Entity*> Entity::GetChildren()
+std::vector<Nomu::Entity*> Nomu::Entity::GetChildren()
 {
     return m_children;
 }
 
-void Entity::RemoveChild(Entity* child)
+void Nomu::Entity::RemoveChild(Nomu::Entity* child)
 {
     m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
     child->Destroy();
 }
 
-void Entity::RemoveChild(const char* name)
+void Nomu::Entity::RemoveChild(const char* name)
 {
     for (auto child : m_children)
     {
@@ -150,17 +150,17 @@ void Entity::RemoveChild(const char* name)
     }
 }
 
-void Entity::SetParent(Entity* parent)
+void Nomu::Entity::SetParent(Nomu::Entity* parent)
 {
     m_parent = parent;
 }
 
-Entity* Entity::GetParent()
+Nomu::Entity* Nomu::Entity::GetParent()
 {
     return m_parent;
 }
 
-void Entity::Destroy()
+void Nomu::Entity::Destroy()
 {
     for (auto component : m_components)
     {
@@ -173,18 +173,18 @@ void Entity::Destroy()
     }
 }
 
-std::vector<Component*> Entity::GetComponents()
+std::vector<Nomu::Component*> Nomu::Entity::GetComponents()
 {
     return m_components;
 }
 
 
-std::string Entity::GetName()
+std::string Nomu::Entity::GetName()
 {
     return m_name;
 }
 
-void Entity::SetName(const char* name)
+void Nomu::Entity::SetName(const char* name)
 {
     m_name = name;
 }

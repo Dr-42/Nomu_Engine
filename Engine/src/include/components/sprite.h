@@ -1,6 +1,5 @@
-#ifndef SPRITE_H
-#define SPRITE_H
-
+#pragma once
+#include "defines.h"
 #include <iostream>
 
 #include "ecs/component.h"
@@ -12,42 +11,41 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
-class Sprite : public Component
+namespace Nomu
 {
-public:
-    Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_width, int screen_height, Transform* transform);
-    Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform);
-    ~Sprite();
+    class N_API Sprite : public Component
+    {
+    public:
+        Sprite(Texture2D *texture, glm::vec4 color, Shader *shader, int screen_width, int screen_height, Transform *transform);
+        Sprite(Texture2D *texture, Shader *shader, int screen_width, int screen_height, Transform *transform);
+        ~Sprite();
 
-    void Init() override;
-    void Update(float dt) override;
-    void Render() override;
-    void Destroy();
-    Sprite* Clone() override;
+        void Init() override;
+        void Update(float dt) override;
+        void Render() override;
+        void Destroy();
+        Sprite *Clone() override;
 
-    void SetTexture(const char* texturePath);
-    void SetTexture(Texture2D* texture);
+        void SetTexture(const char *texturePath);
+        void SetTexture(Texture2D *texture);
 
-    void SetColor(glm::vec4 color);
+        void SetColor(glm::vec4 color);
 
-    void SetShader(Shader* shader, glm::vec2 size);
+        void SetShader(Shader *shader, glm::vec2 size);
 
-    Texture2D* GetTexture();
-    SpriteRenderer* GetSpriteRenderer();
-    Shader* GetShader();
+        Texture2D *GetTexture();
+        SpriteRenderer *GetSpriteRenderer();
+        Shader *GetShader();
 
-private:
+    private:
+        void m_ConfigureShader();
 
-    void m_ConfigureShader();
-
-    Transform* m_transform; 
-    Texture2D* m_texture;
-    SpriteRenderer* m_spriteRenderer;
-    Shader* m_shader;
-    glm::vec2 m_size;
-    glm::vec4 m_color;
-    int screenWidth, screenHeight;
-}; 
-
-#endif
+        Transform *m_transform;
+        Texture2D *m_texture;
+        SpriteRenderer *m_spriteRenderer;
+        Shader *m_shader;
+        glm::vec2 m_size;
+        glm::vec4 m_color;
+        int screenWidth, screenHeight;
+    };
+}

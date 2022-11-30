@@ -1,30 +1,30 @@
 #include "ecs/component.h"
 #include <iostream>
 
-Component::Component()
+Nomu::Component::Component()
 {
 }
 
-Component::~Component()
+Nomu::Component::~Component()
 {
 }
 
-void Component::Init()
+void Nomu::Component::Init()
 {
 }
 
-void Component::Update(float dt)
+void Nomu::Component::Update(float dt)
 {
 }
 
-void Component::Render()
+void Nomu::Component::Render()
 {
 }
 
-void Component::Destroy()
+void Nomu::Component::Destroy()
 {
 }
 
-Component* Component::Clone()
+Nomu::Component* Nomu::Component::Clone()
 {
 }

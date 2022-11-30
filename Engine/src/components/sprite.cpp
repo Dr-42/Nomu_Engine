@@ -1,12 +1,12 @@
 #include "components/sprite.h"
 #include "ecs/entity.h"
 
-Sprite::~Sprite()
+Nomu::Sprite::~Sprite()
 {
     delete m_spriteRenderer;
 }
 
-Sprite::Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_width, int screen_height, Transform* transform)
+Nomu::Sprite::Sprite(Nomu::Texture2D* texture, glm::vec4 color, Nomu::Shader* shader, int screen_width, int screen_height, Nomu::Transform* transform)
 {
     m_texture = texture;
     m_color = color;
@@ -20,7 +20,7 @@ Sprite::Sprite(Texture2D* texture, glm::vec4 color, Shader* shader, int screen_w
     m_name = "Sprite";
 }
 
-Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_height, Transform* transform)
+Nomu::Sprite::Sprite(Nomu::Texture2D* texture, Nomu::Shader* shader, int screen_width, int screen_height, Nomu::Transform* transform)
 {
     m_texture = texture;
     m_color = glm::vec4(1.0f);
@@ -34,13 +34,13 @@ Sprite::Sprite(Texture2D* texture, Shader* shader, int screen_width, int screen_
     m_name = "Sprite";
 }
 
-void Sprite::Init()
+void Nomu::Sprite::Init()
 {
     m_ConfigureShader();
     m_entity = m_transform->GetEntity();
 }
 
-void Sprite::Render()
+void Nomu::Sprite::Render()
 {
     if(active)
     {
@@ -49,60 +49,60 @@ void Sprite::Render()
 
 }
 
-void Sprite::Update(float dt)
+void Nomu::Sprite::Update(float dt)
 {
 }
 
-void Sprite::Destroy()
+void Nomu::Sprite::Destroy()
 {
 
 }
 
-Sprite* Sprite::Clone()
+Nomu::Sprite* Nomu::Sprite::Clone()
 {
     Sprite* sprite = new Sprite(m_texture, m_color, m_shader, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
     return sprite;
 }
 
-void Sprite::SetTexture(const char* texturePath)
+void Nomu::Sprite::SetTexture(const char* texturePath)
 {
     ResourceManager::LoadTexture(texturePath, true, "face");
     std::cout << "Loaded texture: " << texturePath << std::endl;
 }
 
-void Sprite::SetTexture(Texture2D* texture)
+void Nomu::Sprite::SetTexture(Nomu::Texture2D* texture)
 {
     m_texture = texture;
 }
 
-void Sprite::SetColor(glm::vec4 color)
+void Nomu::Sprite::SetColor(glm::vec4 color)
 {
     m_color = color;
 }
 
-void Sprite::SetShader(Shader* shader, glm::vec2 size)
+void Nomu::Sprite::SetShader(Nomu::Shader* shader, glm::vec2 size)
 {
     m_shader = shader;
     m_size = size;
 }
 
 
-Texture2D* Sprite::GetTexture()
+Nomu::Texture2D* Nomu::Sprite::GetTexture()
 {
     return m_texture;
 }
 
-SpriteRenderer* Sprite::GetSpriteRenderer()
+Nomu::SpriteRenderer* Nomu::Sprite::GetSpriteRenderer()
 {
     return m_spriteRenderer;
 }
 
-Shader* Sprite::GetShader()
+Nomu::Shader* Nomu::Sprite::GetShader()
 {
     return m_shader;
 }
 
-void Sprite::m_ConfigureShader()
+void Nomu::Sprite::m_ConfigureShader()
 {
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->screenWidth), 
         static_cast<float>(this->screenHeight), 0.0f, -1.0f, 1.0f);

@@ -8,7 +8,7 @@
 #include <iterator>
 
 
-void SceneManager::ParseScene(std::string path)
+void Nomu::SceneManager::ParseScene(std::string path)
 {
 	// Load the file
 	std::ifstream file;
@@ -50,7 +50,7 @@ void SceneManager::ParseScene(std::string path)
 // The entire structure is parsed by a tokeniser which 
 // creates a Node based tree based on tabbing level
 
-void SceneManager::ParseAssets()
+void Nomu::SceneManager::ParseAssets()
 {
 	// Find the start of the assets
 	int start = 0;
@@ -98,7 +98,7 @@ void SceneManager::ParseAssets()
 	}
 }
 
-void SceneManager::ParseEntities()
+void Nomu::SceneManager::ParseEntities()
 {
 	// Find the start of the entities
 	int start = 0;
@@ -128,7 +128,7 @@ void SceneManager::ParseEntities()
 	}
 }
 
-Entity_Data* SceneManager::ParseEntity(Node *entity)
+Nomu::Entity_Data* Nomu::SceneManager::ParseEntity(Node *entity)
 {
 	// Parse the entity
 	Entity_Data* entity_data = new Entity_Data();
@@ -158,7 +158,7 @@ Entity_Data* SceneManager::ParseEntity(Node *entity)
 	return entity_data;
 }
 
-Component_Data* SceneManager::ParseComponent(Node *component)
+Nomu::Component_Data* Nomu::SceneManager::ParseComponent(Node *component)
 {
 	// Parse the component
 	Component_Data* component_data = new Component_Data();
@@ -180,7 +180,7 @@ Component_Data* SceneManager::ParseComponent(Node *component)
 	return component_data;
 }
 
-Node *SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
+Nomu::Node *Nomu::SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 {
 	// Tokenise the lines into tokens based on tabs
 	Node *root = new Node("root");
@@ -260,7 +260,7 @@ Node *SceneManager::Tokenize(int start, int end, std::vector<std::string> lines)
 	return root;
 }
 
-void SceneManager::LoadResources(std::vector<Asset_Data> assets){
+void Nomu::SceneManager::LoadResources(std::vector<Asset_Data> assets){
 	for(int i = 0; i < assets.size(); i++){
 		Asset_Data* asset_data = &assets[i];
 		if(asset_data->type == "[Texture]"){
@@ -279,14 +279,14 @@ void SceneManager::LoadResources(std::vector<Asset_Data> assets){
 
 
 
-void SceneManager::ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path){
+void Nomu::SceneManager::ParseShaderPath(std::string comb_path, std::string &vshader_path, std::string &fshader_path){
 	int index = comb_path.find(",");
 	vshader_path = comb_path.substr(0, index);
 	fshader_path = comb_path.substr(index + 2, comb_path.size());
 }
 
 
-Entity* SceneManager::CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	Entity* entity = new Entity(entity_data->name);
 	entity->SetParent(parent);
 	for(int i = 0; i < entity_data->components.size(); i++){
@@ -308,7 +308,7 @@ Entity* SceneManager::CreateEntity(Entity_Data* entity_data, Entity* parent, int
 	return entity;
 }
 
-glm::vec4 SceneManager::ParseVec4(std::string value){
+glm::vec4 Nomu::SceneManager::ParseVec4(std::string value){
 	std::string x = value.substr(0, value.find(","));
 	value = value.substr(value.find(",") + 1, value.size());
 	std::string y = value.substr(0, value.find(","));
@@ -319,29 +319,29 @@ glm::vec4 SceneManager::ParseVec4(std::string value){
 	return glm::vec4(std::stof(x), std::stof(y), std::stof(z), std::stof(w));
 }
 
-glm::vec2 SceneManager::ParseVec2(std::string value){
+glm::vec2 Nomu::SceneManager::ParseVec2(std::string value){
 	std::string x = value.substr(0, value.find(","));
 	std::string y = value.substr(value.find(",") + 1, value.size());
 	return glm::vec2(std::stof(x), std::stof(y));
 }
 
-float SceneManager::ParseFloat(std::string value){
+float Nomu::SceneManager::ParseFloat(std::string value){
 	return std::stof(value);
 }
 
-int SceneManager::ParseInt(std::string value){
+int Nomu::SceneManager::ParseInt(std::string value){
 	return std::stoi(value);
 }
 
-bool SceneManager::ParseBool(std::string value){
+bool Nomu::SceneManager::ParseBool(std::string value){
 	return value == "true";
 }
 
-std::string SceneManager::ParseString(std::string value){
+std::string Nomu::SceneManager::ParseString(std::string value){
 	return value;
 }
 
-Component* SceneManager::CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	Component* component = NULL;
 	std::map<std::string, std::string>::iterator it;
 	if(component_data->type == "[Transform]"){
@@ -438,7 +438,7 @@ Component* SceneManager::CreateComponent(Component_Data* component_data, Entity*
 	return component;
 }
 
-Entity* SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Entity* Nomu::SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
 	ParseScene(path);
 
 	LoadResources(assets);

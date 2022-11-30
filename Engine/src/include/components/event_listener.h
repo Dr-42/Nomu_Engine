@@ -1,36 +1,35 @@
-#ifndef EVENT_LISTENER_H
-#define EVENT_LISTENER_H
+#pragma once
+#include "defines.h"
 #include "ecs/component.h"
 #include "components/transform.h"
-
-class EventListener : public Component
+namespace Nomu
 {
-public:
-    EventListener(Transform* transform, glm::vec2* mousePos, bool* mouseLeft, bool* mouseRight, bool* keys);
-    virtual ~EventListener();
+    class N_API EventListener : public Component
+    {
+    public:
+        EventListener(Transform *transform, glm::vec2 *mousePos, bool *mouseLeft, bool *mouseRight, bool *keys);
+        virtual ~EventListener();
 
-    void Update(float dt) override;
-    EventListener* Clone() override;
+        void Update(float dt) override;
+        EventListener *Clone() override;
 
-    bool isLeftClicked();
-    bool isRightClicked();
-    bool isLeftClickedandHeld();
-    bool isRightClickedandHeld();
-    bool isHovered();
+        bool isLeftClicked();
+        bool isRightClicked();
+        bool isLeftClickedandHeld();
+        bool isRightClickedandHeld();
+        bool isHovered();
 
-private:
-    Transform *m_transform;
-    glm::vec2 *m_mousePos;
-    bool *m_mouseLeft;
-    bool *m_mouseRight;
-    bool *m_keys;
-    float m_leftClickTime, m_rightClickTime;
-    bool m_leftClickHeld;
-    bool m_rightClickHeld;
-    bool activated;
-    
-    bool isMouseOver();
+    private:
+        Transform *m_transform;
+        glm::vec2 *m_mousePos;
+        bool *m_mouseLeft;
+        bool *m_mouseRight;
+        bool *m_keys;
+        float m_leftClickTime, m_rightClickTime;
+        bool m_leftClickHeld;
+        bool m_rightClickHeld;
+        bool activated;
 
-};
-
-#endif
+        bool isMouseOver();
+    };
+}

@@ -1,18 +1,18 @@
 #include "renderer/sprite_renderer.h"
 
 
-SpriteRenderer::SpriteRenderer(Shader* shader)
+Nomu::SpriteRenderer::SpriteRenderer(Nomu::Shader* shader)
 {
     this->shader = shader;
     this->initRenderData();
 }
 
-SpriteRenderer::~SpriteRenderer()
+Nomu::SpriteRenderer::~SpriteRenderer()
 {
     glDeleteVertexArrays(1, &this->quadVAO);
 }
 
-void SpriteRenderer::DrawSprite(Texture2D* texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color)
+void Nomu::SpriteRenderer::DrawSprite(Nomu::Texture2D* texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color)
 {
     // prepare transformations
     this->shader->Use();
@@ -39,7 +39,7 @@ void SpriteRenderer::DrawSprite(Texture2D* texture, glm::vec2 position, glm::vec
     glBindVertexArray(0);
 }
 
-void SpriteRenderer::initRenderData()
+void Nomu::SpriteRenderer::initRenderData()
 {
     // configure VAO/VBO
     unsigned int VBO;

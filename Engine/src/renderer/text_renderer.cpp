@@ -8,7 +8,7 @@
 #include "utils/resource_manager.h"
 
 
-TextRenderer::TextRenderer(unsigned int width, unsigned int height, Shader* shader)
+Nomu::TextRenderer::TextRenderer(unsigned int width, unsigned int height, Shader* shader)
 {
     this->TextShader = shader;
     this->TextShader->SetMatrix4("projection", glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f), true);
@@ -25,7 +25,7 @@ TextRenderer::TextRenderer(unsigned int width, unsigned int height, Shader* shad
     glBindVertexArray(0);
 }
 
-void TextRenderer::Load(std::string font, unsigned int fontSize)
+void Nomu::TextRenderer::Load(std::string font, unsigned int fontSize)
 {
     // first clear the previously loaded Characters
     this->Characters.clear();
@@ -89,7 +89,7 @@ void TextRenderer::Load(std::string font, unsigned int fontSize)
     FT_Done_FreeType(ft);
 }
 
-void TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
+void Nomu::TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
     // activate corresponding render state	
     this->TextShader->Use();
@@ -133,7 +133,7 @@ void TextRenderer::RenderText(std::string text, float x, float y, float scale, g
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-Shader* TextRenderer::GetShader()
+Nomu::Shader* Nomu::TextRenderer::GetShader()
 {
     return this->TextShader;
 }

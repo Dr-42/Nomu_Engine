@@ -1,12 +1,12 @@
 #include "components/text.h"
 #include "ecs/entity.h"
 
-Text::~Text()
+Nomu::Text::~Text()
 {
     delete m_textRenderer;
 }
 
-Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Transform *transform)
+Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Nomu::Transform *transform)
 {
     m_text = text;
     m_font_size = font_size;
@@ -22,16 +22,16 @@ Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size
     m_name = "Text";
 }
 
-void Text::Init()
+void Nomu::Text::Init()
 {
     m_textRenderer->Load(m_fontPath, m_font_size);
 }
 
-void Text::Update(float dt)
+void Nomu::Text::Update(float dt)
 {
 }
 
-void Text::Render()
+void Nomu::Text::Render()
 {
     if (isActivated)
     {
@@ -39,37 +39,37 @@ void Text::Render()
     }
 }
 
-void Text::Destroy()
+void Nomu::Text::Destroy()
 {
 }
 
-Text *Text::Clone()
+Nomu::Text *Nomu::Text::Clone()
 {
     Text *text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
     return text;
 }
 
-void Text::SetText(std::string text)
+void Nomu::Text::SetText(std::string text)
 {
     m_text = text;
 }
 
-void Text::SetFontSize(int font_size)
+void Nomu::Text::SetFontSize(int font_size)
 {
     m_font_size = font_size;
 }
 
-void Text::SetColor(glm::vec3 color)
+void Nomu::Text::SetColor(glm::vec3 color)
 {
     m_color = color;
 }
 
-void Text::SetFontPath(const char *fontPath)
+void Nomu::Text::SetFontPath(const char *fontPath)
 {
     m_fontPath = fontPath;
 }
 
-TextRenderer *Text::GetTextRenderer()
+Nomu::TextRenderer *Nomu::Text::GetTextRenderer()
 {
     return m_textRenderer;
 }

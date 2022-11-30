@@ -1,7 +1,7 @@
 #include "components/event_listener.h"
 #include "ecs/entity.h"
 
-EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mouseLeft, bool* mouseRight, bool* keys)
+Nomu::EventListener::EventListener(Nomu::Transform* transform, glm::vec2* mousePos, bool* mouseLeft, bool* mouseRight, bool* keys)
 {
     m_transform = transform;
     m_mousePos = mousePos;
@@ -13,11 +13,11 @@ EventListener::EventListener(Transform* transform, glm::vec2* mousePos, bool* mo
     m_name = "EventListener";
 }
 
-EventListener::~EventListener()
+Nomu::EventListener::~EventListener()
 {
 }
 
-void EventListener::Update(float dt)
+void Nomu::EventListener::Update(float dt)
 {
     if (m_leftClickTime > 0.0f)
     {
@@ -56,13 +56,13 @@ void EventListener::Update(float dt)
     }
 }
 
-EventListener* EventListener::Clone()
+Nomu::EventListener* Nomu::EventListener::Clone()
 {
     EventListener* eventListener = new EventListener(m_entity->GetComponent<Transform>(), m_mousePos, m_mouseLeft, m_mouseRight, m_keys);
     return eventListener;
 }
 
-bool EventListener::isLeftClickedandHeld()
+bool Nomu::EventListener::isLeftClickedandHeld()
 {
     if (isMouseOver() && *m_mouseLeft)
     {
@@ -71,7 +71,7 @@ bool EventListener::isLeftClickedandHeld()
     return false;   
 }
 
-bool EventListener::isRightClickedandHeld()
+bool Nomu::EventListener::isRightClickedandHeld()
 {
     if(isMouseOver() && *m_mouseRight)
     {
@@ -80,12 +80,12 @@ bool EventListener::isRightClickedandHeld()
     return false;
 }
 
-bool EventListener::isHovered()
+bool Nomu::EventListener::isHovered()
 {
     return isMouseOver();
 }
 
-bool EventListener::isLeftClicked()
+bool Nomu::EventListener::isLeftClicked()
 {
     if (isMouseOver() && *m_mouseLeft && m_leftClickTime == 0.0f && !m_leftClickHeld)
     {
@@ -96,7 +96,7 @@ bool EventListener::isLeftClicked()
     return false;
 }
 
-bool EventListener::isRightClicked()
+bool Nomu::EventListener::isRightClicked()
 {
     if (isMouseOver() && *m_mouseRight && m_rightClickTime == 0.0f && !m_rightClickHeld)
     {
@@ -107,7 +107,7 @@ bool EventListener::isRightClicked()
     return false;
 }
 
-bool EventListener::isMouseOver()
+bool Nomu::EventListener::isMouseOver()
 {
     //the top left corner is (0,0)
     //the bottom right corner is (m_game->Width, m_game->Height)

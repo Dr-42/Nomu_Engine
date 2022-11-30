@@ -1,12 +1,12 @@
 Assets:
 	[Shader]
-		sprite: assets/shaders/sprite_vert_shad.glsl, assets/shaders/sprite_frag_shad.glsl
+		sprite: ../assets/shaders/sprite_vert_shad.glsl, ../assets/shaders/sprite_frag_shad.glsl
 	[Shader]
-		text: assets/shaders/text_vert_shad.glsl, assets/shaders/text_frag_shad.glsl
+		text: ../assets/shaders/text_vert_shad.glsl, ../assets/shaders/text_frag_shad.glsl
 	[Texture]
-		sprite: assets/textures/nomu.png
+		sprite: ../assets/textures/nomu.png
 	[Font]
-		font: assets/fonts/OCRAEXT.TTF
+		font: ../assets/fonts/OCRAEXT.TTF
 
 Entities:
 	nomu:
