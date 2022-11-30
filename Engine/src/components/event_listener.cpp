@@ -125,6 +125,3 @@ bool Nomu::EventListener::isMouseOver()
     }
     return false;
 }
-
-
-

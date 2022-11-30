@@ -1,9 +1,9 @@
 #include "core/engine.h"
 
-Nomu::Engine::Engine(App& app)
+Nomu::Engine::Engine(App* app)
 {
     this->mApp = app;
-    if(mApp.window != nullptr){
+    if(mApp->window != nullptr){
         Nomu::Logger::Error("Window is not null");
     }
 }
@@ -29,8 +29,8 @@ bool Nomu::Engine::Init(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, false);
 
-    mApp.window = glfwCreateWindow(mApp.WIDTH, mApp.HEIGHT, mApp.title.c_str(), nullptr, nullptr);
-    glfwMakeContextCurrent(mApp.window);
+    mApp->window = glfwCreateWindow(mApp->WIDTH, mApp->HEIGHT, mApp->title.c_str(), nullptr, nullptr);
+    glfwMakeContextCurrent(mApp->window);
 
     // glew: load all OpenGL function pointers
     GLenum err = glewInit();
@@ -43,13 +43,13 @@ bool Nomu::Engine::Init(){
     Nomu::Input::getInstance();
     Nomu::Input::SetApp(mApp);
 
-    glfwSetKeyCallback(mApp.window, Nomu::Input::keyCallback);
-    glfwSetCursorPosCallback(mApp.window, Nomu::Input::cursorPositionCallback);
-    glfwSetMouseButtonCallback(mApp.window, Nomu::Input::mouseButtonCallback);
-    glfwSetFramebufferSizeCallback(mApp.window, Nomu::Input::framebufferSizeCallback);
+    glfwSetKeyCallback(mApp->window, Nomu::Input::keyCallback);
+    glfwSetCursorPosCallback(mApp->window, Nomu::Input::cursorPositionCallback);
+    glfwSetMouseButtonCallback(mApp->window, Nomu::Input::mouseButtonCallback);
+    glfwSetFramebufferSizeCallback(mApp->window, Nomu::Input::framebufferSizeCallback);
 
     // OpenGL configuration
-    glViewport(mApp.x, mApp.y, mApp.WIDTH, mApp.HEIGHT);
+    glViewport(mApp->x, mApp->y, mApp->WIDTH, mApp->HEIGHT);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -58,17 +58,19 @@ bool Nomu::Engine::Init(){
 }
 
 bool Nomu::Engine::Run(){
-    while (!glfwWindowShouldClose(mApp.window))
+    while (!glfwWindowShouldClose(mApp->window))
     {
         currentFrame = glfwGetTime();
-        mApp.deltaTime = currentFrame - mApp.lastFrame;
+        mApp->deltaTime = currentFrame - mApp->lastFrame;
         glfwPollEvents();
-        mGame->ProcessInput(mApp.deltaTime);
-        mGame->Update(mApp.deltaTime);
+        mGame->ProcessInput(mApp->deltaTime);
+        mGame->Update(mApp->deltaTime);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         mGame->Render();
-        glfwSwapBuffers(mApp.window);
+        glfwSwapBuffers(mApp->window);
+
+        mApp->lastFrame = currentFrame;
     }
     return true;
 }

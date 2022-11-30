@@ -8,7 +8,7 @@ int main(){
         nullptr,
         "Nomu Engine",
         800,
-        600,
+        800,
         0,
         0,
         {false},
@@ -19,7 +19,7 @@ int main(){
         0.0f
     };
 
-    Nomu::Engine engine(app);
+    Nomu::Engine engine(&app);
 
     MyGame game;
     game.SetApp(app);

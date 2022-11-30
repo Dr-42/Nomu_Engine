@@ -6,7 +6,7 @@ from termcolor import colored
 
 # Output details
 
-out_file = 'engine'
+out_file = 'libengine'
 out_type = 'dll'
 # Directories
 out_dir = '../bin'
@@ -23,7 +23,7 @@ if platform.system() == 'Windows':
     cflags = '-g -Wall ' + freetype_cfg
 elif platform.system() == 'Linux':
     libs = '-lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2`'
-    cflags = '-g -Wall `pkg-config --cflags freetype2`'
+    cflags = '-g -Wall `pkg-config --cflags freetype2` -std=c++17 -fPIC -shared'
 
 ##########################################
 ##### DO NOT EDIT BELOW THIS LINE ########

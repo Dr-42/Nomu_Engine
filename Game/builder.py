@@ -22,8 +22,8 @@ if platform.system() == 'Windows':
     libs = '-lm -lglew32 -lglfw3 -lopengl32 ' + freetype_lib + ' -L../bin -lengine'
     cflags = '-g -Wall ' + freetype_cfg + ' -I../Engine/src/include'
 elif platform.system() == 'Linux':
-    libs = '-lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2`'
-    cflags = '-g -Wall `pkg-config --cflags freetype2`'
+    libs = ' -lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2` -L../bin -lengine -Wl,-rpath=../bin'
+    cflags = '-g -Wall `pkg-config --cflags freetype2` -I../Engine/src/include'
 
 ##########################################
 ##### DO NOT EDIT BELOW THIS LINE ########

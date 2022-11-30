@@ -8,7 +8,7 @@ namespace Nomu
     {
     public:
         static Input &getInstance();
-        static void SetApp(App& app);
+        static void SetApp(App* app);
 
         static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
         static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);

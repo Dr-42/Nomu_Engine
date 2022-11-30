@@ -9,7 +9,7 @@ namespace Nomu {
     class N_API Engine{
 
     public:
-        Engine(App& app);
+        Engine(App* app);
         ~Engine();
         void setGame(Game* game);
         bool Init();
@@ -18,7 +18,7 @@ namespace Nomu {
 
     private:
         f32 currentFrame;
-        App mApp;
+        App* mApp;
         Game* mGame;
     };
 

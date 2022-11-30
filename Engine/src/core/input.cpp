@@ -8,9 +8,9 @@ Nomu::Input &Nomu::Input::getInstance()
     return instance;
 }
 
-void Nomu::Input::SetApp(App& app)
+void Nomu::Input::SetApp(App* app)
 {
-    mApp = &app;
+    mApp = app;
 }
 
 
