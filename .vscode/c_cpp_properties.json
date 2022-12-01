@@ -22,7 +22,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src/include/**",
+                "${workspaceFolder}/Engine/src/include/**",
                 "/usr/include/**"
             ],
             "defines": [
