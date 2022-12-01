@@ -8,9 +8,9 @@
 #include <vector>
 #include <algorithm>
 #define quote(x) #x
-namespace N_API Nomu
+namespace Nomu
 {
-    class Entity
+    class N_API Entity
     {
     public:
         Entity(std::string name);
