@@ -2,10 +2,9 @@
 #include "nomuScript.h"
 #include "nomu1Script.h"
 #include "fpsScript.h"
+#include <core/input.h>
 
-#include <GLFW/glfw3.h>
 #include <utils/scene_manager.h>
-#include <iostream>
 
 MyGame::MyGame()
 {
@@ -33,18 +32,10 @@ void MyGame::Init(){
 
 void MyGame::ProcessInput(float dt)
 {
-   if(mApp->Keys[GLFW_KEY_SPACE]){
-       wireframe = !wireframe;
-       if(wireframe){
-           glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-       }else{
-           glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-       }
-   }
 
-   if(mApp->Keys[GLFW_KEY_ESCAPE]){
-       glfwSetWindowShouldClose(mApp->window, true);
-   }
+    if(mApp->Keys[NOMU_KEY_ESCAPE]){
+        mApp->Close();
+    }
 }
 
 void MyGame::Update(float dt)

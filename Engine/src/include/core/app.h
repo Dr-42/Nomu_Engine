@@ -7,8 +7,9 @@
 
 namespace Nomu
 {
-    struct N_API App
+    class N_API App
     {
+    public:
         GLFWwindow *window;
         std::string title;
         i32 WIDTH;
@@ -19,5 +20,7 @@ namespace Nomu
         glm::vec2 mousePos;
         f32 deltaTime;
         f32 lastFrame;
+
+        void Close();
     };
 }
