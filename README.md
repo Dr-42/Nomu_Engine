@@ -47,16 +47,28 @@ I have tested this both on WSL and a physical laptop.
 In an Arch based distro run the following command to install libraries
 
 ```
-sudo pacman -S glew glfw stb freetype2
+sudo pacman -S glew glfw-x11 glm stb freetype2 pkg-config
 ```
+
+On debian based 
+```
+apt install libglfw3-dev libglew-dev libstb-dev libglm-dev libfreetype-dev pkg-config
+```
+
+On a wayland system install the glfw-wayland library instead of the x11 one.
 
 Other distros should have these libraries available too though I have not tested on them.
 
 ### Build
 ---------------------------------------------------------------------------
+The build tool requires Python 3.10 or later. It also requires a submodule termcolor
+```
+pip install termcolor
+```
+
 The binaries will be placed in the bin directory
 
-To compile the Engine
+To compile the Engine 
 ```
 cd Engine
 python builder.py

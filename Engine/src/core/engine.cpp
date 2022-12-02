@@ -37,6 +37,7 @@ bool Nomu::Engine::Init(){
     if (glewInit() != GLEW_OK)
     {
         Nomu::Logger::Error("Failed to initialize GLEW error");
+        glewGetErrorString(err);
         return false;
     }
 
