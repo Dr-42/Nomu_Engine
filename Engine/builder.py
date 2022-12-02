@@ -54,13 +54,12 @@ elif out_type == 'exe':
         out_ext = ''
 
 def run_ps(cmd, print_output=True):
-    completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
-    if print_output:
-        if(completed.stderr.decode('utf-8') != ''):
-            print(colored('[ERROR] ', 'red'), completed.stderr.decode('utf-8'))
-        if(completed.stdout.decode('utf-8') != ''):
-            print(colored('[INFO] \n', 'green'), completed.stdout.decode('utf-8'))
-    return completed
+    with subprocess.Popen(["powershell", "-Command", cmd], stdout=subprocess.PIPE, stderr=subprocess.PIPE) as proc:
+        if print_output:
+            for line in proc.stdout:
+                print(line.decode('utf-8').strip())
+            for line in proc.stderr:
+                print(line.decode('utf-8').strip())
      
 # Saves md5s to file
 def save_md5():
