@@ -41,6 +41,10 @@ void MyGame::ProcessInput(float dt)
            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
        }
    }
+
+   if(mApp->Keys[GLFW_KEY_ESCAPE]){
+       glfwSetWindowShouldClose(mApp->window, true);
+   }
 }
 
 void MyGame::Update(float dt)
