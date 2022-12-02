@@ -22,6 +22,9 @@ Entities:
 			active: true
 		[Event_listener]
 			active: true 
+		[Script]
+			script: NomuScript
+			active: true
 	nomu1:
 		[Sprite]
 			texture: sprite
@@ -34,6 +37,9 @@ Entities:
 			rotation: 0
 			active: true
 		[Event_listener]
+			active: true
+		[Script]
+			script: Nomu1Script
 			active: true
 	hello_text:
 		[Text]
@@ -73,4 +79,7 @@ Entities:
 			position: 10, 10
 			scale: 1, 1
 			rotation: 0
+			active: true
+		[Script]
+			script: FpsScript
 			active: true

@@ -429,6 +429,21 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
     	EventListener* evl = new EventListener(entity->GetComponent<Transform>(), mouse_pos, mouse_left, mouse_right, keys);
 		component = evl;
 	}
+	else if(component_data->type == "[Script]"){
+		std::string script_name;
+		bool active;
+		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
+			if(it->first == "script"){
+				script_name = it->second;
+			}
+			else if(it->first == "active"){
+				active = ParseBool(it->second);
+			}
+		}
+		Script* script = Script::Create(script_name);
+		script->active = active;
+		component = dynamic_cast<Component*>(script);
+	}
 
 	else{
 		std::cout << "Component type not found: " << component_data->type << std::endl;

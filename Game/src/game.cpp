@@ -1,8 +1,10 @@
 #include "game.h"
 #include "nomuScript.h"
+#include "nomu1Script.h"
+#include "fpsScript.h"
+
 #include <GLFW/glfw3.h>
 #include <utils/scene_manager.h>
-#include <components/script.h>
 #include <iostream>
 
 MyGame::MyGame()
@@ -26,9 +28,6 @@ void MyGame::Init(){
     Nomu::SceneManager sceneManager;
     root = sceneManager.LoadScene("../assets/scenes/scene1.nsc", mApp->WIDTH, mApp->HEIGHT, &mApp->mouseLeft, &mApp->mouseRight, &mApp->mousePos, mApp->Keys);
 
-    Nomu::Entity* nomu = root->GetChild("nomu");
-    Nomu::Component* scr = dynamic_cast<Nomu::Component*>(Nomu::Script::Create("NomuScript"));
-    nomu->AddComponent(scr);
     root->Init();
 }
 
@@ -48,14 +47,6 @@ void MyGame::Update(float dt)
 {
 
     root->Update(dt);
-
-    if(root->GetChild("nomu1")->GetComponent<Nomu::EventListener>()->isRightClickedandHeld()){
-        root->GetChild("nomu1")->GetComponent<Nomu::Transform>()->SetPosition(mApp->mousePos);
-    }
-
-    std::string fps = "FPS: " + std::to_string(1.0f / dt);
-    root->GetChild("fps")->GetComponent<Nomu::Text>()->SetText(fps);
-
 }
 
 void MyGame::Render()
