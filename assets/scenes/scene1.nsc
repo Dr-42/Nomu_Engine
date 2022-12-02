@@ -1,8 +1,8 @@
 Assets:
 	[Shader]
-		sprite: ../assets/shaders/sprite_vert_shad.glsl, ../assets/shaders/sprite_frag_shad.glsl
+		sprite: ../assets/shaders/sprite_vert_shad.vs, ../assets/shaders/sprite_frag_shad.fs
 	[Shader]
-		text: ../assets/shaders/text_vert_shad.glsl, ../assets/shaders/text_frag_shad.glsl
+		text: ../assets/shaders/text_vert_shad.vs, ../assets/shaders/text_frag_shad.fs
 	[Texture]
 		sprite: ../assets/textures/nomu.png
 	[Font]
