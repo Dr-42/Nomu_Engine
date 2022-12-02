@@ -69,3 +69,8 @@ void Nomu::Input::mouseButtonCallbackImpl(GLFWwindow* window, int button, int ac
     else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
         mApp->mouseRight = false;
 }
+
+glm::vec2 Nomu::Input::GetMousePos()
+{
+    return mApp->mousePos;
+}

@@ -84,6 +84,7 @@ Nomu::Entity* Nomu::Entity::Clone()
 void Nomu::Entity::AddComponent(Component* component)
 {
     m_components.push_back(component);
+    component->SetEntity(this);
 }
 
 void Nomu::Entity::RemoveComponent(Component* component)

@@ -2,7 +2,7 @@
 #include <string>
 
 namespace Nomu {
-    class N_API Logger{
+    class Logger{
     public:
         static void Error(std::string message){
             std::cerr << "Error: " << message << std::endl;
@@ -13,5 +13,8 @@ namespace Nomu {
         static void Warning(std::string message){
             std::cout << "Warning: " << message << std::endl;
         }
+    private:
+        Logger() {}
+        ~Logger() {}
     };
 }
