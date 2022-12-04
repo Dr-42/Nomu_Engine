@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "core/app.h"
 #include <iostream>
 
 #include "ecs/component.h"
@@ -16,8 +17,8 @@ namespace Nomu
     class N_API Sprite : public Component
     {
     public:
-        Sprite(Texture2D *texture, glm::vec4 color, Shader *shader, int screen_width, int screen_height, Transform *transform);
-        Sprite(Texture2D *texture, Shader *shader, int screen_width, int screen_height, Transform *transform);
+        Sprite(Texture2D *texture, glm::vec4 color, Shader *shader, App *app);
+        Sprite(Texture2D *texture, Shader *shader, App *app);
         ~Sprite();
 
         void Init() override;
@@ -40,12 +41,11 @@ namespace Nomu
     private:
         void m_ConfigureShader();
 
-        Transform *m_transform;
         Texture2D *m_texture;
         SpriteRenderer *m_spriteRenderer;
         Shader *m_shader;
         glm::vec2 m_size;
         glm::vec4 m_color;
-        int screenWidth, screenHeight;
+        App* m_app;
     };
 }

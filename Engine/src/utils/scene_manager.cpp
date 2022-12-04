@@ -7,6 +7,11 @@
 #include <algorithm>
 #include <iterator>
 
+Nomu::SceneManager::SceneManager(App* app)
+{
+	m_app = app;
+}
+
 
 void Nomu::SceneManager::ParseScene(std::string path)
 {
@@ -286,12 +291,12 @@ void Nomu::SceneManager::ParseShaderPath(std::string comb_path, std::string &vsh
 }
 
 
-Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Entity* parent, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Nomu::Entity* parent){
 	Entity* entity = new Entity(entity_data->name);
 	entity->SetParent(parent);
 	for(int i = 0; i < entity_data->components.size(); i++){
 		Component_Data* component_data = entity_data->components[i];
-		Component* component = CreateComponent(component_data, entity, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys);
+		Component* component = CreateComponent(component_data, entity);
 		if(component->GetName() == "Transform"){
 			continue;
 		}
@@ -301,7 +306,7 @@ Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Entity*
 	}
 	if(entity_data->children.size() > 0){
 		for(int i = 0; i < entity_data->children.size(); i++){
-			Entity* child = CreateEntity(entity_data->children[i], entity, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys);
+			Entity* child = CreateEntity(entity_data->children[i], entity);
 			entity->AddChild(child);
 		}
 	}
@@ -341,7 +346,7 @@ std::string Nomu::SceneManager::ParseString(std::string value){
 	return value;
 }
 
-Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_data, Entity* entity, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_data, Entity* entity){
 	Component* component = NULL;
 	std::map<std::string, std::string>::iterator it;
 	if(component_data->type == "[Transform]"){
@@ -381,7 +386,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 				active = ParseBool(it->second);
 			}
 		}
-		Sprite* sprite = new Sprite(texture, color, shader, scr_width, scr_height, entity->GetComponent<Transform>());
+		Sprite* sprite = new Sprite(texture, color, shader, m_app);
 		sprite->active = active;
 		component = sprite;
 	}
@@ -413,7 +418,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 				active = ParseBool(it->second);
 			}
 		}
-		Text* text_comp = new Text(text, font_path, shader, font_size, scr_width, scr_height, entity->GetComponent<Transform>());
+		Text* text_comp = new Text(text, font_path, shader, font_size, m_app);
 		text_comp->SetColor(color);
 		text_comp->active = active;
 		component = text_comp;
@@ -426,7 +431,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 			}
 		}
 
-    	EventListener* evl = new EventListener(entity->GetComponent<Transform>(), mouse_pos, mouse_left, mouse_right, keys);
+    	EventListener* evl = new EventListener(m_app);
 		component = evl;
 	}
 	else if(component_data->type == "[Script]"){
@@ -453,7 +458,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 	return component;
 }
 
-Nomu::Entity* Nomu::SceneManager::LoadScene(std::string path, int scr_width, int scr_height, bool* mouse_left, bool* mouse_right, glm::vec2* mouse_pos, bool* keys){
+Nomu::Entity* Nomu::SceneManager::LoadScene(std::string path){
 	ParseScene(path);
 
 	LoadResources(assets);
@@ -462,7 +467,7 @@ Nomu::Entity* Nomu::SceneManager::LoadScene(std::string path, int scr_width, int
 	// Create the entities
 	for(int i = 0; i < entities.size(); i++){
 		Entity_Data* entity_data = &entities[i];
-		root_en->AddChild(CreateEntity(entity_data, root_en, scr_width, scr_height, mouse_left, mouse_right, mouse_pos, keys));
+		root_en->AddChild(CreateEntity(entity_data, root_en));
 	}
 
 	return root_en;

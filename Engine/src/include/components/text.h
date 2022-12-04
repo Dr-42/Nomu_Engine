@@ -1,5 +1,6 @@
 #pragma once
 #include "defines.h"
+#include "core/app.h"
 #include <iostream>
 #include <string>
 
@@ -17,7 +18,7 @@ namespace Nomu
     class N_API Text : public Component
     {
     public:
-        Text(std::string text, std::string fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Transform *transform);
+        Text(std::string text, std::string fontPath, Shader *shader, int font_size, App* app);
         ~Text();
 
         void Init() override;
@@ -37,11 +38,10 @@ namespace Nomu
 
     private:
         TextRenderer *m_textRenderer;
-        int screenWidth, screenHeight;
+        App* m_app;
         std::string m_text;
         int m_font_size;
         glm::vec3 m_color;
-        Transform *m_transform;
         std::string m_fontPath;
     };
 }

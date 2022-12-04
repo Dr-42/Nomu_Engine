@@ -6,45 +6,41 @@ Nomu::Sprite::~Sprite()
     delete m_spriteRenderer;
 }
 
-Nomu::Sprite::Sprite(Nomu::Texture2D* texture, glm::vec4 color, Nomu::Shader* shader, int screen_width, int screen_height, Nomu::Transform* transform)
+Nomu::Sprite::Sprite(Nomu::Texture2D* texture, glm::vec4 color, Nomu::Shader* shader, Nomu::App* app)
 {
     m_texture = texture;
     m_color = color;
     m_shader = shader;
-    m_transform = transform;
-    m_size = m_transform->GetScale();
-    screenWidth = screen_width;
-    screenHeight = screen_height;
-    m_spriteRenderer = new SpriteRenderer(m_shader);
-    active = true;
+    m_app = app;
     m_name = "Sprite";
+    m_spriteRenderer = new Nomu::SpriteRenderer(m_shader);
 }
 
-Nomu::Sprite::Sprite(Nomu::Texture2D* texture, Nomu::Shader* shader, int screen_width, int screen_height, Nomu::Transform* transform)
+Nomu::Sprite::Sprite(Nomu::Texture2D* texture, Nomu::Shader* shader, Nomu::App* app)
 {
     m_texture = texture;
     m_color = glm::vec4(1.0f);
     m_shader = shader;
-    m_transform = transform;
-    m_size = m_transform->GetScale();
-    screenWidth = screen_width;
-    screenHeight = screen_height;
-    m_spriteRenderer = new SpriteRenderer(m_shader);
-    active = true;
+    m_app = app;
     m_name = "Sprite";
+    m_spriteRenderer = new Nomu::SpriteRenderer(m_shader);
 }
 
 void Nomu::Sprite::Init()
 {
     m_ConfigureShader();
-    m_entity = m_transform->GetEntity();
 }
 
 void Nomu::Sprite::Render()
 {
     if(active)
     {
-        m_spriteRenderer->DrawSprite(m_texture, m_transform->GetPosition(), m_transform->GetScale(), m_transform->GetRotation(), m_color);
+        m_spriteRenderer->DrawSprite(
+            m_texture,
+            GetEntity()->GetComponent<Transform>()->GetPosition(),
+            GetEntity()->GetComponent<Transform>()->GetScale(),
+            GetEntity()->GetComponent<Transform>()->GetRotation(),
+            m_color);
     }
 
 }
@@ -60,7 +56,7 @@ void Nomu::Sprite::Destroy()
 
 Nomu::Sprite* Nomu::Sprite::Clone()
 {
-    Sprite* sprite = new Sprite(m_texture, m_color, m_shader, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
+    Sprite* sprite = new Sprite(m_texture, m_color, m_shader, m_app);
     return sprite;
 }
 
@@ -104,8 +100,8 @@ Nomu::Shader* Nomu::Sprite::GetShader()
 
 void Nomu::Sprite::m_ConfigureShader()
 {
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->screenWidth), 
-        static_cast<float>(this->screenHeight), 0.0f, -1.0f, 1.0f);
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_app->WIDTH), 
+        static_cast<float>(m_app->HEIGHT), 0.0f, -1.0f, 1.0f);
     this->m_shader->Use().SetInteger("image", 0);
     this->m_shader->SetMatrix4("projection", projection);
 }

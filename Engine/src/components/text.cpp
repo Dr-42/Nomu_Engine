@@ -6,17 +6,15 @@ Nomu::Text::~Text()
     delete m_textRenderer;
 }
 
-Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, int screen_width, int screen_height, Nomu::Transform *transform)
+Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, App* app)
 {
     m_text = text;
     m_font_size = font_size;
-    screenWidth = screen_width;
-    screenHeight = screen_height;
-    m_transform = transform;
     isActivated = true;
     m_color = glm::vec3(1.0f, 1.0f, 1.0f);
+    m_app = app;
 
-    m_textRenderer = new TextRenderer(screenWidth, screenHeight, shader);
+    m_textRenderer = new TextRenderer(m_app->WIDTH, m_app->HEIGHT, shader);
 
     m_fontPath = fontPath;
     m_name = "Text";
@@ -35,8 +33,12 @@ void Nomu::Text::Render()
 {
     if (isActivated)
     {
-        m_textRenderer->RenderText(m_text, m_transform->GetPosition().x, m_transform->GetPosition().y, m_transform->GetScale().x, m_color);
-    }
+        m_textRenderer->RenderText(
+            m_text,
+            GetEntity()->GetComponent<Transform>()->GetPosition().x,
+            GetEntity()->GetComponent<Transform>()->GetPosition().y,
+            GetEntity()->GetComponent<Transform>()->GetScale().x,
+            m_color);    }
 }
 
 void Nomu::Text::Destroy()
@@ -45,7 +47,7 @@ void Nomu::Text::Destroy()
 
 Nomu::Text *Nomu::Text::Clone()
 {
-    Text *text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, screenWidth, screenHeight, m_entity->GetComponent<Transform>());
+    Text *text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, m_app);
     return text;
 }
 

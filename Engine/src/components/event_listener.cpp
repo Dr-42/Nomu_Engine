@@ -1,13 +1,9 @@
 #include "components/event_listener.h"
 #include "ecs/entity.h"
 
-Nomu::EventListener::EventListener(Nomu::Transform* transform, glm::vec2* mousePos, bool* mouseLeft, bool* mouseRight, bool* keys)
+Nomu::EventListener::EventListener(App* app)
 {
-    m_transform = transform;
-    m_mousePos = mousePos;
-    m_mouseLeft = mouseLeft;
-    m_mouseRight = mouseRight;
-    m_keys = keys;
+    m_app = app;
     m_leftClickTime = 0.0f;
     m_rightClickTime = 0.0f;
     m_name = "EventListener";
@@ -15,6 +11,11 @@ Nomu::EventListener::EventListener(Nomu::Transform* transform, glm::vec2* mouseP
 
 Nomu::EventListener::~EventListener()
 {
+}
+
+void Nomu::EventListener::Init()
+{
+    m_transform = GetEntity()->GetComponent<Transform>();
 }
 
 void Nomu::EventListener::Update(float dt)
@@ -45,12 +46,12 @@ void Nomu::EventListener::Update(float dt)
         
     }
 
-    if (!*m_mouseLeft)
+    if (!m_app->mouseLeft)
     {
         m_leftClickHeld = false;
     }
 
-    if (!*m_mouseRight)
+    if (!m_app->mouseRight)
     {
         m_rightClickHeld = false;
     }
@@ -58,13 +59,13 @@ void Nomu::EventListener::Update(float dt)
 
 Nomu::EventListener* Nomu::EventListener::Clone()
 {
-    EventListener* eventListener = new EventListener(m_entity->GetComponent<Transform>(), m_mousePos, m_mouseLeft, m_mouseRight, m_keys);
+    EventListener* eventListener = new EventListener(m_app);
     return eventListener;
 }
 
 bool Nomu::EventListener::isLeftClickedandHeld()
 {
-    if (isMouseOver() && *m_mouseLeft)
+    if (isMouseOver() && m_app->mouseLeft)
     {
         return true;
     }
@@ -73,7 +74,7 @@ bool Nomu::EventListener::isLeftClickedandHeld()
 
 bool Nomu::EventListener::isRightClickedandHeld()
 {
-    if(isMouseOver() && *m_mouseRight)
+    if(isMouseOver() && m_app->mouseRight)
     {
         return true;
     }
@@ -87,7 +88,7 @@ bool Nomu::EventListener::isHovered()
 
 bool Nomu::EventListener::isLeftClicked()
 {
-    if (isMouseOver() && *m_mouseLeft && m_leftClickTime == 0.0f && !m_leftClickHeld)
+    if (isMouseOver() && m_app->mouseLeft && m_leftClickTime == 0.0f && !m_leftClickHeld)
     {
         m_leftClickTime = 0.1f;
         m_leftClickHeld = true;
@@ -98,7 +99,7 @@ bool Nomu::EventListener::isLeftClicked()
 
 bool Nomu::EventListener::isRightClicked()
 {
-    if (isMouseOver() && *m_mouseRight && m_rightClickTime == 0.0f && !m_rightClickHeld)
+    if (isMouseOver() && m_app->mouseRight && m_rightClickTime == 0.0f && !m_rightClickHeld)
     {
         m_rightClickTime = 0.1f;
         m_rightClickHeld = true;
@@ -116,10 +117,10 @@ bool Nomu::EventListener::isMouseOver()
     //the entity size is (m_transform->GetScale().x, m_transform->GetScale().y)
 
     //check if the mouse is over the entity
-    if (m_mousePos->x >= m_transform->GetPosition().x - m_transform->GetScale().x / 2 &&
-        m_mousePos->x <= m_transform->GetPosition().x + m_transform->GetScale().x / 2 &&
-        m_mousePos->y >= m_transform->GetPosition().y - m_transform->GetScale().y / 2 &&
-        m_mousePos->y <= m_transform->GetPosition().y + m_transform->GetScale().y / 2)
+    if (m_app->mousePos.x >= m_transform->GetPosition().x - m_transform->GetScale().x / 2 &&
+        m_app->mousePos.x <= m_transform->GetPosition().x + m_transform->GetScale().x / 2 &&
+        m_app->mousePos.y >= m_transform->GetPosition().y - m_transform->GetScale().y / 2 &&
+        m_app->mousePos.y <= m_transform->GetPosition().y + m_transform->GetScale().y / 2)
     {
         return true;
     }

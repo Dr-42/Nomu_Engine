@@ -24,8 +24,8 @@ void MyGame::SetApp(Nomu::App& app)
 
 void MyGame::Init(){
 
-    Nomu::SceneManager sceneManager;
-    root = sceneManager.LoadScene("../assets/scenes/scene1.nsc", mApp->WIDTH, mApp->HEIGHT, &mApp->mouseLeft, &mApp->mouseRight, &mApp->mousePos, mApp->Keys);
+    Nomu::SceneManager sceneManager(mApp);
+    root = sceneManager.LoadScene("../assets/scenes/scene1.nsc");
 
     root->Init();
 }
