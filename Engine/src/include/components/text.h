@@ -33,9 +33,6 @@ namespace Nomu
         void SetFontPath(const char *fontPath);
 
         TextRenderer *GetTextRenderer();
-
-        bool isActivated = false;
-
     private:
         TextRenderer *m_textRenderer;
         App* m_app;

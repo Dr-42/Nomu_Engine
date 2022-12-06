@@ -25,6 +25,13 @@ void Nomu::Component::Destroy()
 {
 }
 
+void Nomu::Component::SetEntity(Nomu::Entity *entity)
+{
+    m_entity = entity;
+}
+
 Nomu::Component* Nomu::Component::Clone()
 {
+    std::cerr << "Component::Clone() called with unspecified component" << std::endl;
+    return nullptr;
 }

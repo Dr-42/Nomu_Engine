@@ -10,7 +10,6 @@ Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, int fon
 {
     m_text = text;
     m_font_size = font_size;
-    isActivated = true;
     m_color = glm::vec3(1.0f, 1.0f, 1.0f);
     m_app = app;
 
@@ -31,7 +30,7 @@ void Nomu::Text::Update(float dt)
 
 void Nomu::Text::Render()
 {
-    if (isActivated)
+    if (active)
     {
         m_textRenderer->RenderText(
             m_text,

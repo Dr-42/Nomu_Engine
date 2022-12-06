@@ -21,7 +21,7 @@ Entities:
 			rotation: 0
 			active: true
 		[Event_listener]
-			active: true 
+			active: true
 		[Script]
 			script: NomuScript
 			active: true

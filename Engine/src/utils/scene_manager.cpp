@@ -59,7 +59,7 @@ void Nomu::SceneManager::ParseAssets()
 {
 	// Find the start of the assets
 	int start = 0;
-	for (int i = 0; i < lines.size(); i++)
+	for (u64 i = 0; i < lines.size(); i++)
 	{
 		if (lines[i] == "Assets:")
 		{
@@ -70,7 +70,7 @@ void Nomu::SceneManager::ParseAssets()
 
 	// Find the end of the assets
 	int end = 0;
-	for (int i = start; i < lines.size(); i++)
+	for (u64 i = start; i < lines.size(); i++)
 	{
 		if (lines[i] == "Entities:")
 		{
@@ -83,12 +83,12 @@ void Nomu::SceneManager::ParseAssets()
 	asset_tree = Tokenize(start, end, lines);	
 
 	// Parse the asset tree
-	for (int i = 0; i < asset_tree->children.size(); i++)
+	for (u64 i = 0; i < asset_tree->children.size(); i++)
 	{
 		Node* asset_type = asset_tree->children[i];
 
 		// Parse the asset type
-		for (int j = 0; j < asset_type->children.size(); j++)
+		for (u64 j = 0; j < asset_type->children.size(); j++)
 		{
 			Node* asset = asset_type->children[j];
 
@@ -107,7 +107,7 @@ void Nomu::SceneManager::ParseEntities()
 {
 	// Find the start of the entities
 	int start = 0;
-	for (int i = 0; i < lines.size(); i++)
+	for (u64 i = 0; i < lines.size(); i++)
 	{
 		if (lines[i] == "Entities:")
 		{
@@ -117,11 +117,11 @@ void Nomu::SceneManager::ParseEntities()
 	}
 	int end = lines.size();
 
-	Node* entity_tree;
+	Node* entity_tree = new Node("");
 	entity_tree = Tokenize(start, end, lines);
 
 	// Parse the entity tree
-	for (int i = 0; i < entity_tree->children.size(); i++)
+	for (u64 i = 0; i < entity_tree->children.size(); i++)
 	{
 		if(entity_tree->children[i]->name[0] == '[')
 			continue;
@@ -148,7 +148,7 @@ Nomu::Entity_Data* Nomu::SceneManager::ParseEntity(Node *entity)
 	entity_data->parent = entity->parent->name;
 
 	// Parse the components
-	for (int i = 0; i < entity->children.size(); i++)
+	for (u64 i = 0; i < entity->children.size(); i++)
 	{
 		if(entity->children[i]->name[0] == '[')
 		{
@@ -171,7 +171,7 @@ Nomu::Component_Data* Nomu::SceneManager::ParseComponent(Node *component)
 	component_data->entity = component->parent->name;
 
 	// Parse the component properties
-	for (int k = 0; k < component->children.size(); k++)
+	for (u64 k = 0; k < component->children.size(); k++)
 	{
 		Node* property = component->children[k];
 
@@ -203,7 +203,7 @@ Nomu::Node *Nomu::SceneManager::Tokenize(int start, int end, std::vector<std::st
 		{
 			// Check if this line has 0 or 1 tab more than the previous line
 			int tabs = 0;
-			for (int j = 0; j < line.length(); j++)
+			for (u64 j = 0; j < line.length(); j++)
 			{
 				if (line[j] == '\t')
 				{
@@ -266,7 +266,7 @@ Nomu::Node *Nomu::SceneManager::Tokenize(int start, int end, std::vector<std::st
 }
 
 void Nomu::SceneManager::LoadResources(std::vector<Asset_Data> assets){
-	for(int i = 0; i < assets.size(); i++){
+	for(u64 i = 0; i < assets.size(); i++){
 		Asset_Data* asset_data = &assets[i];
 		if(asset_data->type == "[Texture]"){
 			ResourceManager::LoadTexture(asset_data->path,true, asset_data->name);
@@ -294,7 +294,7 @@ void Nomu::SceneManager::ParseShaderPath(std::string comb_path, std::string &vsh
 Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Nomu::Entity* parent){
 	Entity* entity = new Entity(entity_data->name);
 	entity->SetParent(parent);
-	for(int i = 0; i < entity_data->components.size(); i++){
+	for(u64 i = 0; i < entity_data->components.size(); i++){
 		Component_Data* component_data = entity_data->components[i];
 		Component* component = CreateComponent(component_data, entity);
 		if(component->GetName() == "Transform"){
@@ -305,7 +305,7 @@ Nomu::Entity* Nomu::SceneManager::CreateEntity(Entity_Data* entity_data, Nomu::E
 		}
 	}
 	if(entity_data->children.size() > 0){
-		for(int i = 0; i < entity_data->children.size(); i++){
+		for(u64 i = 0; i < entity_data->children.size(); i++){
 			Entity* child = CreateEntity(entity_data->children[i], entity);
 			entity->AddChild(child);
 		}
@@ -432,6 +432,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 		}
 
     	EventListener* evl = new EventListener(m_app);
+		evl->active = active;
 		component = evl;
 	}
 	else if(component_data->type == "[Script]"){
@@ -465,7 +466,7 @@ Nomu::Entity* Nomu::SceneManager::LoadScene(std::string path){
 
 	root_en = new Entity("root");
 	// Create the entities
-	for(int i = 0; i < entities.size(); i++){
+	for(u64 i = 0; i < entities.size(); i++){
 		Entity_Data* entity_data = &entities[i];
 		root_en->AddChild(CreateEntity(entity_data, root_en));
 	}

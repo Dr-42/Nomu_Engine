@@ -19,7 +19,7 @@ namespace Nomu
 
         virtual Component *Clone();
         Entity *GetEntity() const { return m_entity; }
-        void SetEntity(Entity *entity) { m_entity = entity; }
+        void SetEntity(Entity *entity);
         std::string GetName() const { return m_name; }
         bool active;
 
