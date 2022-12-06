@@ -67,8 +67,9 @@ Nomu::Entity* Nomu::Entity::Clone()
     {
         if(component->GetName() != "Transform")
         {
-            component->SetEntity(clone);
-            clone->AddComponent(component->Clone());
+            Component* comp = component->Clone();
+            comp->SetEntity(clone);
+            clone->AddComponent(comp);
         }
     }
 
