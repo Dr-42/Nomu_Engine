@@ -17,17 +17,24 @@ namespace Nomu
 
         bool isLeftClicked();
         bool isRightClicked();
+        bool wasLeftClickReleased();
+        bool wasRightClickReleased();
         bool isLeftClickedandHeld();
         bool isRightClickedandHeld();
         bool isHovered();
+        bool mouseEntered();
+        bool mouseExited();
+        bool isLeftClickedInside();
+        bool isRightClickedInside();
 
     private:
         Transform *m_transform;
         App* m_app;
-        float m_leftClickTime, m_rightClickTime;
-        bool m_leftClickHeld;
-        bool m_rightClickHeld;
-
+        bool m_leftClicked_curr, m_leftClicked_prev;
+        bool m_rightClicked_curr, m_rightClicked_prev;
+        float m_mouseX, m_mouseY;
+        bool currMouseOver, prevMouseOver;
+        bool mouseLeftClickedInside, mouseRightClickedInside;
         bool isMouseOver();
     };
 }

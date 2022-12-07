@@ -4,8 +4,6 @@
 Nomu::EventListener::EventListener(App *app)
 {
     m_app = app;
-    m_leftClickTime = 0.0f;
-    m_rightClickTime = 0.0f;
     m_name = "EventListener";
 }
 
@@ -22,39 +20,14 @@ void Nomu::EventListener::Update(float dt)
 {
     if (active)
     {
-        if (m_leftClickTime > 0.0f)
-        {
-            if (m_leftClickTime > dt)
-            {
-                m_leftClickTime -= dt;
-            }
-            else
-            {
-                m_leftClickTime = 0.0f;
-            }
-        }
-
-        if (m_rightClickTime > 0.0f)
-        {
-            if (m_rightClickTime > dt)
-            {
-                m_rightClickTime -= dt;
-            }
-            else
-            {
-                m_rightClickTime = 0.0f;
-            }
-        }
-
-        if (!m_app->mouseLeft)
-        {
-            m_leftClickHeld = false;
-        }
-
-        if (!m_app->mouseRight)
-        {
-            m_rightClickHeld = false;
-        }
+        m_leftClicked_prev = m_leftClicked_curr;
+        m_rightClicked_prev = m_rightClicked_curr;
+        m_leftClicked_curr = m_app->mouseLeft;
+        m_rightClicked_curr = m_app->mouseRight;
+        m_mouseX = m_app->mousePos.x;
+        m_mouseY = m_app->mousePos.y;
+        prevMouseOver = currMouseOver;
+        currMouseOver = isMouseOver();
     }
 }
 
@@ -68,7 +41,7 @@ bool Nomu::EventListener::isLeftClickedandHeld()
 {
     if (active)
     {
-        if (isMouseOver() && m_app->mouseLeft)
+        if(isMouseOver() && m_leftClicked_curr && m_leftClicked_prev && !mouseEntered())
         {
             return true;
         }
@@ -81,7 +54,7 @@ bool Nomu::EventListener::isRightClickedandHeld()
 {
     if (active)
     {
-        if (isMouseOver() && m_app->mouseRight)
+        if(isMouseOver() && m_rightClicked_curr && m_rightClicked_prev)
         {
             return true;
         }
@@ -103,10 +76,8 @@ bool Nomu::EventListener::isLeftClicked()
 {
     if (active)
     {
-        if (isMouseOver() && m_app->mouseLeft && m_leftClickTime == 0.0f && !m_leftClickHeld)
+        if(isMouseOver() && m_leftClicked_curr && !m_leftClicked_prev)
         {
-            m_leftClickTime = 0.1f;
-            m_leftClickHeld = true;
             return true;
         }
         return false;
@@ -118,10 +89,33 @@ bool Nomu::EventListener::isRightClicked()
 {
     if (active)
     {
-        if (isMouseOver() && m_app->mouseRight && m_rightClickTime == 0.0f && !m_rightClickHeld)
+        if(isMouseOver() && m_rightClicked_curr && !m_rightClicked_prev)
         {
-            m_rightClickTime = 0.1f;
-            m_rightClickHeld = true;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Nomu::EventListener::wasLeftClickReleased()
+{
+    if (active)
+    {
+        if(isMouseOver() && !m_leftClicked_curr && m_leftClicked_prev)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool Nomu::EventListener::wasRightClickReleased()
+{
+    if (active)
+    {
+        if(isMouseOver() && !m_rightClicked_curr && m_rightClicked_prev)
+        {
             return true;
         }
         return false;
@@ -139,14 +133,69 @@ bool Nomu::EventListener::isMouseOver()
     if (active)
     {
         // check if the mouse is over the entity
-        if (m_app->mousePos.x >= m_transform->GetPosition().x - m_transform->GetScale().x / 2 &&
-            m_app->mousePos.x <= m_transform->GetPosition().x + m_transform->GetScale().x / 2 &&
-            m_app->mousePos.y >= m_transform->GetPosition().y - m_transform->GetScale().y / 2 &&
-            m_app->mousePos.y <= m_transform->GetPosition().y + m_transform->GetScale().y / 2)
+        if (m_mouseX >= m_transform->GetPosition().x - m_transform->GetScale().x / 2 &&
+            m_mouseX <= m_transform->GetPosition().x + m_transform->GetScale().x / 2 &&
+            m_mouseY >= m_transform->GetPosition().y - m_transform->GetScale().y / 2 &&
+            m_mouseY <= m_transform->GetPosition().y + m_transform->GetScale().y / 2)
         {
             return true;
         }
         return false;
+    }
+    return false;
+}
+
+bool Nomu::EventListener::mouseEntered()
+{
+    if (active)
+    {
+        if (currMouseOver && !prevMouseOver)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool Nomu::EventListener::mouseExited()
+{
+    if (active)
+    {
+        if(!currMouseOver && prevMouseOver)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool Nomu::EventListener::isLeftClickedInside()
+{
+    if (active)
+    {
+        if(isLeftClicked() && isMouseOver() && !m_leftClicked_prev)
+        {
+            mouseLeftClickedInside = true;
+            return true;
+        }
+        else if (isLeftClicked() && isMouseOver() && m_leftClicked_prev)
+        {
+            if(mouseLeftClickedInside)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
+        else{
+            mouseLeftClickedInside = false;
+            return false;
+        }
     }
     return false;
 }
