@@ -27,6 +27,9 @@ namespace Nomu
         bool isLeftClickedInside();
         bool isRightClickedInside();
 
+        bool isKeyPressed(int key);
+        bool isKeyReleased(int key);
+
     private:
         Transform *m_transform;
         App* m_app;

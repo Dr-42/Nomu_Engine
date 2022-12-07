@@ -199,3 +199,58 @@ bool Nomu::EventListener::isLeftClickedInside()
     }
     return false;
 }
+
+bool Nomu::EventListener::isRightClickedInside()
+{
+    if (active)
+    {
+        if(isRightClicked() && isMouseOver() && !m_rightClicked_prev)
+        {
+            mouseRightClickedInside = true;
+            return true;
+        }
+        else if (isRightClicked() && isMouseOver() && m_rightClicked_prev)
+        {
+            if(mouseRightClickedInside)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
+        else{
+            mouseRightClickedInside = false;
+            return false;
+        }
+    }
+    return false;
+}
+
+bool Nomu::EventListener::isKeyPressed(int key)
+{
+    if (active)
+    {
+        if (m_app->Keys[key])
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool Nomu::EventListener::isKeyReleased(int key)
+{
+    if (active)
+    {
+        if (!m_app->Keys[key])
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}

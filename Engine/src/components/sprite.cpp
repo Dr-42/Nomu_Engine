@@ -40,6 +40,7 @@ void Nomu::Sprite::Render()
             GetEntity()->GetComponent<Transform>()->GetPosition(),
             GetEntity()->GetComponent<Transform>()->GetScale(),
             GetEntity()->GetComponent<Transform>()->GetRotation(),
+            m_z,
             m_color);
     }
 
@@ -76,6 +77,16 @@ void Nomu::Sprite::SetColor(glm::vec4 color)
     m_color = color;
 }
 
+void Nomu::Sprite::SetZ(float z)
+{
+    m_z = z;
+}
+
+float Nomu::Sprite::GetZ()
+{
+    return m_z;
+}
+
 void Nomu::Sprite::SetShader(Nomu::Shader* shader, glm::vec2 size)
 {
     m_shader = shader;
@@ -101,7 +112,8 @@ Nomu::Shader* Nomu::Sprite::GetShader()
 void Nomu::Sprite::m_ConfigureShader()
 {
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_app->WIDTH), 
-        static_cast<float>(m_app->HEIGHT), 0.0f, -1.0f, 1.0f);
+        static_cast<float>(m_app->HEIGHT), 0.0f, -100.0f, 100.0f);
+    //glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)m_app->WIDTH / (float)m_app->HEIGHT, 0.1f, 100.0f);
     this->m_shader->Use().SetInteger("image", 0);
     this->m_shader->SetMatrix4("projection", projection);
 }

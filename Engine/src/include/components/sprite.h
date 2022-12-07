@@ -32,6 +32,9 @@ namespace Nomu
 
         void SetColor(glm::vec4 color);
 
+        void SetZ(float z);
+        float GetZ();
+
         void SetShader(Shader *shader, glm::vec2 size);
 
         Texture2D *GetTexture();
@@ -47,5 +50,6 @@ namespace Nomu
         glm::vec2 m_size;
         glm::vec4 m_color;
         App* m_app;
+        float m_z = 0.0f;
     };
 }
