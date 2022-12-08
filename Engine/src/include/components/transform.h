@@ -14,7 +14,6 @@ namespace Nomu
 
         void Init() override;
         void Update(float dt) override;
-        void Destroy();
 
         void SetPosition(glm::vec2 position);
         void SetPosition(float x, float y);

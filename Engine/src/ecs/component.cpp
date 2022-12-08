@@ -23,6 +23,7 @@ void Nomu::Component::Render()
 
 void Nomu::Component::Destroy()
 {
+    delete this;
 }
 
 void Nomu::Component::SetEntity(Nomu::Entity *entity)

@@ -33,6 +33,8 @@ namespace Nomu
 
         void RemoveChild(Entity *child);
         void RemoveChild(const char *name);
+        void DestroyChild(Entity *child);
+        void DestroyChild(const char *name);
 
         void SetParent(Entity *parent);
         Entity *GetParent();

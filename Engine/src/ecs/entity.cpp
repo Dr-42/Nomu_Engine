@@ -37,12 +37,23 @@ void Nomu::Entity::Update(float dt)
 {
     for (auto component : m_components)
     {
-        component->Update(dt);
+        if(component != nullptr)
+            component->Update(dt);
+        else{
+            std::cout << "Component is null" << std::endl;
+            RemoveComponent(component);
+        }
     }
 
     for (auto child : m_children)
     {
-        child->Update(dt);
+        if(child != nullptr){
+            child->Update(dt);
+        }
+        else{
+            std::cout << "Child is null" << std::endl;
+            RemoveChild(child);
+        }
     }
 }
 
@@ -136,7 +147,6 @@ std::vector<Nomu::Entity*> Nomu::Entity::GetChildren()
 void Nomu::Entity::RemoveChild(Nomu::Entity* child)
 {
     m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
-    child->Destroy();
 }
 
 void Nomu::Entity::RemoveChild(const char* name)
@@ -146,7 +156,25 @@ void Nomu::Entity::RemoveChild(const char* name)
         if (child->m_name == name)
         {
             m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
+            return;
+        }
+    }
+}
+
+void Nomu::Entity::DestroyChild(Nomu::Entity* child)
+{
+    child->Destroy();
+    m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
+}
+
+void Nomu::Entity::DestroyChild(const char* name)
+{
+    for (auto child : m_children)
+    {
+        if (child->m_name == name)
+        {
             child->Destroy();
+            m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
             return;
         }
     }
@@ -168,11 +196,15 @@ void Nomu::Entity::Destroy()
     {
         component->Destroy();
     }
+    m_components.clear();
 
     for (auto child : m_children)
     {
         child->Destroy();
     }
+    m_children.clear();
+    m_parent->RemoveChild(this);
+    delete this;
 }
 
 std::vector<Nomu::Component*> Nomu::Entity::GetComponents()

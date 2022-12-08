@@ -15,7 +15,7 @@ namespace Nomu
         virtual void Init();
         virtual void Update(float dt);
         virtual void Render();
-        virtual void Destroy();
+        void Destroy();
 
         virtual Component *Clone();
         Entity *GetEntity() const { return m_entity; }

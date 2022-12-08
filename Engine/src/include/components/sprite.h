@@ -24,7 +24,6 @@ namespace Nomu
         void Init() override;
         void Update(float dt) override;
         void Render() override;
-        void Destroy();
         Sprite *Clone() override;
 
         void SetTexture(const char *texturePath);

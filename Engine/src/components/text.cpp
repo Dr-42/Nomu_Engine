@@ -40,10 +40,6 @@ void Nomu::Text::Render()
             m_color);    }
 }
 
-void Nomu::Text::Destroy()
-{
-}
-
 Nomu::Text *Nomu::Text::Clone()
 {
     Text *text = new Text(m_text, m_fontPath, m_textRenderer->GetShader(), m_font_size, m_app);

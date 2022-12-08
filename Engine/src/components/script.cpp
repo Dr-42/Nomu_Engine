@@ -14,10 +14,6 @@ void Nomu::Script::Render()
 {
 }
 
-void Nomu::Script::Destroy()
-{
-}
-
 Nomu::Script* Nomu::Script::Create(std::string name)
     {
         if(m_scripts.find(name) != m_scripts.end())

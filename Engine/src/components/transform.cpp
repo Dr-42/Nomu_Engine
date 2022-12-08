@@ -22,10 +22,6 @@ void Nomu::Transform::Update(float dt)
 {
 }
 
-void Nomu::Transform::Destroy()
-{
-}
-
 void Nomu::Transform::SetPosition(glm::vec2 position)
 {
     m_position = position;

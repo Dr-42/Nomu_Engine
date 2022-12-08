@@ -13,7 +13,6 @@ namespace Nomu
         virtual void Init();
         virtual void Update(float dt);
         virtual void Render();
-        virtual void Destroy();
 
         template <typename T>
         static bool Register(std::string name)

@@ -50,11 +50,6 @@ void Nomu::Sprite::Update(float dt)
 {
 }
 
-void Nomu::Sprite::Destroy()
-{
-
-}
-
 Nomu::Sprite* Nomu::Sprite::Clone()
 {
     Sprite* sprite = new Sprite(m_texture, m_color, m_shader, m_app);
