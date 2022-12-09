@@ -13,7 +13,7 @@ void Nomu::Component::Init()
 {
 }
 
-void Nomu::Component::Update(float dt)
+void Nomu::Component::Update(f32 dt)
 {
 }
 
@@ -26,7 +26,7 @@ void Nomu::Component::Destroy()
     delete this;
 }
 
-void Nomu::Component::SetEntity(Nomu::Entity *entity)
+void Nomu::Component::SetEntity(Nomu::Entity* entity)
 {
     m_entity = entity;
 }

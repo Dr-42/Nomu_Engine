@@ -12,32 +12,32 @@ namespace Nomu
         virtual ~EventListener();
 
         void Init() override;
-        void Update(float dt) override;
+        void Update(f32 dt) override;
         EventListener* Clone() override;
 
-        bool isLeftClicked();
-        bool isRightClicked();
-        bool wasLeftClickReleased();
-        bool wasRightClickReleased();
-        bool isLeftClickedandHeld();
-        bool isRightClickedandHeld();
-        bool isHovered();
-        bool mouseEntered();
-        bool mouseExited();
-        bool isLeftClickedInside();
-        bool isRightClickedInside();
+        bl isLeftClicked();
+        bl isRightClicked();
+        bl wasLeftClickReleased();
+        bl wasRightClickReleased();
+        bl isLeftClickedandHeld();
+        bl isRightClickedandHeld();
+        bl isHovered();
+        bl mouseEntered();
+        bl mouseExited();
+        bl isLeftClickedInside();
+        bl isRightClickedInside();
 
-        bool isKeyPressed(int key);
-        bool isKeyReleased(int key);
+        bl isKeyPressed(i32 key);
+        bl isKeyReleased(i32 key);
 
     private:
         Transform *m_transform;
         App* m_app;
-        bool m_leftClicked_curr, m_leftClicked_prev;
-        bool m_rightClicked_curr, m_rightClicked_prev;
-        float m_mouseX, m_mouseY;
-        bool currMouseOver, prevMouseOver;
-        bool mouseLeftClickedInside, mouseRightClickedInside;
-        bool isMouseOver();
+        bl m_leftClicked_curr, m_leftClicked_prev;
+        bl m_rightClicked_curr, m_rightClicked_prev;
+        f32 m_mouseX, m_mouseY;
+        bl currMouseOver, prevMouseOver;
+        bl mouseLeftClickedInside, mouseRightClickedInside;
+        bl isMouseOver();
     };
 }

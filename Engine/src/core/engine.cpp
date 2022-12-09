@@ -17,7 +17,7 @@ void Nomu::Engine::setGame(Game* game)
     this->mGame = game;
 }
 
-bool Nomu::Engine::Init(){
+bl Nomu::Engine::Init(){
     if (!glfwInit())
     {
         Nomu::Logger::Error("Failed to initialize GLFW");
@@ -59,7 +59,7 @@ bool Nomu::Engine::Init(){
     return true;
 }
 
-bool Nomu::Engine::Run(){
+bl Nomu::Engine::Run(){
     while (!glfwWindowShouldClose(mApp->window))
     {
         currentFrame = glfwGetTime();

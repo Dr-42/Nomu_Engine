@@ -13,21 +13,21 @@ namespace Nomu
         ~Transform();
 
         void Init() override;
-        void Update(float dt) override;
+        void Update(f32 dt) override;
 
         void SetPosition(glm::vec2 position);
-        void SetPosition(float x, float y);
-        void SetRotation(float rotation);
+        void SetPosition(f32 x, f32 y);
+        void SetRotation(f32 rotation);
         void SetScale(glm::vec2 scale);
-        void SetScale(float x, float y);
+        void SetScale(f32 x, f32 y);
 
         glm::vec2 GetPosition();
-        float GetRotation();
+        f32 GetRotation();
         glm::vec2 GetScale();
 
     private:
         glm::vec2 m_position;
-        float m_rotation;
+        f32 m_rotation;
         glm::vec2 m_scale;
     };
 }

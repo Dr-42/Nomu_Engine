@@ -10,7 +10,7 @@ Nomu::Shader &Nomu::Shader::Use()
 
 void Nomu::Shader::Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource)
 {
-    unsigned int sVertex, sFragment, gShader;
+    u32 sVertex, sFragment, gShader;
     // vertex Shader
     sVertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(sVertex, 1, &vertexSource, NULL);
@@ -44,55 +44,55 @@ void Nomu::Shader::Compile(const char* vertexSource, const char* fragmentSource,
         glDeleteShader(gShader);
 }
 
-void Nomu::Shader::SetFloat(const char *name, float value, bool useShader)
+void Nomu::Shader::SetFloat(const char *name, f32 value, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform1f(glGetUniformLocation(this->ID, name), value);
 }
-void Nomu::Shader::SetInteger(const char *name, int value, bool useShader)
+void Nomu::Shader::SetInteger(const char *name, int value, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform1i(glGetUniformLocation(this->ID, name), value);
 }
-void Nomu::Shader::SetVector2f(const char *name, float x, float y, bool useShader)
+void Nomu::Shader::SetVector2f(const char *name, f32 x, f32 y, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform2f(glGetUniformLocation(this->ID, name), x, y);
 }
-void Nomu::Shader::SetVector2f(const char *name, const glm::vec2 &value, bool useShader)
+void Nomu::Shader::SetVector2f(const char *name, const glm::vec2 &value, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform2f(glGetUniformLocation(this->ID, name), value.x, value.y);
 }
-void Nomu::Shader::SetVector3f(const char *name, float x, float y, float z, bool useShader)
+void Nomu::Shader::SetVector3f(const char *name, f32 x, f32 y, f32 z, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform3f(glGetUniformLocation(this->ID, name), x, y, z);
 }
-void Nomu::Shader::SetVector3f(const char *name, const glm::vec3 &value, bool useShader)
+void Nomu::Shader::SetVector3f(const char *name, const glm::vec3 &value, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform3f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z);
 }
-void Nomu::Shader::SetVector4f(const char *name, float x, float y, float z, float w, bool useShader)
+void Nomu::Shader::SetVector4f(const char *name, f32 x, f32 y, f32 z, f32 w, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform4f(glGetUniformLocation(this->ID, name), x, y, z, w);
 }
-void Nomu::Shader::SetVector4f(const char *name, const glm::vec4 &value, bool useShader)
+void Nomu::Shader::SetVector4f(const char *name, const glm::vec4 &value, bl useShader)
 {
     if (useShader)
         this->Use();
     glUniform4f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z, value.w);
 }
-void Nomu::Shader::SetMatrix4(const char *name, const glm::mat4 &matrix, bool useShader)
+void Nomu::Shader::SetMatrix4(const char *name, const glm::mat4 &matrix, bl useShader)
 {
     if (useShader)
         this->Use();
@@ -100,7 +100,7 @@ void Nomu::Shader::SetMatrix4(const char *name, const glm::mat4 &matrix, bool us
 }
 
 
-void Nomu::Shader::checkCompileErrors(unsigned int object, std::string type)
+void Nomu::Shader::checkCompileErrors(u32 object, std::string type)
 {
     int success;
     char infoLog[1024];

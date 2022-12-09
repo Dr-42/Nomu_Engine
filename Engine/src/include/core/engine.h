@@ -12,8 +12,8 @@ namespace Nomu {
         Engine(App* app);
         ~Engine();
         void setGame(Game* game);
-        bool Init();
-        bool Run();
+        bl Init();
+        bl Run();
         void Shutdown();
 
     private:

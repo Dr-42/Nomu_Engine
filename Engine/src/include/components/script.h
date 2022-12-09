@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <typeinfo>
 #include "core/logger.h"
 #include "ecs/component.h"
 namespace Nomu
@@ -11,11 +12,11 @@ namespace Nomu
         virtual ~Script() = default;
 
         virtual void Init();
-        virtual void Update(float dt);
+        virtual void Update(f32 dt);
         virtual void Render();
 
         template <typename T>
-        static bool Register(std::string name)
+        static bl Register(std::string name)
         {
             T* script = new T();
             if(dynamic_cast<Script*>(script) == nullptr){

@@ -338,7 +338,7 @@ int Nomu::SceneManager::ParseInt(std::string value){
 	return std::stoi(value);
 }
 
-bool Nomu::SceneManager::ParseBool(std::string value){
+bl Nomu::SceneManager::ParseBool(std::string value){
 	return value == "true";
 }
 
@@ -371,7 +371,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 		Texture2D* texture;
 		glm::vec4 color;
 		Shader* shader;
-		bool active;
+		bl active;
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "texture"){
 				texture = ResourceManager::GetTexture(it->second);
@@ -396,7 +396,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 		Shader* shader;
 		std::string font_path;
 		int font_size;
-		bool active;
+		bl active;
 
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "text"){
@@ -424,7 +424,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 		component = text_comp;
 	}
 	else if(component_data->type == "[Event_listener]"){
-		bool active;
+		bl active;
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "active"){
 				active = ParseBool(it->second);
@@ -437,7 +437,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 	}
 	else if(component_data->type == "[Script]"){
 		std::string script_name;
-		bool active;
+		bl active;
 		for(it = component_data->properties.begin(); it != component_data->properties.end(); it++){
 			if(it->first == "script"){
 				script_name = it->second;

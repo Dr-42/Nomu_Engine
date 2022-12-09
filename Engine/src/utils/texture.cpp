@@ -9,7 +9,7 @@ Nomu::Texture2D::Texture2D()
     glGenTextures(1, &this->ID);
 }
 
-void Nomu::Texture2D::Generate(unsigned int width, unsigned int height, unsigned char* data)
+void Nomu::Texture2D::Generate(u32 width, u32 height, unsigned char* data)
 {
     this->Width = width;
     this->Height = height;

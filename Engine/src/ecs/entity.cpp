@@ -33,7 +33,7 @@ void Nomu::Entity::Init()
     }
 }
 
-void Nomu::Entity::Update(float dt)
+void Nomu::Entity::Update(f32 dt)
 {
     for (auto component : m_components)
     {
@@ -111,7 +111,7 @@ Nomu::Entity* Nomu::Entity::AddChild(Entity* child)
     return child;
 }
 
-Nomu::Entity* Nomu::Entity::AddChild(Entity* child, const char* name)
+Nomu::Entity* Nomu::Entity::AddChild(Entity* child, std::string name)
 {
     child->SetParent(this);
     child->m_name = name;
@@ -119,7 +119,7 @@ Nomu::Entity* Nomu::Entity::AddChild(Entity* child, const char* name)
     return child;
 }
 
-Nomu::Entity* Nomu::Entity::AddChild(const char* name)
+Nomu::Entity* Nomu::Entity::AddChild(std::string name)
 {
     Entity* child = new Entity(name);
     child->SetParent(this);
@@ -127,7 +127,7 @@ Nomu::Entity* Nomu::Entity::AddChild(const char* name)
     return child;
 }
 
-Nomu::Entity* Nomu::Entity::GetChild(const char* name)
+Nomu::Entity* Nomu::Entity::GetChild(std::string name)
 {
     for (auto child : m_children)
     {
@@ -149,7 +149,7 @@ void Nomu::Entity::RemoveChild(Nomu::Entity* child)
     m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
 }
 
-void Nomu::Entity::RemoveChild(const char* name)
+void Nomu::Entity::RemoveChild(std::string name)
 {
     for (auto child : m_children)
     {
@@ -167,7 +167,7 @@ void Nomu::Entity::DestroyChild(Nomu::Entity* child)
     m_children.erase(std::remove(m_children.begin(), m_children.end(), child), m_children.end());
 }
 
-void Nomu::Entity::DestroyChild(const char* name)
+void Nomu::Entity::DestroyChild(std::string name)
 {
     for (auto child : m_children)
     {
@@ -218,7 +218,7 @@ std::string Nomu::Entity::GetName()
     return m_name;
 }
 
-void Nomu::Entity::SetName(const char* name)
+void Nomu::Entity::SetName(std::string name)
 {
     m_name = name;
 }

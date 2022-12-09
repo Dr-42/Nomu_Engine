@@ -46,7 +46,7 @@ void Nomu::Sprite::Render()
 
 }
 
-void Nomu::Sprite::Update(float dt)
+void Nomu::Sprite::Update(f32 dt)
 {
 }
 
@@ -56,7 +56,7 @@ Nomu::Sprite* Nomu::Sprite::Clone()
     return sprite;
 }
 
-void Nomu::Sprite::SetTexture(const char* texturePath)
+void Nomu::Sprite::SetTexture(std::string texturePath)
 {
     ResourceManager::LoadTexture(texturePath, true, "face");
     std::cout << "Loaded texture: " << texturePath << std::endl;
@@ -72,12 +72,12 @@ void Nomu::Sprite::SetColor(glm::vec4 color)
     m_color = color;
 }
 
-void Nomu::Sprite::SetZ(float z)
+void Nomu::Sprite::SetZ(f32 z)
 {
     m_z = z;
 }
 
-float Nomu::Sprite::GetZ()
+f32 Nomu::Sprite::GetZ()
 {
     return m_z;
 }
@@ -106,9 +106,9 @@ Nomu::Shader* Nomu::Sprite::GetShader()
 
 void Nomu::Sprite::m_ConfigureShader()
 {
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_app->WIDTH), 
-        static_cast<float>(m_app->HEIGHT), 0.0f, -100.0f, 100.0f);
-    //glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)m_app->WIDTH / (float)m_app->HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<f32>(m_app->WIDTH), 
+        static_cast<f32>(m_app->HEIGHT), 0.0f, -100.0f, 100.0f);
+    //glm::mat4 projection = glm::perspective(glm::radians(45.0f), (f32)m_app->WIDTH / (f32)m_app->HEIGHT, 0.1f, 100.0f);
     this->m_shader->Use().SetInteger("image", 0);
     this->m_shader->SetMatrix4("projection", projection);
 }

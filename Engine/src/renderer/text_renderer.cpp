@@ -8,24 +8,24 @@
 #include "utils/resource_manager.h"
 
 
-Nomu::TextRenderer::TextRenderer(unsigned int width, unsigned int height, Shader* shader)
+Nomu::TextRenderer::TextRenderer(u32 width, u32 height, Shader* shader)
 {
     this->TextShader = shader;
-    this->TextShader->SetMatrix4("projection", glm::ortho(0.0f, static_cast<float>(width), static_cast<float>(height), 0.0f), true);
+    this->TextShader->SetMatrix4("projection", glm::ortho(0.0f, static_cast<f32>(width), static_cast<f32>(height), 0.0f), true);
     this->TextShader->SetInteger("text", 0);
     // configure VAO/VBO for texture quads
     glGenVertexArrays(1, &this->VAO);
     glGenBuffers(1, &this->VBO);
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(f32) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(f32), 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
 
-void Nomu::TextRenderer::Load(std::string font, unsigned int fontSize)
+void Nomu::TextRenderer::Load(std::string font, u32 fontSize)
 {
     // first clear the previously loaded Characters
     this->Characters.clear();
@@ -54,7 +54,7 @@ void Nomu::TextRenderer::Load(std::string font, unsigned int fontSize)
             continue;
         }
         // generate texture
-        unsigned int texture;
+        u32 texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(
@@ -79,7 +79,7 @@ void Nomu::TextRenderer::Load(std::string font, unsigned int fontSize)
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            (unsigned int)face->glyph->advance.x
+            (u32)face->glyph->advance.x
         };
         Characters.insert(std::pair<char, Character>(c, character));
     }
@@ -89,7 +89,7 @@ void Nomu::TextRenderer::Load(std::string font, unsigned int fontSize)
     FT_Done_FreeType(ft);
 }
 
-void Nomu::TextRenderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
+void Nomu::TextRenderer::RenderText(std::string text, f32 x, f32 y, f32 scale, glm::vec3 color)
 {
     // activate corresponding render state	
     this->TextShader->Use();
@@ -103,13 +103,13 @@ void Nomu::TextRenderer::RenderText(std::string text, float x, float y, float sc
     {
         Character ch = Characters[*c];
 
-        float xpos = x + ch.Bearing.x * scale;
-        float ypos = y + (this->Characters['H'].Bearing.y - ch.Bearing.y) * scale;
+        f32 xpos = x + ch.Bearing.x * scale;
+        f32 ypos = y + (this->Characters['H'].Bearing.y - ch.Bearing.y) * scale;
 
-        float w = ch.Size.x * scale;
-        float h = ch.Size.y * scale;
+        f32 w = ch.Size.x * scale;
+        f32 h = ch.Size.y * scale;
         // update VBO for each character
-        float vertices[6][4] = {
+        f32 vertices[6][4] = {
             { xpos,     ypos + h,   0.0f, 1.0f },
             { xpos + w, ypos,       1.0f, 0.0f },
             { xpos,     ypos,       0.0f, 0.0f },

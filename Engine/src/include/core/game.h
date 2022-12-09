@@ -9,8 +9,8 @@ namespace Nomu
         // initialize game state (load all shaders/textures/levels)
         virtual void Init() = 0;
         // game loop
-        virtual void ProcessInput(float dt) = 0;
-        virtual void Update(float dt) = 0;
+        virtual void ProcessInput(f32 dt) = 0;
+        virtual void Update(f32 dt) = 0;
         virtual void Render() = 0;
     };
 }

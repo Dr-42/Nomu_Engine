@@ -12,7 +12,7 @@ Nomu::SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &this->quadVAO);
 }
 
-void Nomu::SpriteRenderer::DrawSprite(Nomu::Texture2D* texture, glm::vec2 position, glm::vec2 size, float rotate, float z, glm::vec3 color)
+void Nomu::SpriteRenderer::DrawSprite(Nomu::Texture2D* texture, glm::vec2 position, glm::vec2 size, f32 rotate, f32 z, glm::vec3 color)
 {
     // prepare transformations
     this->shader->Use();
@@ -28,13 +28,6 @@ void Nomu::SpriteRenderer::DrawSprite(Nomu::Texture2D* texture, glm::vec2 positi
     model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
 
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-
-    // model = glm::translate(model, glm::vec3(position, 0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
-    // model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // move origin of rotation to center of quad
-    // model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
-    // model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // move origin back
-
-    // model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
 
     this->shader->SetMatrix4("model", model);
     this->shader->SetMatrix4("view", view);
@@ -53,8 +46,8 @@ void Nomu::SpriteRenderer::DrawSprite(Nomu::Texture2D* texture, glm::vec2 positi
 void Nomu::SpriteRenderer::initRenderData()
 {
     // configure VAO/VBO
-    unsigned int VBO;
-    float vertices[] = { 
+    u32 VBO;
+    f32 vertices[] = { 
         // pos      // tex
         0.0f, 1.0f, 0.0f, 1.0f,
         1.0f, 0.0f, 1.0f, 0.0f,
@@ -73,7 +66,7 @@ void Nomu::SpriteRenderer::initRenderData()
 
     glBindVertexArray(this->quadVAO);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(f32), (void*)0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }

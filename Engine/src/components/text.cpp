@@ -6,7 +6,7 @@ Nomu::Text::~Text()
     delete m_textRenderer;
 }
 
-Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, int font_size, App* app)
+Nomu::Text::Text(std::string text, std::string fontPath, Shader *shader, u32 font_size, App* app)
 {
     m_text = text;
     m_font_size = font_size;
@@ -24,7 +24,7 @@ void Nomu::Text::Init()
     m_textRenderer->Load(m_fontPath, m_font_size);
 }
 
-void Nomu::Text::Update(float dt)
+void Nomu::Text::Update(f32 dt)
 {
 }
 
@@ -51,7 +51,7 @@ void Nomu::Text::SetText(std::string text)
     m_text = text;
 }
 
-void Nomu::Text::SetFontSize(int font_size)
+void Nomu::Text::SetFontSize(u32 font_size)
 {
     m_font_size = font_size;
 }

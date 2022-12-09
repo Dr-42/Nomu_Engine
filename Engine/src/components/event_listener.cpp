@@ -16,7 +16,7 @@ void Nomu::EventListener::Init()
     m_transform = GetEntity()->GetComponent<Transform>();
 }
 
-void Nomu::EventListener::Update(float dt)
+void Nomu::EventListener::Update(f32 dt)
 {
     if (active)
     {
@@ -37,7 +37,7 @@ Nomu::EventListener *Nomu::EventListener::Clone()
     return eventListener;
 }
 
-bool Nomu::EventListener::isLeftClickedandHeld()
+bl Nomu::EventListener::isLeftClickedandHeld()
 {
     if (active)
     {
@@ -50,7 +50,7 @@ bool Nomu::EventListener::isLeftClickedandHeld()
     return false;
 }
 
-bool Nomu::EventListener::isRightClickedandHeld()
+bl Nomu::EventListener::isRightClickedandHeld()
 {
     if (active)
     {
@@ -63,7 +63,7 @@ bool Nomu::EventListener::isRightClickedandHeld()
     return false;
 }
 
-bool Nomu::EventListener::isHovered()
+bl Nomu::EventListener::isHovered()
 {
     if (active)
     {
@@ -72,7 +72,7 @@ bool Nomu::EventListener::isHovered()
     return false;
 }
 
-bool Nomu::EventListener::isLeftClicked()
+bl Nomu::EventListener::isLeftClicked()
 {
     if (active)
     {
@@ -85,7 +85,7 @@ bool Nomu::EventListener::isLeftClicked()
     return false;
 }
 
-bool Nomu::EventListener::isRightClicked()
+bl Nomu::EventListener::isRightClicked()
 {
     if (active)
     {
@@ -97,7 +97,7 @@ bool Nomu::EventListener::isRightClicked()
     return false;
 }
 
-bool Nomu::EventListener::wasLeftClickReleased()
+bl Nomu::EventListener::wasLeftClickReleased()
 {
     if (active)
     {
@@ -110,7 +110,7 @@ bool Nomu::EventListener::wasLeftClickReleased()
     return false;
 }
 
-bool Nomu::EventListener::wasRightClickReleased()
+bl Nomu::EventListener::wasRightClickReleased()
 {
     if (active)
     {
@@ -123,7 +123,7 @@ bool Nomu::EventListener::wasRightClickReleased()
     return false;
 }
 
-bool Nomu::EventListener::isMouseOver()
+bl Nomu::EventListener::isMouseOver()
 {
     // the top left corner is (0,0)
     // the bottom right corner is (m_game->Width, m_game->Height)
@@ -145,7 +145,7 @@ bool Nomu::EventListener::isMouseOver()
     return false;
 }
 
-bool Nomu::EventListener::mouseEntered()
+bl Nomu::EventListener::mouseEntered()
 {
     if (active)
     {
@@ -158,7 +158,7 @@ bool Nomu::EventListener::mouseEntered()
     return false;
 }
 
-bool Nomu::EventListener::mouseExited()
+bl Nomu::EventListener::mouseExited()
 {
     if (active)
     {
@@ -171,7 +171,7 @@ bool Nomu::EventListener::mouseExited()
     return false;
 }
 
-bool Nomu::EventListener::isLeftClickedInside()
+bl Nomu::EventListener::isLeftClickedInside()
 {
     if (active)
     {
@@ -200,7 +200,7 @@ bool Nomu::EventListener::isLeftClickedInside()
     return false;
 }
 
-bool Nomu::EventListener::isRightClickedInside()
+bl Nomu::EventListener::isRightClickedInside()
 {
     if (active)
     {
@@ -229,7 +229,7 @@ bool Nomu::EventListener::isRightClickedInside()
     return false;
 }
 
-bool Nomu::EventListener::isKeyPressed(int key)
+bl Nomu::EventListener::isKeyPressed(i32 key)
 {
     if (active)
     {
@@ -242,7 +242,7 @@ bool Nomu::EventListener::isKeyPressed(int key)
     return false;
 }
 
-bool Nomu::EventListener::isKeyReleased(int key)
+bl Nomu::EventListener::isKeyReleased(i32 key)
 {
     if (active)
     {

@@ -18,16 +18,16 @@ namespace Nomu
     class N_API Text : public Component
     {
     public:
-        Text(std::string text, std::string fontPath, Shader *shader, int font_size, App* app);
+        Text(std::string text, std::string fontPath, Shader *shader, u32 font_size, App* app);
         ~Text();
 
         void Init() override;
-        void Update(float dt) override;
+        void Update(f32 dt) override;
         void Render() override;
         Text *Clone() override;
 
         void SetText(std::string text);
-        void SetFontSize(int font_size);
+        void SetFontSize(u32 font_size);
         void SetColor(glm::vec3 color);
         void SetFontPath(const char *fontPath);
 
@@ -36,7 +36,7 @@ namespace Nomu
         TextRenderer *m_textRenderer;
         App* m_app;
         std::string m_text;
-        int m_font_size;
+        u32 m_font_size;
         glm::vec3 m_color;
         std::string m_fontPath;
     };

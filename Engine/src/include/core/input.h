@@ -10,15 +10,15 @@ namespace Nomu
         static Input &getInstance();
         static void SetApp(App* app);
 
-        static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
-        static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
-        static void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
-        static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+        static void framebufferSizeCallback(GLFWwindow* window, i32 width, i32 height);
+        static void keyCallback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mode);
+        static void cursorPositionCallback(GLFWwindow* window, f64 xpos, f64 ypos);
+        static void mouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods);
 
-        static void framebufferSizeCallbackImpl(GLFWwindow* window, int width, int height);
-        static void keyCallbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode);
-        static void cursorPositionCallbackImpl(GLFWwindow* window, double xpos, double ypos);
-        static void mouseButtonCallbackImpl(GLFWwindow* window, int button, int action, int mods);
+        static void framebufferSizeCallbackImpl(GLFWwindow* window, i32 width, i32 height);
+        static void keyCallbackImpl(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mode);
+        static void cursorPositionCallbackImpl(GLFWwindow* window, f64 xpos, f64 ypos);
+        static void mouseButtonCallbackImpl(GLFWwindow* window, i32 button, i32 action, i32 mods);
 
         static glm::vec2 GetMousePos();
     private:

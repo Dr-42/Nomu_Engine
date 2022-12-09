@@ -14,33 +14,33 @@ void Nomu::Input::SetApp(App* app)
 }
 
 
-void Nomu::Input::framebufferSizeCallback(GLFWwindow* window, int width, int height)
+void Nomu::Input::framebufferSizeCallback(GLFWwindow* window, i32 width, i32 height)
 {
     getInstance().framebufferSizeCallbackImpl(window, width, height);
 }
 
-void Nomu::Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+void Nomu::Input::keyCallback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mode)
 {
     getInstance().keyCallbackImpl(window, key, scancode, action, mode);
 }
 
-void Nomu::Input::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+void Nomu::Input::cursorPositionCallback(GLFWwindow* window, f64 xpos, f64 ypos)
 {
     getInstance().cursorPositionCallbackImpl(window, xpos, ypos);
 }
 
-void Nomu::Input::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void Nomu::Input::mouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
     getInstance().mouseButtonCallbackImpl(window, button, action, mods);
 }
 
 
-void Nomu::Input::framebufferSizeCallbackImpl(GLFWwindow* window, int width, int height)
+void Nomu::Input::framebufferSizeCallbackImpl(GLFWwindow* window, i32 width, i32 height)
 {
     glViewport(0, 0, width, height);
 }
 
-void Nomu::Input::keyCallbackImpl(GLFWwindow* window, int key, int scancode, int action, int mode)
+void Nomu::Input::keyCallbackImpl(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mode)
 {
     if (key >= 0 && key < 1024)
     {
@@ -51,13 +51,13 @@ void Nomu::Input::keyCallbackImpl(GLFWwindow* window, int key, int scancode, int
     }
 }
 
-void Nomu::Input::cursorPositionCallbackImpl(GLFWwindow* window, double xpos, double ypos)
+void Nomu::Input::cursorPositionCallbackImpl(GLFWwindow* window, f64 xpos, f64 ypos)
 {
     mApp->mousePos.x = xpos;
     mApp->mousePos.y = ypos;
 }
 
-void Nomu::Input::mouseButtonCallbackImpl(GLFWwindow* window, int button, int action, int mods)
+void Nomu::Input::mouseButtonCallbackImpl(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
     if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
         mApp->mouseLeft = true;

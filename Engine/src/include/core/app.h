@@ -15,8 +15,8 @@ namespace Nomu
         i32 WIDTH;
         i32 HEIGHT;
         i32 x, y;
-        bool Keys[1024];
-        bool mouseLeft, mouseRight;
+        bl Keys[1024];
+        bl mouseLeft, mouseRight;
         glm::vec2 mousePos;
         f32 deltaTime;
         f32 lastFrame;

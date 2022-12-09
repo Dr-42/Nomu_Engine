@@ -20,8 +20,8 @@ namespace Nomu
 	struct Entity_Data
 	{
 		std::string name;
-		std::vector<Component_Data *> components;
-		std::vector<Entity_Data *> children;
+		std::vector<Component_Data*> components;
+		std::vector<Entity_Data*> children;
 		std::string clone_source;
 		std::string parent;
 	};
@@ -36,7 +36,7 @@ namespace Nomu
 	struct Node
 	{
 		std::string name;
-		std::vector<Node *> children;
+		std::vector<Node*> children;
 		Node *parent;
 
 		Node(const std::string &name) : name(name) {}
@@ -46,15 +46,15 @@ namespace Nomu
 				delete child;
 		}
 
-		void AddChild(Node *child)
+		void AddChild(Node* child)
 		{
 			children.push_back(child);
 			child->parent = this;
 		}
 
-		void Print(int depth = 0)
+		void Print(i32 depth = 0)
 		{
-			for (int i = 0; i < depth; i++)
+			for (i32 i = 0; i < depth; i++)
 				std::cout << "  ";
 			std::cout << name << std::endl;
 			for (auto child : children)
@@ -77,7 +77,7 @@ namespace Nomu
 		void ParseEntities();
 
 	private:
-		Node *Tokenize(int start, int end, std::vector<std::string> lines);
+		Node *Tokenize(i32 start, i32 end, std::vector<std::string> lines);
 		Entity_Data *ParseEntity(Node *entity);
 		Component_Data *ParseComponent(Node *component);
 		void LoadResources(std::vector<Asset_Data> assets);
@@ -89,7 +89,7 @@ namespace Nomu
 		glm::vec4 ParseVec4(std::string value);
 		glm::vec2 ParseVec2(std::string value);
 		float ParseFloat(std::string value);
-		int ParseInt(std::string value);
+		i32 ParseInt(std::string value);
 		bool ParseBool(std::string value);
 		std::string ParseString(std::string value);
 

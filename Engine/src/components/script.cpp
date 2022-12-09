@@ -4,9 +4,10 @@ std::map<std::string, Nomu::Script*> Nomu::Script::m_scripts;
 
 void Nomu::Script::Init()
 {
+    m_name = "Script";
 }
 
-void Nomu::Script::Update(float dt)
+void Nomu::Script::Update(f32 dt)
 {
 }
 
@@ -21,7 +22,7 @@ Nomu::Script* Nomu::Script::Create(std::string name)
             return m_scripts[name];
         }
         else{
-            Nomu::Logger::Error("Failed to create script: {0} does not exist" + name);
+            Nomu::Logger::Error("Failed to create script: " + name + "does not exist");
             return nullptr;
         }
     }

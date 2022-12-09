@@ -13,7 +13,7 @@ namespace Nomu
         virtual ~Component();
 
         virtual void Init();
-        virtual void Update(float dt);
+        virtual void Update(f32 dt);
         virtual void Render();
         void Destroy();
 

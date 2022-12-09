@@ -22,17 +22,17 @@ namespace Nomu
         ~Sprite();
 
         void Init() override;
-        void Update(float dt) override;
+        void Update(f32 dt) override;
         void Render() override;
         Sprite *Clone() override;
 
-        void SetTexture(const char *texturePath);
+        void SetTexture(std::string texturePath);
         void SetTexture(Texture2D *texture);
 
         void SetColor(glm::vec4 color);
 
-        void SetZ(float z);
-        float GetZ();
+        void SetZ(f32 z);
+        f32 GetZ();
 
         void SetShader(Shader *shader, glm::vec2 size);
 
@@ -49,6 +49,6 @@ namespace Nomu
         glm::vec2 m_size;
         glm::vec4 m_color;
         App* m_app;
-        float m_z = 0.0f;
+        f32 m_z = 0.0f;
     };
 }

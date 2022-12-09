@@ -28,7 +28,7 @@ Nomu::Shader* Nomu::ResourceManager::GetShader(std::string name)
     return &Shaders[name];
 }
 
-Nomu::Texture2D Nomu::ResourceManager::LoadTexture(std::string file, bool alpha, std::string name)
+Nomu::Texture2D Nomu::ResourceManager::LoadTexture(std::string file, bl alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file.c_str(), alpha);
     return Textures[name];
@@ -103,7 +103,7 @@ Nomu::Shader Nomu::ResourceManager::loadShaderFromFile(const char *vShaderFile, 
     return shader;
 }
 
-Nomu::Texture2D Nomu::ResourceManager::loadTextureFromFile(const char *file, bool alpha)
+Nomu::Texture2D Nomu::ResourceManager::loadTextureFromFile(const char *file, bl alpha)
 {
     // create texture object
     Texture2D texture;
@@ -113,8 +113,8 @@ Nomu::Texture2D Nomu::ResourceManager::loadTextureFromFile(const char *file, boo
         texture.Image_Format = GL_RGBA;
     }
     // load image
-    int width, height, nrChannels;
-    unsigned char* data = stbi_load(file, &width, &height, &nrChannels, 0);
+    i32 width, height, nrChannels;
+    u8* data = stbi_load(file, &width, &height, &nrChannels, 0);
     // now generate texture
     texture.Generate(width, height, data);
     // and finally free image data
