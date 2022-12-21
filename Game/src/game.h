@@ -3,10 +3,10 @@
 #include <core/game.h>
 #include <ecs/entity.h>
 #include <components/transform.h>
-#include <components/sprite.h>
+#include <components/ui_sprite.h>
 #include <components/event_listener.h>
 
-#include <renderer/sprite_renderer.h>
+#include <renderer/ui_sprite_renderer.h>
 #include <utils/resource_manager.h>
 #include <renderer/text_renderer.h>
 

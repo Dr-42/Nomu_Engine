@@ -1,41 +1,41 @@
-#include "components/sprite.h"
+#include "components/ui_sprite.h"
 #include "ecs/entity.h"
 
-Nomu::Sprite::~Sprite()
+Nomu::UISprite::~UISprite()
 {
     delete m_spriteRenderer;
 }
 
-Nomu::Sprite::Sprite(Nomu::Texture2D* texture, glm::vec4 color, Nomu::Shader* shader, Nomu::App* app)
+Nomu::UISprite::UISprite(Nomu::Texture2D* texture, glm::vec4 color, Nomu::Shader* shader, Nomu::App* app)
 {
     m_texture = texture;
     m_color = color;
     m_shader = shader;
     m_app = app;
-    m_name = "Sprite";
-    m_spriteRenderer = new Nomu::SpriteRenderer(m_shader);
+    m_name = "UISprite";
+    m_spriteRenderer = new Nomu::UIUISpriteRenderer(m_shader);
 }
 
-Nomu::Sprite::Sprite(Nomu::Texture2D* texture, Nomu::Shader* shader, Nomu::App* app)
+Nomu::UISprite::UISprite(Nomu::Texture2D* texture, Nomu::Shader* shader, Nomu::App* app)
 {
     m_texture = texture;
     m_color = glm::vec4(1.0f);
     m_shader = shader;
     m_app = app;
-    m_name = "Sprite";
-    m_spriteRenderer = new Nomu::SpriteRenderer(m_shader);
+    m_name = "UISprite";
+    m_spriteRenderer = new Nomu::UIUISpriteRenderer(m_shader);
 }
 
-void Nomu::Sprite::Init()
+void Nomu::UISprite::Init()
 {
     m_ConfigureShader();
 }
 
-void Nomu::Sprite::Render()
+void Nomu::UISprite::Render()
 {
     if(active)
     {
-        m_spriteRenderer->DrawSprite(
+        m_spriteRenderer->DrawUISprite(
             m_texture,
             GetEntity()->GetComponent<Transform>()->GetPosition(),
             GetEntity()->GetComponent<Transform>()->GetScale(),
@@ -46,65 +46,65 @@ void Nomu::Sprite::Render()
 
 }
 
-void Nomu::Sprite::Update(f32 dt)
+void Nomu::UISprite::Update(f32 dt)
 {
 }
 
-Nomu::Sprite* Nomu::Sprite::Clone()
+Nomu::UISprite* Nomu::UISprite::Clone()
 {
-    Sprite* sprite = new Sprite(m_texture, m_color, m_shader, m_app);
+    UISprite* sprite = new UISprite(m_texture, m_color, m_shader, m_app);
     return sprite;
 }
 
-void Nomu::Sprite::SetTexture(std::string texturePath)
+void Nomu::UISprite::SetTexture(std::string texturePath)
 {
     ResourceManager::LoadTexture(texturePath, true, "face");
     std::cout << "Loaded texture: " << texturePath << std::endl;
 }
 
-void Nomu::Sprite::SetTexture(Nomu::Texture2D* texture)
+void Nomu::UISprite::SetTexture(Nomu::Texture2D* texture)
 {
     m_texture = texture;
 }
 
-void Nomu::Sprite::SetColor(glm::vec4 color)
+void Nomu::UISprite::SetColor(glm::vec4 color)
 {
     m_color = color;
 }
 
-void Nomu::Sprite::SetZ(f32 z)
+void Nomu::UISprite::SetZ(f32 z)
 {
     m_z = z;
 }
 
-f32 Nomu::Sprite::GetZ()
+f32 Nomu::UISprite::GetZ()
 {
     return m_z;
 }
 
-void Nomu::Sprite::SetShader(Nomu::Shader* shader, glm::vec2 size)
+void Nomu::UISprite::SetShader(Nomu::Shader* shader, glm::vec2 size)
 {
     m_shader = shader;
     m_size = size;
 }
 
 
-Nomu::Texture2D* Nomu::Sprite::GetTexture()
+Nomu::Texture2D* Nomu::UISprite::GetTexture()
 {
     return m_texture;
 }
 
-Nomu::SpriteRenderer* Nomu::Sprite::GetSpriteRenderer()
+Nomu::UIUISpriteRenderer* Nomu::UISprite::GetUIUISpriteRenderer()
 {
     return m_spriteRenderer;
 }
 
-Nomu::Shader* Nomu::Sprite::GetShader()
+Nomu::Shader* Nomu::UISprite::GetShader()
 {
     return m_shader;
 }
 
-void Nomu::Sprite::m_ConfigureShader()
+void Nomu::UISprite::m_ConfigureShader()
 {
     glm::mat4 projection = glm::ortho(0.0f, static_cast<f32>(m_app->WIDTH), 
         static_cast<f32>(m_app->HEIGHT), 0.0f, -100.0f, 100.0f);

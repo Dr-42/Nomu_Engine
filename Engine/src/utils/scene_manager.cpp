@@ -367,7 +367,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 		}
 		component = transform;	
 	}
-	else if(component_data->type == "[Sprite]"){
+	else if(component_data->type == "[UISprite]"){
 		Texture2D* texture;
 		glm::vec4 color;
 		Shader* shader;
@@ -386,7 +386,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 				active = ParseBool(it->second);
 			}
 		}
-		Sprite* sprite = new Sprite(texture, color, shader, m_app);
+		UISprite* sprite = new UISprite(texture, color, shader, m_app);
 		sprite->active = active;
 		component = sprite;
 	}

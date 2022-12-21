@@ -1,18 +1,18 @@
 Assets:
 	[Shader]
-		sprite: ../assets/shaders/sprite_vert_shad.vs, ../assets/shaders/sprite_frag_shad.fs
+		ui_sprite: ../assets/shaders/sprite_vert_shad.vs, ../assets/shaders/sprite_frag_shad.fs
 	[Shader]
 		text: ../assets/shaders/text_vert_shad.vs, ../assets/shaders/text_frag_shad.fs
 	[Texture]
-		sprite: ../assets/textures/nomu.png
+		nomu: ../assets/textures/nomu.png
 	[Font]
 		font: ../assets/fonts/OCRAEXT.TTF
 
 Entities:
 	nomu:
-		[Sprite]
-			texture: sprite
-			shader: sprite
+		[UISprite]
+			texture: nomu
+			shader: ui_sprite
 			active: true
 			color: 1, 1, 1, 1
 		[Transform]
@@ -26,9 +26,9 @@ Entities:
 			script: NomuScript
 			active: true
 	nomu1:
-		[Sprite]
-			texture: sprite
-			shader: sprite
+		[UISprite]
+			texture: nomu
+			shader: ui_sprite
 			active: true
 			color: 1, 1, 1, 1
 		[Transform]
@@ -42,9 +42,9 @@ Entities:
 			script: Nomu1Script
 			active: true
 	nomu2:
-		[Sprite]
-			texture: sprite
-			shader: sprite
+		[UISprite]
+			texture: nomu
+			shader: ui_sprite
 			active: true
 			color: 1, 1, 1, 1
 		[Transform]

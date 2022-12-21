@@ -6,7 +6,7 @@
 #include "ecs/component.h"
 #include "components/transform.h"
 #include "utils/texture.h"
-#include "renderer/sprite_renderer.h"
+#include "renderer/ui_sprite_renderer.h"
 #include "utils/shader.h"
 #include "utils/resource_manager.h"
 
@@ -14,17 +14,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 namespace Nomu
 {
-    class N_API Sprite : public Component
+    class N_API UISprite : public Component
     {
     public:
-        Sprite(Texture2D *texture, glm::vec4 color, Shader *shader, App *app);
-        Sprite(Texture2D *texture, Shader *shader, App *app);
-        ~Sprite();
+        UISprite(Texture2D *texture, glm::vec4 color, Shader *shader, App *app);
+        UISprite(Texture2D *texture, Shader *shader, App *app);
+        ~UISprite();
 
         void Init() override;
         void Update(f32 dt) override;
         void Render() override;
-        Sprite *Clone() override;
+        UISprite *Clone() override;
 
         void SetTexture(std::string texturePath);
         void SetTexture(Texture2D *texture);
@@ -37,14 +37,14 @@ namespace Nomu
         void SetShader(Shader *shader, glm::vec2 size);
 
         Texture2D *GetTexture();
-        SpriteRenderer *GetSpriteRenderer();
+        UIUISpriteRenderer *GetUIUISpriteRenderer();
         Shader *GetShader();
 
     private:
         void m_ConfigureShader();
 
         Texture2D *m_texture;
-        SpriteRenderer *m_spriteRenderer;
+        UIUISpriteRenderer *m_spriteRenderer;
         Shader *m_shader;
         glm::vec2 m_size;
         glm::vec4 m_color;

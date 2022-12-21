@@ -1,9 +1,6 @@
 #pragma once
 #include "defines.h"
 #include "ecs/component.h"
-#include "components/transform.h"
-#include "components/sprite.h"
-#include "components/text.h"
 
 #include <vector>
 #include <algorithm>
@@ -56,7 +53,6 @@ namespace Nomu
                     return component;
                 }
             }
-            std::cout << "Component " << quote(T) << " not found" << std::endl;
             exit(1);
         }
 
