@@ -23,6 +23,11 @@ class Nomu1Script : public Nomu::Script
             GetEntity()->GetComponent<Nomu::Sprite>()->SetZ(GetEntity()->GetComponent<Nomu::Sprite>()->GetZ() + -0.001f);
         }
     }
+
+    Nomu1Script* Clone()
+    {
+        return new Nomu1Script();
+    }
 };
 
 bool dummy1 = Nomu::Script::Register<Nomu1Script>("Nomu1Script");

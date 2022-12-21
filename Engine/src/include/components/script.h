@@ -27,6 +27,7 @@ namespace Nomu
             return true;
         }
         static Script* Create(std::string name);
+        virtual Script* Clone() = 0;
     private:
         static std::map<std::string, Script *> m_scripts;
         Entity* mParent;

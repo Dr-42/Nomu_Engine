@@ -41,6 +41,22 @@ Entities:
 		[Script]
 			script: Nomu1Script
 			active: true
+	nomu2:
+		[Sprite]
+			texture: sprite
+			shader: sprite
+			active: true
+			color: 1, 1, 1, 1
+		[Transform]
+			position: 600, 200
+			scale: 150, 150
+			rotation: 60
+			active: true
+		[Event_listener]
+			active: true
+		[Script]
+			script: Nomu1Script
+			active: true
 	hello_text:
 		[Text]
 			shader: text

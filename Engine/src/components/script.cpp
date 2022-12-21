@@ -19,7 +19,7 @@ Nomu::Script* Nomu::Script::Create(std::string name)
     {
         if(m_scripts.find(name) != m_scripts.end())
         {
-            return m_scripts[name];
+            return m_scripts[name]->Clone();
         }
         else{
             Nomu::Logger::Error("Failed to create script: " + name + "does not exist");
