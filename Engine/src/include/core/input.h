@@ -21,6 +21,8 @@ namespace Nomu
         static void mouseButtonCallbackImpl(GLFWwindow* window, i32 button, i32 action, i32 mods);
 
         static glm::vec2 GetMousePos();
+        static bl isKeyPressed(i32 key);
+        static bl isKeyReleased(i32 key);
     private:
         Input(void) = default;
         Input(Input const &);

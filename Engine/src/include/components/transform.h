@@ -21,6 +21,12 @@ namespace Nomu
         void SetScale(glm::vec2 scale);
         void SetScale(f32 x, f32 y);
 
+        void Translate(glm::vec2 translation);
+        void Translate(f32 x, f32 y);
+        void Rotate(f32 rotation);
+        void Scale(glm::vec2 scale);
+        void Scale(f32 x, f32 y);
+
         glm::vec2 GetPosition();
         f32 GetRotation();
         glm::vec2 GetScale();

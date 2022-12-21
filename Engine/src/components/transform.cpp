@@ -61,3 +61,28 @@ glm::vec2 Nomu::Transform::GetScale()
 {
     return m_scale;
 }
+
+void Nomu::Transform::Translate(glm::vec2 translation)
+{
+    m_position += translation;
+}
+
+void Nomu::Transform::Translate(f32 x, f32 y)
+{
+    m_position += glm::vec2(x, y);
+}
+
+void Nomu::Transform::Rotate(f32 rotation)
+{
+    m_rotation += rotation;
+}
+
+void Nomu::Transform::Scale(glm::vec2 scale)
+{
+    m_scale += scale;
+}
+
+void Nomu::Transform::Scale(f32 x, f32 y)
+{
+    m_scale += glm::vec2(x, y);
+}

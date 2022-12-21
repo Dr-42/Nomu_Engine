@@ -27,9 +27,6 @@ namespace Nomu
         bl isLeftClickedInside();
         bl isRightClickedInside();
 
-        bl isKeyPressed(i32 key);
-        bl isKeyReleased(i32 key);
-
     private:
         Transform *m_transform;
         App* m_app;

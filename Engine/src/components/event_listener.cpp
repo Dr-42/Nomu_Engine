@@ -228,29 +228,3 @@ bl Nomu::EventListener::isRightClickedInside()
     }
     return false;
 }
-
-bl Nomu::EventListener::isKeyPressed(i32 key)
-{
-    if (active)
-    {
-        if (m_app->Keys[key])
-        {
-            return true;
-        }
-        return false;
-    }
-    return false;
-}
-
-bl Nomu::EventListener::isKeyReleased(i32 key)
-{
-    if (active)
-    {
-        if (!m_app->Keys[key])
-        {
-            return true;
-        }
-        return false;
-    }
-    return false;
-}

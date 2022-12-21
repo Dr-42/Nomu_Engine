@@ -16,11 +16,18 @@ class Nomu1Script : public Nomu::Script
         if(GetEntity()->GetComponent<Nomu::EventListener>()->wasRightClickReleased()){
             GetEntity()->GetComponent<Nomu::Sprite>()->SetZ(1.0f);
         }
-        if(GetEntity()->GetComponent<Nomu::EventListener>()->isKeyPressed(NOMU_KEY_SPACE)){
-            GetEntity()->GetComponent<Nomu::Sprite>()->SetZ(GetEntity()->GetComponent<Nomu::Sprite>()->GetZ() + -0.001f);
+        //WASD controls
+        if(Nomu::Input::isKeyPressed(NOMU_KEY_W)){
+            GetEntity()->GetComponent<Nomu::Transform>()->Translate(0.0f, -100.0f * dt);
         }
-        if(GetEntity()->GetComponent<Nomu::EventListener>()->isKeyPressed(NOMU_KEY_A)){
-            GetEntity()->GetComponent<Nomu::Sprite>()->SetZ(GetEntity()->GetComponent<Nomu::Sprite>()->GetZ() + -0.001f);
+        if(Nomu::Input::isKeyPressed(NOMU_KEY_A)){
+            GetEntity()->GetComponent<Nomu::Transform>()->Translate(-100.0f * dt, 0.0f);
+        }
+        if(Nomu::Input::isKeyPressed(NOMU_KEY_S)){
+            GetEntity()->GetComponent<Nomu::Transform>()->Translate(0.0f, 100.0f * dt);
+        }
+        if(Nomu::Input::isKeyPressed(NOMU_KEY_D)){
+            GetEntity()->GetComponent<Nomu::Transform>()->Translate(100.0f * dt, 0.0f);
         }
     }
 

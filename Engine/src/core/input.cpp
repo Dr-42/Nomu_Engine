@@ -74,3 +74,21 @@ glm::vec2 Nomu::Input::GetMousePos()
 {
     return mApp->mousePos;
 }
+
+bl Nomu::Input::isKeyPressed(i32 key)
+{
+        if (mApp->Keys[key])
+        {
+            return true;
+        }
+        return false;
+}
+
+bl Nomu::Input::isKeyReleased(i32 key)
+{
+        if (!mApp->Keys[key])
+        {
+            return true;
+        }
+        return false;
+}
