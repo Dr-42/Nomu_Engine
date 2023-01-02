@@ -1,10 +1,12 @@
 #pragma once
 #include "defines.h"
 #include "ecs/component.h"
+#include "components/transform.h"
 
 #include <vector>
 #include <algorithm>
-#define quote(x) #x
+#include <iostream>
+#include <glm/glm.hpp>
 namespace Nomu
 {
     class N_API Entity
