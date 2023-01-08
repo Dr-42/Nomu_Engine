@@ -23,7 +23,7 @@ if platform.system() == 'Windows':
     cflags = '-g -Wall ' + freetype_cfg
 elif platform.system() == 'Linux':
     libs = '-lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2`'
-    cflags = '-g -Wall `pkg-config --cflags freetype2` -std=c++17 -fPIC -shared'
+    cflags = '-g -Wall `pkg-config --cflags freetype2` -std=c++17'
 
 ##########################################
 ##### DO NOT EDIT BELOW THIS LINE ########
@@ -45,7 +45,8 @@ if out_type == 'dll':
         cflags += ' -shared'
         out_ext = '.dll'
     elif platform.system() == 'Linux':
-        cflags += ' -fPIC -shared'
+        cflags += ' -fPIC '
+        libs += ' -shared '
         out_ext = '.so'
 elif out_type == 'exe':
     if platform.system() == 'Windows':
