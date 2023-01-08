@@ -17,9 +17,9 @@ src_dir = 'src'
 compiler = 'g++'
 
 if platform.system() == 'Windows':
-    freetype_cfg = '-IC:/msys64/mingw64/bin/../include/freetype2 -IC:/msys64/mingw64/bin/../include -IC:/msys64/mingw64/bin/../include/libpng16 -IC:/msys64/mingw64/bin/../include/harfbuzz -IC:/msys64/mingw64/bin/../include/glib-2.0 -IC:/msys64/mingw64/bin/../lib/glib-2.0/include'
-    freetype_lib = '-LC:/msys64/mingw64/bin/../lib -lfreetype'
-    libs = '-lm -lglew32 -lglfw3 -lopengl32 ' + freetype_lib
+    freetype_lib = '-LC:/msys64/ucrt64/lib -lfreetype'
+    freetype_cfg = '-IC:/msys64/ucrt64/include/freetype2 -IC:/msys64/ucrt64/include/libpng16 -IC:/msys64/ucrt64/include -IC:/msys64/ucrt64/include/harfbuzz -IC:/msys64/ucrt64/include -IC:/msys64/ucrt64/include/glib-2.0 -IC:/msys64/ucrt64/lib/glib-2.0/include -IC:/msys64/ucrt64/include'
+    libs = '-lm -lglew32 -lglfw3 -lopengl32 -static-libstdc++ ' + freetype_lib
     cflags = '-g -Wall ' + freetype_cfg
 elif platform.system() == 'Linux':
     libs = '-lm -lGL -lGLEW -lglfw `pkg-config --libs freetype2`'

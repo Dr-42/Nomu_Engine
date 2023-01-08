@@ -16,7 +16,7 @@ src_dir = 'src'
 #Compiler options
 compiler = 'g++'
 
-libs = ' -L../bin -lengine -Wl,-rpath=../bin'
+libs = ' -L../bin -lengine -static-libstdc++ -Wl,-rpath=../bin'
 cflags = '-g -Wall -I../Engine/src/include'
 
 ##########################################
