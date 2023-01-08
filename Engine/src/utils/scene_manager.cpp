@@ -386,7 +386,7 @@ Nomu::Component* Nomu::SceneManager::CreateComponent(Component_Data* component_d
 				active = ParseBool(it->second);
 			}
 		}
-		UISprite* sprite = new UISprite(texture, color, shader, m_app);
+		UI_Sprite* sprite = new UI_Sprite(texture, color, shader, m_app);
 		sprite->active = active;
 		component = sprite;
 	}

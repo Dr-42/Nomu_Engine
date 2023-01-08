@@ -10,11 +10,11 @@ class Nomu1Script : public Nomu::Script
     void Update(float dt)
     {
         if(GetEntity()->GetComponent<Nomu::EventListener>()->isRightClickedandHeld()){
-            GetEntity()->GetComponent<Nomu::UISprite>()->SetZ(-1.0f);
+            GetEntity()->GetComponent<Nomu::UI_Sprite>()->SetZ(-1.0f);
             GetEntity()->GetComponent<Nomu::Transform>()->SetPosition(Nomu::Input::GetMousePos());
         }
         if(GetEntity()->GetComponent<Nomu::EventListener>()->wasRightClickReleased()){
-            GetEntity()->GetComponent<Nomu::UISprite>()->SetZ(1.0f);
+            GetEntity()->GetComponent<Nomu::UI_Sprite>()->SetZ(1.0f);
         }
         //WASD controls
         if(Nomu::Input::isKeyPressed(NOMU_KEY_W)){

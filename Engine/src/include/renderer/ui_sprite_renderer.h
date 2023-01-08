@@ -9,13 +9,13 @@
 
 namespace Nomu
 {
-    class N_API UIUISpriteRenderer
+    class N_API UI_SpriteRenderer
     {
     public:
         // Constructor (inits shaders/shapes)
-        UIUISpriteRenderer(Shader *shader);
+        UI_SpriteRenderer(Shader *shader);
         // Destructor
-        ~UIUISpriteRenderer();
+        ~UI_SpriteRenderer();
         // Renders a defined quad textured with given sprite
         void DrawUISprite(Texture2D *texture, glm::vec2 position, glm::vec2 size = glm::vec2(10.0f, 10.0f), f32 rotate = 0.0f, f32 z = 0.0f, glm::vec3 color = glm::vec3(1.0f));
 

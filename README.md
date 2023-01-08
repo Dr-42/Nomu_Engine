@@ -16,6 +16,7 @@ This Engine compiles and works on both Windows and Linux. This is made possible 
 2. GLFW
 3. Freetype2
 4. STB Image
+5. GLM
 
 ### Environment Setup
 ---------------------------------------------------------------------------
@@ -28,15 +29,13 @@ I am using the MSYS2 mingw 64-bit g++ compiler for installation of libraries and
 To install libraries in msys2
 
 ```
-pacman -S mingw-w64-x86_64-glew mingw-w64-x86_64-glfw mingw-w64-x86_64-stb mingw-w64-x86_64-freetype
+pacman -S mingw-w64-ucrt-x86_64-glew mingw-w64-ucrt-x86_64-glfw mingw-w64-ucrt-x86_64-stb mingw-w64-ucrt-x86_64-freetype mingw-w64-ucrt-x86_64-glm
 ```
 
 For environment variables, locations to add to path
 
 ```
-C:\msys64\mingw64\bin
-
-C:\msys64\usr\bin
+C:\msys64\ucrt64\bin
 ```
 
 ### Linux

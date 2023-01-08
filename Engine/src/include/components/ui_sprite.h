@@ -14,17 +14,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 namespace Nomu
 {
-    class N_API UISprite : public Component
+    class N_API UI_Sprite : public Component
     {
     public:
-        UISprite(Texture2D *texture, glm::vec4 color, Shader *shader, App *app);
-        UISprite(Texture2D *texture, Shader *shader, App *app);
-        ~UISprite();
+        UI_Sprite(Texture2D *texture, glm::vec4 color, Shader *shader, App *app);
+        UI_Sprite(Texture2D *texture, Shader *shader, App *app);
+        ~UI_Sprite();
 
         void Init() override;
         void Update(f32 dt) override;
         void Render() override;
-        UISprite *Clone() override;
+        UI_Sprite *Clone() override;
 
         void SetTexture(std::string texturePath);
         void SetTexture(Texture2D *texture);
@@ -37,14 +37,14 @@ namespace Nomu
         void SetShader(Shader *shader, glm::vec2 size);
 
         Texture2D *GetTexture();
-        UIUISpriteRenderer *GetUIUISpriteRenderer();
+        UI_SpriteRenderer *GetUI_SpriteRenderer();
         Shader *GetShader();
 
     private:
         void m_ConfigureShader();
 
         Texture2D *m_texture;
-        UIUISpriteRenderer *m_spriteRenderer;
+        UI_SpriteRenderer *m_spriteRenderer;
         Shader *m_shader;
         glm::vec2 m_size;
         glm::vec4 m_color;

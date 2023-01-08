@@ -9,11 +9,11 @@ class NomuScript : public Nomu::Script
     void Update(float dt)
     {
         if(GetEntity()->GetComponent<Nomu::EventListener>()->isLeftClickedandHeld()){
-            GetEntity()->GetComponent<Nomu::UISprite>()->SetZ(-1.0f);
+            GetEntity()->GetComponent<Nomu::UI_Sprite>()->SetZ(-1.0f);
             GetEntity()->GetComponent<Nomu::Transform>()->SetPosition(Nomu::Input::GetMousePos());
         }
         if(GetEntity()->GetComponent<Nomu::EventListener>()->wasLeftClickReleased()){
-            GetEntity()->GetComponent<Nomu::UISprite>()->SetZ(1.0f);
+            GetEntity()->GetComponent<Nomu::UI_Sprite>()->SetZ(1.0f);
         }
     }
 
