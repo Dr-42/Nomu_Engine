@@ -60,37 +60,26 @@ Other distros should have these libraries available too though I have not tested
 
 ### Build
 ---------------------------------------------------------------------------
-The build tool requires Python 3.10 or later. It also requires a submodule termcolor
+Install build tool
 ```
-pip install termcolor
+cargo install builder_cpp
 ```
 
 The binaries will be placed in the bin directory
 
 To compile the Engine 
 ```
-cd Engine
-python builder.py
-```
-To compile the Application
-```
-cd Game
-python builder.py
+$ builder_cpp -b
 ```
 
 To run the Application
 ```
-cd Game
-python builder.py -r
+$ builder_cpp -r
 ```
-It is important to be in the Game directory because of how the engine library is linked. This is not an issue in Windows. If you want to change this, edit the parameters in the build script.
+It is important to be in the root directory because of how the engine library is linked. This is not an issue in Windows. If you want to change this, edit the parameters in the build script.
 
 To get help on the build script run
 
 ```
-python builder.py -h
-```
-or
-```
-python builder.py --help
+$ builder_cpp -h
 ```

@@ -25,7 +25,7 @@ void MyGame::SetApp(Nomu::App& app)
 void MyGame::Init(){
 
     Nomu::SceneManager sceneManager(mApp);
-    root = sceneManager.LoadScene("../assets/scenes/scene1.nsc");
+    root = sceneManager.LoadScene("./assets/scenes/scene1.nsc");
 
     root->Init();
 }

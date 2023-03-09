@@ -1,0 +1,20 @@
+[build]
+compiler = "g++"
+build_dir = "./bin"
+obj_dir = "./obj_win"
+
+[[targets]]
+name = "libengine"
+src = "./Engine/src/"
+include_dir = "./Engine/src/include"
+type = "dll"
+cflags = "-g -Wall -Wunused `pkg-config --cflags freetype2` -std=c++17"
+libs = "-lm -lglew32 -lglfw3 -lopengl32 -static-libstdc++ `pkg-config --libs freetype2`"
+
+[[targets]]
+name = "main"
+src = "./Game/src/"
+include_dir = "./Game/src"
+type = "exe"
+cflags = "-g -Wall -IEngine/src/include"
+libs = " -Lbin -lengine -static-libstdc++ -Wl,-rpath=bin"
