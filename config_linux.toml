@@ -16,5 +16,6 @@ name = "main"
 src = "./Game/src/"
 include_dir = "./Game/src"
 type = "exe"
-cflags = "-g -Wall -IEngine/src/include"
-libs = " -Lbin -lengine -Wl,-rpath=bin"
+cflags = "-g -Wall "
+libs = ""
+deps = ["libengine"]
