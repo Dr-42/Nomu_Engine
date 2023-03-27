@@ -21,5 +21,4 @@ namespace Nomu {
         App* mApp;
         Game* mGame;
     };
-
 }

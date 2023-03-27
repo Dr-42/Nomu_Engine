@@ -1,4 +1,5 @@
 #pragma once
+#include "defines.h"
 namespace Nomu
 {
     class N_API Game

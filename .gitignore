@@ -1,6 +1,3 @@
-bin
-obj_lin
-obj_win
 compile_commands.json
-*.hash
 .cache
+.bld_cpp
