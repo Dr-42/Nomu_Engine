@@ -1,7 +1,5 @@
 [build]
 compiler = "g++"
-build_dir = "./bin"
-obj_dir = "./obj_lin"
 
 [[targets]]
 name = "libengine"
